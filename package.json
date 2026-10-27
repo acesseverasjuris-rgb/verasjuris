@@ -1,0 +1,27 @@
+{
+  "name": "verasjuris",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "VerasJuris — fundação do ecossistema jurídico digital",
+  "packageManager": "pnpm@10.18.3",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "pnpm run --parallel --filter @verasjuris/api --filter @verasjuris/worker --filter @verasjuris/web dev",
+    "build": "pnpm -r --if-present run build",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "typecheck": "pnpm -r --if-present --sort run typecheck",
+    "test": "vitest run",
+    "db:generate": "pnpm --filter @verasjuris/database run db:generate",
+    "db:migrate": "pnpm --filter @verasjuris/database run db:migrate",
+    "db:seed": "pnpm --filter @verasjuris/database run db:seed"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@verasjuris/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "tsup",
+    "start": "node dist/main.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@verasjuris/config": "workspace:*",
+    "@verasjuris/database": "workspace:*",
+    "@verasjuris/events": "workspace:*",
+    "@verasjuris/notifications": "workspace:*",
+    "@verasjuris/storage": "workspace:*",
+    "drizzle-orm": "0.45.3",
+    "fastify": "5.12.5",
+    "pino": "10.3.1",
+    "postgres": "3.4.9"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.3",
+    "tsup": "8.5.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
+  }
+}

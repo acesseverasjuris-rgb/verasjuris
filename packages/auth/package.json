@@ -1,0 +1,23 @@
+{
+  "name": "@verasjuris/auth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@verasjuris/database": "workspace:*",
+    "@verasjuris/security": "workspace:*",
+    "@verasjuris/types": "workspace:*",
+    "drizzle-orm": "0.45.3"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.3",
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
+  }
+}

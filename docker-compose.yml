@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: verasjuris
+      POSTGRES_PASSWORD: verasjuris
+      POSTGRES_DB: verasjuris
+    ports:
+      - "5432:5432"
+    volumes:
+      - verasjuris_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U verasjuris -d verasjuris"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  verasjuris_postgres:

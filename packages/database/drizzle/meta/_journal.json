@@ -1,0 +1,104 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1790692280954,
+      "tag": "0000_tricky_retro_girl",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790700000000,
+      "tag": "0001_etapa1_identity",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790710000000,
+      "tag": "0002_etapa1_1_sessions_profile",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1790720000000,
+      "tag": "0003_etapa1_2_profiles_crm",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790730000000,
+      "tag": "0004_etapa2_1_intake_triage",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790740000000,
+      "tag": "0005_etapa2_2_pipeline",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790750000000,
+      "tag": "0006_etapa3_legal_matters",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1790760000000,
+      "tag": "0007_etapa3_1_judicial_processes",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1792521084818,
+      "tag": "0008_etapa3_2_4_admin_documents",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1792524202153,
+      "tag": "0009_etapa4_2_5_productivity",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1792527653193,
+      "tag": "0010_etapa6_ai_document_legal_public",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1793120075202,
+      "tag": "0011_etapa6_3_7_8_review_research_citation_auctions",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1793122686666,
+      "tag": "0012_etapa7_drafting_comparison_post_auction",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1793128895180,
+      "tag": "0013_etapa9_10_previdentiary_labor",
+      "breakpoints": true
+    }
+  ]
+}

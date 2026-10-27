@@ -1,0 +1,44 @@
+{
+  "name": "@verasjuris/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "tsup",
+    "start": "node dist/main.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fastify/cookie": "11.1.2",
+    "@fastify/cors": "11.3.0",
+    "@fastify/helmet": "13.1.1",
+    "@fastify/multipart": "9.4.0",
+    "@verasjuris/ai": "workspace:*",
+    "@verasjuris/audit": "workspace:*",
+    "@verasjuris/auth": "workspace:*",
+    "@verasjuris/calculations": "workspace:*",
+    "@verasjuris/config": "workspace:*",
+    "@verasjuris/database": "workspace:*",
+
+    "@verasjuris/email": "workspace:*",
+    "@verasjuris/events": "workspace:*",
+    "@verasjuris/notifications": "workspace:*",
+    "@verasjuris/security": "workspace:*",
+    "@verasjuris/storage": "workspace:*",
+    "@verasjuris/types": "workspace:*",
+    "@verasjuris/validation": "workspace:*",
+    "drizzle-orm": "0.45.3",
+    "fastify": "5.12.5",
+    "pino": "10.3.1",
+    "postgres": "3.4.9",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.3",
+    "tsup": "8.5.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@verasjuris/audit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.3"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@verasjuris/database": "workspace:*",
+    "@verasjuris/security": "workspace:*"
+  }
+}

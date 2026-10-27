@@ -1,0 +1,16 @@
+node_modules
+dist
+.next
+out
+coverage
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+.data/
+pgdata/
+.DS_Store
+*.log
+.vercel
+playwright-report
+test-results
