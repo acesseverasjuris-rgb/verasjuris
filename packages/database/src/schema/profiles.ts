@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import {
   boolean,
   index,
+  integer,
   pgEnum,
   pgTable,
   text,
@@ -39,6 +40,22 @@ export const employeeStatusEnum = pgEnum("employee_status", ["active", "inactive
 
 /** Núcleo já existente em identity.professional_profiles — extensões abaixo. */
 
+export const oabVerificationStatusEnum = pgEnum("oab_verification_status", [
+  "informed",
+  "pending_verification",
+  "verified",
+  "rejected",
+  "expired",
+  "not_configured",
+]);
+
+export const lawyerAvailabilityStatusEnum = pgEnum("lawyer_availability_status", [
+  "available",
+  "busy",
+  "away",
+  "offline",
+]);
+
 export const lawyerProfiles = pgTable("lawyer_profiles", {
   userId: uuid("user_id")
     .primaryKey()
@@ -51,11 +68,34 @@ export const lawyerProfiles = pgTable("lawyer_profiles", {
   oabSubsection: text("oab_subsection"),
   inscriptionDate: timestamp("inscription_date", { withTimezone: true, mode: "date" }),
   declaredSituation: text("declared_situation"),
+  /** OAB informado ≠ verificado. Default: informed se há número; senão not_configured. */
+  oabVerificationStatus: oabVerificationStatusEnum("oab_verification_status")
+    .notNull()
+    .default("not_configured"),
   practiceAreas: text("practice_areas"),
   languages: text("languages"),
   remoteAvailable: boolean("remote_available").notNull().default(false),
   inPersonAvailable: boolean("in_person_available").notNull().default(false),
   serviceRegions: text("service_regions"),
+  onlineServiceEnabled: boolean("online_service_enabled").notNull().default(false),
+  serviceStates: text("service_states"),
+  consultationModes: text("consultation_modes"),
+  availabilityStatus: lawyerAvailabilityStatusEnum("availability_status")
+    .notNull()
+    .default("offline"),
+  acceptsUrgent: boolean("accepts_urgent").notNull().default(false),
+  consultationPriceCents: integer("consultation_price_cents"),
+  /** Marketplace (Etapa 17) — distinto de Advogado Online. */
+  marketplaceEnabled: boolean("marketplace_enabled").notNull().default(false),
+  marketplaceHeadline: text("marketplace_headline"),
+  marketplaceDescription: text("marketplace_description"),
+  serviceCities: text("service_cities"),
+  marketplaceCategories: text("marketplace_categories"),
+  specialties: text("specialties"),
+  responseTimeEstimate: text("response_time_estimate"),
+  basePriceMinCents: integer("base_price_min_cents"),
+  basePriceMaxCents: integer("base_price_max_cents"),
+  marketplaceStatus: text("marketplace_status").notNull().default("draft"),
   visibility: profileVisibilityEnum("visibility").notNull().default("private"),
   ...timestamps,
 });

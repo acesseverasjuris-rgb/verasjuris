@@ -1,6 +1,6 @@
 # Domínios
 
-Implementado nesta fase: identidade, organizações, autorização, auditoria, perfis profissionais, CRM, atendimento/triagem, pipeline, LegalMatter, processos judiciais e administrativos, documentos com upload seguro, dossiê (projeção), tarefas/SLA, agenda, prazos centrais com notificações in-app, núcleo de IA (persistência + gateway), inteligência documental, análise jurídica assistida, oportunidades públicas (cadastro manual), IA revisora, pesquisa jurídica (catálogo local + ResearchGateway), motor de citação, leilões (cadastro/interesses/due diligence), **modelos e minutas com workflow**, **comparações jurídicas**, **pós-leilão**, fechamento parcial de dívida técnica (fila local opt-in, reconciliação detect-only), **previdenciário** (casos, benefícios, CNIS, cálculos) e **trabalhista** (casos, contratos, cálculos, liquidação).
+Implementado nesta fase: identidade, organizações, autorização, auditoria, perfis profissionais, CRM, atendimento/triagem, pipeline, LegalMatter, processos judiciais e administrativos, documentos com upload seguro, dossiê (projeção), tarefas/SLA, agenda, prazos centrais com notificações in-app, núcleo de IA (persistência + gateway), inteligência documental, análise jurídica assistida, oportunidades públicas (cadastro manual), IA revisora, pesquisa jurídica (catálogo local + ResearchGateway), motor de citação, leilões (cadastro/interesses/due diligence), **modelos e minutas com workflow**, **comparações jurídicas**, **pós-leilão**, fechamento parcial de dívida técnica (fila local opt-in, reconciliação detect-only), **previdenciário** (casos, benefícios, CNIS, cálculos), **trabalhista** (casos, contratos, cálculos, liquidação), **tributário** (casos, cálculos, providers), **núcleo jurídico multi-área** (bindings, extensões por ramo) e **contratos/assinatura** (CLM interno, provider `not_configured`).
 
 Os demais domínios estão previstos. Nenhum deles tem tabela, rota ou tela que simule funcionamento além do descrito abaixo. Provedores externos de IA, fontes jurídicas, leilão/lance, e-filing, INSS/CNIS, eSocial/FGTS e tribunal trabalhista permanecem `not_configured` até adapter real.
 
@@ -41,11 +41,24 @@ Os demais domínios estão previstos. Nenhum deles tem tabela, rota ou tela que 
 | Labor | Casos trabalhistas, contratos/histórico, jornada, remuneração, FGTS informado, rescisão, pedidos | Implementado (Prompt 16) |
 | LaborCalculations / Liquidation | Jornada, férias, FGTS estimado, rescisão, liquidação determinística | Implementado (Prompt 16) |
 | SocialSecurity / Labor providers | Contratos INSS/CNIS/eSocial/FGTS/LaborCourt; default `not_configured` | Contrato (Prompt 16) |
+| Tax | Casos tributários, obrigações, créditos, cálculos determinísticos | Implementado (Etapas 11–13) |
+| TaxCalculations | Motores em `@verasjuris/calculations` (`TaxCalculationEngine`) | Implementado (Etapas 11–13) |
+| Tax providers | Federal/State/Municipal/Debt/Filing; default `not_configured` | Contrato (Etapas 11–13) |
+| LegalAreaCore | Módulos, features, checklists, bindings, extensões por ramo | Implementado (Etapas 11–13) |
+| Contracts (CLM) | Contratos, versões, cláusulas, aprovação, renovação/rescisão | Implementado (Etapas 11–13) |
+| ContractSignatures | Manual/wet ink + `SignatureProvider` default `not_configured` | Implementado (Etapas 11–13) |
+| Area providers | Registry / Environmental / Electoral; default `not_configured` | Contrato (Etapas 11–13) |
 | Audit | Trilha persistente das ações já existentes | Implementado |
 | Security | Senha, sessão, limite e redação | Implementado |
-| Contracts (assinatura) / e-filing | Assinatura eletrônica e peticionamento real junto a tribunais | Não implementado (minutas/workflow internos: Prompt 15) |
-| Marketplace, Professionals, OnlineLawyer, Correspondents | Oferta e profissionais | Não implementado |
-| Payments, Billing, Ledger, Payouts, Refunds, Disputes | Dinheiro e contestação de plataforma (≠ `auction_payments` operacional) | Não implementado |
+| e-filing | Peticionamento real junto a tribunais | Não implementado (minutas/workflow internos: Prompt 15) |
+| ClientPortal | Projection layer — vínculo User↔CRM, solicitações, conversas, ledger cliente | Implementado (Etapas 14–16) |
+| Communication | Templates, preferências, consent, outbox omnichannel | Implementado (Etapas 14–16) |
+| OnlineLawyer | Solicitação, match determinístico, consulta, review (≠ marketplace honorários) | Implementado (Etapas 14–16) |
+| CommunicationProviders | Email/SMS/WhatsApp/Push via `@verasjuris/ai`; default `not_configured` | Contrato (Etapas 14–16) |
+| PaymentProvider (consulta/portal) | Manual + adapter PSP; ≠ billing SaaS | Contrato (Etapas 14–16) |
+| OABVerificationProvider | Verificação inscrição; default `not_configured` | Contrato (Etapas 14–16) |
+| Marketplace, Correspondents | Marketplace amplo / correspondentes | Não implementado |
+| Payments, Billing, Ledger, Payouts, Refunds, Disputes | Dinheiro e contestação de plataforma (≠ `auction_payments` / ledger portal / consulta) | Não implementado |
 | Education, Courses | Estudos | Não implementado |
 | Notary | Cartórios | Não implementado |
 | Support | Atendimento ao usuário da plataforma | Não implementado |
@@ -54,6 +67,6 @@ Os demais domínios estão previstos. Nenhum deles tem tabela, rota ou tela que 
 
 ## Dependências permitidas
 
-Identidade não depende de processo ou pagamento. Organização depende de identidade. Auditoria pode ser chamada por qualquer módulo que já exista, sem ler segredo. Integração futura entra por adaptador (`PaymentProvider`, `AIProvider`, `OCRProvider`, `PublicOpportunityProvider`, `LegalSourceProvider`, `AuctionProvider`, `AuctionBidProvider`, `MapProvider`, `StorageProvider`, `MalwareScannerProvider`, `CourtProvider`, `BodyProvider`, `IdentityProvider`, `NotificationProvider`, `HolidayCalendarProvider`, `SignatureProvider`, `DocumentExportProvider`, `SocialSecurityProvider`, `CNISProvider`, `ESocialProvider`, `FGTSProvider`, `LaborCourtProvider`, `JobQueue`) e deve nascer como `NOT_CONFIGURED` / `not_configured` quando a API oficial não existir. `AIGateway`, `OCRProvider`, `PublicOpportunityProvider`, `ResearchGateway`/`LegalSourceProvider`, providers de leilão e providers previdenciário/trabalhista existem mas default **not_configured** (sem OpenAI/PNCP/tribunais/lance/INSS/eSocial). `StorageProvider`, `MalwareScannerProvider`, `NotificationProvider` (in-app) e `HolidayCalendarProvider` (`NOT_CONFIGURED`) já existem como contrato. Cálculos jurídicos usam `@verasjuris/calculations` (determinístico, sem LLM). `JobQueue` default `not_configured`; `LocalInProcessQueueProvider` só opt-in (ADR 098).
+Identidade não depende de processo ou pagamento. Organização depende de identidade. Auditoria pode ser chamada por qualquer módulo que já exista, sem ler segredo. Integração futura entra por adaptador (`PaymentProvider`, `AIProvider`, `OCRProvider`, `PublicOpportunityProvider`, `LegalSourceProvider`, `AuctionProvider`, `AuctionBidProvider`, `MapProvider`, `StorageProvider`, `MalwareScannerProvider`, `CourtProvider`, `BodyProvider`, `IdentityProvider`, `NotificationProvider`, `HolidayCalendarProvider`, `SignatureProvider`, `DocumentExportProvider`, `SocialSecurityProvider`, `CNISProvider`, `ESocialProvider`, `FGTSProvider`, `LaborCourtProvider`, `FederalTaxProvider`, `StateTaxProvider`, `MunicipalTaxProvider`, `TaxDebtProvider`, `TaxFilingProvider`, `RegistryProvider`, `EnvironmentalDataProvider`, `ElectoralDataProvider`, `EmailProvider`, `SmsProvider`, `WhatsAppProvider`, `PushProvider`, `OABVerificationProvider`, `ConflictCheckProvider`, `VideoConferenceProvider`, `JobQueue`) e deve nascer como `NOT_CONFIGURED` / `not_configured` quando a API oficial não existir. `AIGateway`, `OCRProvider`, `PublicOpportunityProvider`, `ResearchGateway`/`LegalSourceProvider`, providers de leilão e providers previdenciário/trabalhista existem mas default **not_configured** (sem OpenAI/PNCP/tribunais/lance/INSS/eSocial). `StorageProvider`, `MalwareScannerProvider`, `NotificationProvider` (in-app) e `HolidayCalendarProvider` (`NOT_CONFIGURED`) já existem como contrato. Cálculos jurídicos usam `@verasjuris/calculations` (determinístico, sem LLM). `JobQueue` default `not_configured`; `LocalInProcessQueueProvider` só opt-in (ADR 098).
 
 Um módulo novo não consulta a tabela de outro domínio se puder receber um identificador e autorizar pelo contexto da organização.

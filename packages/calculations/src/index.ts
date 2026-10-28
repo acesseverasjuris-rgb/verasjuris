@@ -1,5 +1,5 @@
 /**
- * @verasjuris/calculations — motores determinísticos previdenciários e trabalhistas.
+ * @verasjuris/calculations — motores determinísticos previdenciários, trabalhistas e tributários.
  *
  * - TypeScript puro (sem DB / IA / Fastify)
  * - Dinheiro em centavos inteiros
@@ -91,3 +91,44 @@ export {
   type TerminationVerb,
   type TimeRecordSegment,
 } from "./labor/index.js";
+
+export {
+  getCalculator,
+  listCalculatorKeys,
+  type CalculationDomain,
+  type CalculatorFn,
+} from "./registry.js";
+
+export {
+  TaxCalculationEngine,
+  calculatePenaltyInterest,
+  calculateTaxCompensation,
+  calculateTaxCredit,
+  calculateTaxDebit,
+  calculateTaxInstallment,
+  calculateTaxRefund,
+  calculateTaxUpdate,
+  compareTaxScenarios,
+  LOWEST_TAX_SCENARIO_LABEL,
+  type PenaltyInterestInput,
+  type PenaltyInterestResult,
+  type TaxComparativeInput,
+  type TaxComparativeResult,
+  type TaxCompensationInput,
+  type TaxCompensationResult,
+  type TaxCreditInput,
+  type TaxCreditResult,
+  type TaxDebitInput,
+  type TaxDebitResult,
+  type TaxInstallmentInput,
+  type TaxInstallmentResult,
+  type TaxInstallmentScheduleLine,
+  type TaxMonetaryLine,
+  type TaxPeriod,
+  type TaxRefundInput,
+  type TaxRefundResult,
+  type TaxRuleParams,
+  type TaxScenario,
+  type TaxUpdateInput,
+  type TaxUpdateResult,
+} from "./tax/index.js";

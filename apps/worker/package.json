@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@verasjuris/api": "workspace:*",
     "@verasjuris/config": "workspace:*",
     "@verasjuris/database": "workspace:*",
     "@verasjuris/events": "workspace:*",

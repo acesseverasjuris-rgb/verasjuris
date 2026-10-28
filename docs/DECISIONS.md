@@ -476,3 +476,163 @@ Label fixa de estimativa; `FGTSProvider` `not_configured`. Detalhe: `docs/adr/11
 ## ADR 112 — Integrações via providers (Prompt 16)
 
 SocialSecurity / CNIS / eSocial / FGTS / LaborCourt — defaults `NOT_CONFIGURED`. Detalhe: `docs/adr/112-integrations-via-providers.md`, `docs/SOCIAL_SECURITY_PROVIDERS.md`, `docs/LABOR_PROVIDERS.md`.
+
+## ADR 113 — Núcleo jurídico comum (Etapas 11–13)
+
+Módulos de área, bindings, checklists, rule sets transversais. Detalhe: `docs/adr/113-common-legal-core.md`, `docs/LEGAL_AREAS.md`.
+
+## ADR 114 — Arquitetura de extensão por área (Etapas 11–13)
+
+Extensões no matter; papéis via position + metadata. Detalhe: `docs/adr/114-area-extension-architecture.md`, `docs/LEGAL_AREA_EXTENSION_MODEL.md`.
+
+## ADR 115 — Registry de features por área (Etapas 11–13)
+
+`LEGAL_AREA_FEATURES` + `legal_area_feature_config`. Detalhe: `docs/adr/115-legal-area-feature-registry.md`.
+
+## ADR 116 — Cálculos específicos por área (Etapas 11–13)
+
+Motores em `@verasjuris/calculations` ou `versioned_rule_sets`. Detalhe: `docs/adr/116-area-specific-calculations.md`.
+
+## ADR 117 — Motor determinístico tributário (Etapas 11–13)
+
+`TaxCase` + `TaxCalculationEngine`; providers fiscais `not_configured`. Detalhe: `docs/adr/117-tax-deterministic-engine.md`, `docs/TAX.md`, `docs/TAX_CALCULATIONS.md`.
+
+## ADR 118 — Versionamento de regras tributárias (Etapas 11–13)
+
+`tax_rule_sets` + snapshots. Detalhe: `docs/adr/118-tax-rule-versioning.md`, `docs/TAX_CALCULATIONS.md`.
+
+## ADR 119 — Contract ≠ Document (Etapas 11–13)
+
+Agregado `contracts` distinto de storage. Detalhe: `docs/adr/119-contract-not-document.md`, `docs/CONTRACTS.md`.
+
+## ADR 120 — Contract ≠ LegalDraft (Etapas 11–13)
+
+CLM ≠ minuta processual. Detalhe: `docs/adr/120-contract-not-legal-draft.md`, `docs/LEGAL_DRAFTING.md`.
+
+## ADR 121 — Template de contrato reutiliza motor seguro (Etapas 11–13)
+
+Whitelist de variáveis (ADR 087). Detalhe: `docs/adr/121-contract-template-reuses-engine.md`, `docs/LEGAL_DOCUMENT_TEMPLATES.md`.
+
+## ADR 122 — Versão assinada imutável (Etapas 11–13)
+
+`contract_versions` assinadas não editáveis in-place. Detalhe: `docs/adr/122-signed-contract-version-immutable.md`.
+
+## ADR 123 — Snapshots de cláusulas (Etapas 11–13)
+
+`contract_clause_instances` congelam biblioteca por versão. Detalhe: `docs/adr/123-clause-snapshots.md`.
+
+## ADR 124 — Abstração SignatureProvider (Etapas 11–13)
+
+Assinatura externa só via provider; default `not_configured`. Detalhe: `docs/adr/124-signature-provider-abstraction.md`, `docs/SIGNATURE_PROVIDERS.md`.
+
+## ADR 125 — Assinatura manual ≠ provider (Etapas 11–13)
+
+`manual_signature_records` sem simular envelope. Detalhe: `docs/adr/125-manual-signature-not-provider.md`, `docs/CONTRACT_SIGNATURES.md`.
+
+## ADR 126 — Ciclo renovação e rescisão (Etapas 11–13)
+
+Renewals/terminations explícitos; alertas stub. Detalhe: `docs/adr/126-renewal-termination-lifecycle.md`, `docs/CONTRACTS.md`.
+
+## ADR 127 — Confidencialidade penal, saúde, tributário e eleitoral (Etapas 11–13)
+
+Bindings e defaults restritos; IA não expõe dados sensíveis. Detalhe: `docs/adr/127-confidentiality-criminal-medical-tax.md`, `docs/SECURITY.md`.
+
+## ADR 128 — Portal como camada de projeção (Etapas 14–16)
+
+Portal não duplica matter/document/contract/agenda. Detalhe: `docs/adr/128-portal-as-projection-layer.md`, `docs/CLIENT_PORTAL.md`.
+
+## ADR 129 — Portal deny-by-default (Etapas 14–16)
+
+Vínculo obrigatório; timeline e sigilo explícitos. Detalhe: `docs/adr/129-client-portal-deny-by-default.md`, `docs/CLIENT_PORTAL_SECURITY.md`.
+
+## ADR 130 — Timeline visível ao cliente (Etapas 14–16)
+
+`client_visible` em eventos do matter. Detalhe: `docs/adr/130-client-visible-timeline.md`, `docs/CLIENT_PORTAL.md`.
+
+## ADR 131 — Modelo de conversa compartilhado (Etapas 14–16)
+
+Threads portal + outbox omnichannel + consulta online. Detalhe: `docs/adr/131-shared-conversation-model.md`, `docs/COMMUNICATION.md`.
+
+## ADR 132 — Outbox de comunicação (Etapas 14–16)
+
+Despacho assíncrono `COMMUNICATION_*`. Detalhe: `docs/adr/132-communication-outbox.md`, `docs/COMMUNICATION.md`.
+
+## ADR 133 — Abstração canal/provider (Etapas 14–16)
+
+Adapters email/sms/whatsapp/push em `@verasjuris/ai`. Detalhe: `docs/adr/133-channel-provider-abstraction.md`, `docs/COMMUNICATION_PROVIDERS.md`.
+
+## ADR 134 — Transacional vs marketing (Etapas 14–16)
+
+Categorias e opt-in marketing. Detalhe: `docs/adr/134-transactional-vs-marketing.md`, `docs/COMMUNICATION_CONSENT.md`.
+
+## ADR 135 — Histórico de consentimento (Etapas 14–16)
+
+`communication_consents` append-friendly. Detalhe: `docs/adr/135-consent-history.md`, `docs/COMMUNICATION_CONSENT.md`.
+
+## ADR 136 — Domínio OnlineLegalRequest (Etapas 14–16)
+
+Solicitação online separada de LegalMatter. Detalhe: `docs/adr/136-online-lawyer-request-domain.md`, `docs/ONLINE_LAWYER.md`.
+
+## ADR 137 — Matching determinístico (Etapas 14–16)
+
+Score fixo, sem IA/lance. Detalhe: `docs/adr/137-deterministic-matching.md`, `docs/ONLINE_LAWYER_MATCHING.md`.
+
+## ADR 138 — OAB informada ≠ verificada (Etapas 14–16)
+
+Bônus de score; provider not_configured. Detalhe: `docs/adr/138-oab-informed-not-verified.md`, `docs/OAB_VERIFICATION.md`.
+
+## ADR 139 — Modelo de disponibilidade (Etapas 14–16)
+
+Status + janelas + overrides. Detalhe: `docs/adr/139-availability-model.md`, `docs/ONLINE_LAWYER.md`.
+
+## ADR 140 — Ciclo de vida da consulta (Etapas 14–16)
+
+Estados pagamento/agenda/conclusão. Detalhe: `docs/adr/140-consultation-lifecycle.md`, `docs/ONLINE_CONSULTATIONS.md`.
+
+## ADR 141 — Pagamento manual ≠ provider (Etapas 14–16)
+
+Manual vs PSP; sync honesto. Detalhe: `docs/adr/141-manual-payment-not-provider.md`, `docs/PAYMENT_PROVIDER.md`.
+
+## ADR 142 — Avaliação só após concluída (Etapas 14–16)
+
+Reviews pós-`completed`. Detalhe: `docs/adr/142-review-only-after-completed.md`, `docs/ONLINE_CONSULTATIONS.md`.
+
+## ADR 143 — Documentos após match aceito (Etapas 14–16)
+
+ACL ao advogado no accept. Detalhe: `docs/adr/143-document-access-after-accepted-match.md`, `docs/ONLINE_LAWYER.md`.
+
+## ADR 144 — Marketplace ≠ Advogado Online (Etapas 17–19)
+
+Contratação estruturada vs consulta/matching. Detalhe: `docs/adr/144-marketplace-not-online-lawyer.md`, `docs/MARKETPLACE.md`.
+
+## ADR 145 — Perfil ≠ verificação profissional (Etapa 17.1)
+
+`lawyer_profiles` ≠ `professional_verification_cases`. Detalhe: `docs/adr/145-profile-not-verification.md`.
+
+## ADR 146 — OAB informada ≠ verificada no marketplace (Etapa 17.1)
+
+Sem auto-VERIFIED. Detalhe: `docs/adr/146-oab-informed-not-verified-marketplace.md`.
+
+## ADR 147 — CPF checksum ≠ identidade (Etapa 17.1)
+
+Format validation ≠ bureau. Detalhe: `docs/adr/147-cpf-checksum-not-identity.md`.
+
+## ADR 148 — Biometria via provider + minimização (Etapa 17.1)
+
+NOT_CONFIGURED; sem template bruto. Detalhe: `docs/adr/148-biometrics-via-provider.md`.
+
+## ADR 149 — Divulgação documental no marketplace (Etapa 17)
+
+Safe preview pré-aceite. Detalhe: `docs/adr/149-marketplace-document-disclosure.md`.
+
+## ADR 150 — Disputa e review compartilhados (Etapas 17–18)
+
+`marketplace_disputes` + `service_reviews`. Detalhe: `docs/adr/150-shared-dispute-and-review.md`.
+
+## ADR 151 — Diligência como workflow especializado (Etapa 18)
+
+Race-safe accept + evidência. Detalhe: `docs/adr/151-diligence-specialized-workflow.md`.
+
+## ADR 152 — Cartório manual ≠ verificado; fees via provider (Etapa 19)
+
+Sem integração fictícia. Detalhe: `docs/adr/152-registry-manual-not-verified.md`.

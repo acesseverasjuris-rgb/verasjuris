@@ -114,6 +114,11 @@ Minutas (`legal_document_drafts`) **não** são linhas de `documents`. Evidênci
 
 Job/endpoint `STORAGE_RECONCILIATION`: detecta versão sem objeto e upload incompleto. **`autoDelete: false`** — sem exclusão automática (ADR 099). Ver `docs/TECHNICAL_DEBT_CLOSURE.md`, `docs/SECURE_UPLOAD.md`.
 
+## Portal e advogado online (Etapas 14–16)
+
+- **Portal:** upload/listagem filtrados por vínculo `organization_client_users` + ACL/confidencialidade (`portalCanReadDocument`). ADR 128–129.
+- **Advogado online:** documentos anexos à solicitação ficam inacessíveis ao advogado até match aceito; `grantRequestDocumentsToLawyer` na transação de accept (ADR 143). Ver `docs/ONLINE_LAWYER.md`.
+
 ## Fora do escopo
 
 Assinatura eletrônica, compartilhamento externo público, S3/GCS em produção, antivírus real, retenção automatizada, índice full-text externo (Elasticsearch), remediação automática de órfãos. OCR/LLM comerciais exigem adapters — não inclusos nesta etapa. Auto-aplicação de correções da revisora ao binário. Export PDF/DOCX de minuta: `NOT_CONFIGURED`.

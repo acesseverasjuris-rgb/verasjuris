@@ -5,13 +5,35 @@ import type {
   CitationEngine,
   CNISProvider,
   ESocialProvider,
+  FederalTaxProvider,
   FGTSProvider,
   LaborCourtProvider,
+  MunicipalTaxProvider,
+  StateTaxProvider,
+  TaxDebtProvider,
+  TaxFilingProvider,
+  ConflictCheckProvider,
+  ContractManagementProvider,
+  ElectoralDataProvider,
+  EnvironmentalDataProvider,
+  OABVerificationProvider,
+  CPFVerificationProvider,
+  DocumentVerificationProvider,
+  BiometricVerificationProvider,
+  FeeTableProvider,
+  PaymentProvider,
+  RegistryProvider,
+  SignatureProvider,
+  VideoConferenceProvider,
   OCRProvider,
   PublicOpportunityProvider,
   ResearchGateway,
   SocialSecurityProvider,
   TimeTrackingImportProvider,
+  EmailProvider as CommunicationEmailProvider,
+  PushProvider,
+  SmsProvider,
+  WhatsAppProvider,
 } from "@verasjuris/ai";
 import {
   authorizeAccess,
@@ -93,6 +115,35 @@ export type ApiDeps = {
   socialSecurityProvider?: SocialSecurityProvider;
   /** CNIS externo; ausente = NOT_CONFIGURED (importação manual estruturada segue ativa). */
   cnisProvider?: CNISProvider;
+  /** Dados tributários federais; ausente = NOT_CONFIGURED (cadastro manual segue ativo). */
+  federalTaxProvider?: FederalTaxProvider;
+  /** Dados tributários estaduais; ausente = NOT_CONFIGURED. */
+  stateTaxProvider?: StateTaxProvider;
+  /** Dados tributários municipais; ausente = NOT_CONFIGURED. */
+  municipalTaxProvider?: MunicipalTaxProvider;
+  /** Certidões/dívida ativa; ausente = NOT_CONFIGURED. */
+  taxDebtProvider?: TaxDebtProvider;
+  /** Declarações/obrigações acessórias; ausente = NOT_CONFIGURED. */
+  taxFilingProvider?: TaxFilingProvider;
+  /** Assinatura eletrônica; ausente = NOT_CONFIGURED (registro manual ativo). */
+  signatureProvider?: SignatureProvider;
+  /** CLM externo; ausente = NOT_CONFIGURED. */
+  contractManagementProvider?: ContractManagementProvider;
+  electoralDataProvider?: ElectoralDataProvider;
+  environmentalDataProvider?: EnvironmentalDataProvider;
+  registryProvider?: RegistryProvider;
+  paymentProvider?: PaymentProvider;
+  oabVerificationProvider?: OABVerificationProvider;
+  cpfVerificationProvider?: CPFVerificationProvider;
+  documentVerificationProvider?: DocumentVerificationProvider;
+  biometricVerificationProvider?: BiometricVerificationProvider;
+  feeTableProvider?: FeeTableProvider;
+  conflictCheckProvider?: ConflictCheckProvider;
+  videoConferenceProvider?: VideoConferenceProvider;
+  communicationEmailProvider?: CommunicationEmailProvider;
+  communicationSmsProvider?: SmsProvider;
+  communicationWhatsappProvider?: WhatsAppProvider;
+  communicationPushProvider?: PushProvider;
 };
 
 function meta(request: FastifyRequest): RequestMeta {

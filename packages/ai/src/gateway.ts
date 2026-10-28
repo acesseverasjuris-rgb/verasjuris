@@ -194,6 +194,70 @@ export const DEFAULT_AI_FEATURES: Readonly<Record<string, AIFeatureDefinition>> 
     requires: [AICapability.STRUCTURED_OUTPUT],
     outputDisposition: "requires_review",
   },
+  "contract.generate_assist": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "contract.review": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "contract.compare": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "contract.risk_analysis": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "contract.obligation_extract": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "civil.damage_analysis": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "consumer.contract_analysis": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "family.case_summary": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "criminal.evidence_review": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "medical.record_analysis": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "environmental.notice_analysis": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "digital.lgpd_review": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "international.choice_of_law_assist": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "arbitration.award_review": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "requires_review",
+  },
+  "tax.case_summary": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "assistive",
+  },
+  "tax.assessment_review": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "assistive",
+  },
   document_embedding: { requires: [AICapability.EMBEDDINGS], outputDisposition: "assistive" },
   document_vision: { requires: [AICapability.VISION], outputDisposition: "requires_review" },
 };

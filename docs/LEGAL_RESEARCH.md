@@ -68,3 +68,9 @@ Status de query: `pending`, `running`, `succeeded`, `failed`, `empty`, `not_conf
 - `docs/LEGAL_SOURCE_PROVIDERS.md`
 - `docs/AI_CORE.md`
 - ADRs 073–078
+
+## Teses tributárias e multi-área (Etapas 11–13)
+
+- **`tax_legal_theses`** e links em casos tributários são catálogo **interno** de teses — distinto de resultado de `ResearchGateway`; não substituem pesquisa verificável.
+- Extensões de área podem referenciar documentos e análises; pesquisa jurídica continua ancorada no catálogo local + provider `not_configured`.
+- Job `AREA_DOCUMENT_ANALYSIS` (worker local): stub — análise documental por área não roda em background até handler real existir.

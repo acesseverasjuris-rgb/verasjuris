@@ -386,3 +386,179 @@ export {
   type TimeTrackingImportProvider,
   NotConfiguredTimeTrackingImportProvider,
 } from "./time-tracking-import-provider.js";
+export {
+  type ElectoralCandidateRecord,
+  type ElectoralDataHealth,
+  type ElectoralDataProvider,
+  type ElectoralRegistrationRecord,
+  NotConfiguredElectoralDataProvider,
+} from "./electoral-provider.js";
+export {
+  type EnvironmentalDataHealth,
+  type EnvironmentalDataProvider,
+  type EnvironmentalInfractionRecord,
+  type EnvironmentalLicenseRecord,
+  NotConfiguredEnvironmentalDataProvider,
+} from "./environmental-provider.js";
+export {
+  type RegistryDocumentRecord,
+  type RegistryEntryRecord,
+  type RegistryHealth,
+  type RegistryOfficeSearchResult,
+  type RegistryProvider,
+  type RegistryQuoteInput,
+  type RegistryQuoteResult,
+  type RegistryServiceTypeRecord,
+  type RegistryStatusResult,
+  type RegistrySubmitInput,
+  type RegistrySubmitResult,
+  NotConfiguredRegistryProvider,
+} from "./registry-provider.js";
+export {
+  type CPFVerificationHealth,
+  type CPFVerificationProvider,
+  type CPFVerificationQuery,
+  type CPFVerificationResult,
+  isValidCpfChecksum,
+  maskCpf,
+  NotConfiguredCPFVerificationProvider,
+} from "./cpf-verification-provider.js";
+export {
+  type DocumentValidationInput,
+  type DocumentValidationResult,
+  type DocumentVerificationHealth,
+  type DocumentVerificationProvider,
+  NotConfiguredDocumentVerificationProvider,
+} from "./document-verification-provider.js";
+export {
+  type BiometricSessionInput,
+  type BiometricSessionResult,
+  type BiometricVerificationHealth,
+  type BiometricVerificationProvider,
+  NotConfiguredBiometricVerificationProvider,
+} from "./biometric-verification-provider.js";
+export {
+  type FeeTableHealth,
+  type FeeTableProvider,
+  type FeeTableQuery,
+  type FeeTableResult,
+  NotConfiguredFeeTableProvider,
+} from "./fee-table-provider.js";
+export {
+  type ContractManagementHealth,
+  type ContractManagementProvider,
+  type CreateSignatureEnvelopeInput,
+  type ExternalContractSnapshot,
+  NotConfiguredContractManagementProvider,
+  NotConfiguredSignatureProvider,
+  type SendSignatureEnvelopeInput,
+  type SignatureEnvelope,
+  type SignatureEnvelopeStatus,
+  type SignatureEvidence,
+  type SignatureProvider,
+  type SignatureProviderHealth,
+  type SignatureSignerRef,
+  type SyncExternalContractInput,
+} from "./signature-provider.js";
+export {
+  type FederalTaxAssessmentRecord,
+  type FederalTaxProvider,
+  type MunicipalTaxAssessmentRecord,
+  type MunicipalTaxProvider,
+  type StateTaxAssessmentRecord,
+  type StateTaxProvider,
+  type TaxDebtCertificateRecord,
+  type TaxDebtProvider,
+  type TaxFilingProvider,
+  type TaxFilingRecord,
+  type TaxProviderHealth,
+  NotConfiguredFederalTaxProvider,
+  NotConfiguredMunicipalTaxProvider,
+  NotConfiguredStateTaxProvider,
+  NotConfiguredTaxDebtProvider,
+  NotConfiguredTaxFilingProvider,
+} from "./tax-providers.js";
+export {
+  type ChannelDeliveryStatus,
+  type ChannelHealth,
+  type ChannelSendInput,
+  type ChannelSendResult,
+  type CommunicationChannelAdapter,
+  type CommunicationChannelKey,
+  createDefaultCommunicationChannels,
+  EmailCommunicationChannel,
+  PushCommunicationChannel,
+  SmsCommunicationChannel,
+  WhatsAppCommunicationChannel,
+} from "./communication-channel.js";
+export {
+  type EmailAttachment,
+  type EmailDeliveryStatus,
+  type EmailProvider,
+  type EmailProviderHealth,
+  type EmailSendResult,
+  emailProviderNotConfiguredError,
+  NotConfiguredEmailProvider,
+  type SendEmailInput,
+} from "./email-provider.js";
+export {
+  NotConfiguredSmsProvider,
+  type SendSmsInput,
+  type SmsDeliveryStatus,
+  type SmsProvider,
+  type SmsProviderHealth,
+  type SmsSendResult,
+  smsProviderNotConfiguredError,
+} from "./sms-provider.js";
+export {
+  NotConfiguredWhatsAppProvider,
+  type SendWhatsAppInput,
+  type WhatsAppDeliveryStatus,
+  type WhatsAppProvider,
+  type WhatsAppProviderHealth,
+  type WhatsAppSendResult,
+  whatsAppProviderNotConfiguredError,
+} from "./whatsapp-provider.js";
+export {
+  NotConfiguredPushProvider,
+  type PushDeliveryStatus,
+  type PushProvider,
+  type PushProviderHealth,
+  type PushSendResult,
+  type SendPushInput,
+  pushProviderNotConfiguredError,
+} from "./push-provider.js";
+export {
+  type CreatePaymentInput,
+  NotConfiguredPaymentProvider,
+  type PaymentProvider,
+  type PaymentProviderHealth,
+  type PaymentRecord,
+  type PaymentStatus,
+  type PaymentWebhookPayload,
+  type PaymentWebhookResult,
+} from "./payment-provider.js";
+export {
+  NotConfiguredOABVerificationProvider,
+  type OABVerificationHealth,
+  type OABVerificationProvider,
+  type OABVerificationQuery,
+  type OABVerificationResult,
+} from "./oab-verification-provider.js";
+export {
+  conflictCheckProviderNotConfiguredError,
+  NotConfiguredConflictCheckProvider,
+  type ConflictCheckFinding,
+  type ConflictCheckHealth,
+  type ConflictCheckInput,
+  type ConflictCheckParty,
+  type ConflictCheckProvider,
+  type ConflictCheckResult,
+} from "./conflict-check-provider.js";
+export {
+  type CreateVideoRoomInput,
+  NotConfiguredVideoConferenceProvider,
+  type VideoConferenceHealth,
+  type VideoConferenceProvider,
+  type VideoRoom,
+} from "./video-conference-provider.js";

@@ -139,6 +139,9 @@ importers:
 
   apps/worker:
     dependencies:
+      '@verasjuris/api':
+        specifier: workspace:*
+        version: link:../api
       '@verasjuris/config':
         specifier: workspace:*
         version: link:../../packages/config

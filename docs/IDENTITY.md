@@ -52,3 +52,7 @@ Ver `docs/AUTHORIZATION.md`. Policies em `@verasjuris/auth` além do catálogo R
 ## MFA e passkeys (preparação)
 
 Não há TOTP, recovery codes nem WebAuthn. A autenticação atual é por senha + sessão. Evolução futura: credenciais em entidade própria (`AuthenticationCredential`), desafios MFA e WebAuthn sem recriar `User`. Ver ADR 012.
+
+## Portal do cliente (Etapas 14–16)
+
+Mesma conta `User` — não há “login de cliente” separado (ADR 003). Acesso ao portal exige linha em `organization_client_users` ligando `user_id` a `crm_client_id` no tenant. Staff cria vínculo com `client_portal.link_user`. Contexto resolvido por `resolveClientPortalContext`. Ver `docs/CLIENT_PORTAL.md`, ADR 128.

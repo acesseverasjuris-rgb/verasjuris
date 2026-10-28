@@ -335,6 +335,8 @@ export const legalMatterTimelineEvents = pgTable(
     actorMembershipId: uuid("actor_membership_id").references(() => organizationMembers.id, {
       onDelete: "set null",
     }),
+    /** Deny-by-default: portal do cliente só vê eventos com clientVisible=true. */
+    clientVisible: boolean("client_visible").notNull().default(false),
     occurredAt: timestamp("occurred_at", { withTimezone: true, mode: "date" })
       .notNull()
       .defaultNow(),
@@ -343,6 +345,11 @@ export const legalMatterTimelineEvents = pgTable(
   (table) => [
     index("legal_matter_timeline_matter_idx").on(table.legalMatterId, table.occurredAt),
     index("legal_matter_timeline_org_idx").on(table.organizationId),
+    index("legal_matter_timeline_client_visible_idx").on(
+      table.legalMatterId,
+      table.clientVisible,
+      table.occurredAt,
+    ),
   ],
 );
 

@@ -304,6 +304,8 @@ export const calendarEvents = pgTable(
     meetingUrl: text("meeting_url"),
     status: calendarEventStatusEnum("status").notNull().default("scheduled"),
     recurrence: calendarRecurrenceEnum("recurrence").notNull().default("none"),
+    /** Deny-by-default para portal do cliente. */
+    clientVisible: boolean("client_visible").notNull().default(false),
     metadata: jsonb("metadata").$type<Record<string, unknown>>(),
     responsibleMembershipId: uuid("responsible_membership_id").references(
       () => organizationMembers.id,

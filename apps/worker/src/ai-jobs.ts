@@ -38,6 +38,48 @@ export const AI_JOB_TYPES = {
   PREVIDENTIARY_CALCULATION: "PREVIDENTIARY_CALCULATION",
   /** Análise documental previdenciária — stub not_configured. */
   PREVIDENTIARY_DOCUMENT_ANALYSIS: "PREVIDENTIARY_DOCUMENT_ANALYSIS",
+  /** Cálculo tributário assíncrono — stub not_configured (motor síncrono na API). */
+  TAX_CALCULATION: "TAX_CALCULATION",
+  /** Importação fiscal — stub not_configured. */
+  TAX_IMPORT: "TAX_IMPORT",
+  /** Sync provedores fiscais — stub not_configured. */
+  TAX_PROVIDER_SYNC: "TAX_PROVIDER_SYNC",
+  /** Alertas de contrato — stub not_configured. */
+  CONTRACT_ALERT: "CONTRACT_ALERT",
+  /** Alertas de renovação — stub not_configured. */
+  CONTRACT_RENEWAL_ALERT: "CONTRACT_RENEWAL_ALERT",
+  /** Sync status assinatura — stub not_configured. */
+  SIGNATURE_STATUS_SYNC: "SIGNATURE_STATUS_SYNC",
+  /** Revisão IA de contrato — stub not_configured. */
+  CONTRACT_AI_REVIEW: "CONTRACT_AI_REVIEW",
+  /** Análise documental por área — stub not_configured. */
+  AREA_DOCUMENT_ANALYSIS: "AREA_DOCUMENT_ANALYSIS",
+  /** Despacho outbox de comunicação — handler local no worker. */
+  COMMUNICATION_DISPATCH: "COMMUNICATION_DISPATCH",
+  /** Reprocessamento de falhas transitórias de comunicação. */
+  COMMUNICATION_RETRY: "COMMUNICATION_RETRY",
+  /** Geração assíncrona de candidatos de match — stub local. */
+  ONLINE_MATCH_GENERATION: "ONLINE_MATCH_GENERATION",
+  /** Expiração de ofertas de match — stub local. */
+  ONLINE_MATCH_EXPIRATION: "ONLINE_MATCH_EXPIRATION",
+  /** Lembrete de consulta agendada — stub local. */
+  CONSULTATION_REMINDER: "CONSULTATION_REMINDER",
+  /** Sync status pagamento externo — stub not_configured. */
+  PAYMENT_STATUS_SYNC: "PAYMENT_STATUS_SYNC",
+  /** Verificação OAB assíncrona — stub not_configured. */
+  OAB_VERIFICATION: "OAB_VERIFICATION",
+  /** Despacho push externo — stub not_configured. */
+  PUSH_DISPATCH: "PUSH_DISPATCH",
+  MARKETPLACE_REQUEST_EXPIRATION: "MARKETPLACE_REQUEST_EXPIRATION",
+  MARKETPLACE_PROPOSAL_EXPIRATION: "MARKETPLACE_PROPOSAL_EXPIRATION",
+  MARKETPLACE_DELIVERY_REMINDER: "MARKETPLACE_DELIVERY_REMINDER",
+  PROFESSIONAL_REVALIDATION_CHECK: "PROFESSIONAL_REVALIDATION_CHECK",
+  PROFESSIONAL_VERIFICATION_PROVIDER_SYNC: "PROFESSIONAL_VERIFICATION_PROVIDER_SYNC",
+  DILIGENCE_DEADLINE_REMINDER: "DILIGENCE_DEADLINE_REMINDER",
+  DILIGENCE_EVIDENCE_REVIEW_REMINDER: "DILIGENCE_EVIDENCE_REVIEW_REMINDER",
+  EXTRAJUDICIAL_STATUS_SYNC: "EXTRAJUDICIAL_STATUS_SYNC",
+  EXTRAJUDICIAL_REQUIREMENT_REMINDER: "EXTRAJUDICIAL_REQUIREMENT_REMINDER",
+  REGISTRY_PROVIDER_SYNC: "REGISTRY_PROVIDER_SYNC",
 } as const;
 
 export type KnownAiJobType = (typeof AI_JOB_TYPES)[keyof typeof AI_JOB_TYPES];

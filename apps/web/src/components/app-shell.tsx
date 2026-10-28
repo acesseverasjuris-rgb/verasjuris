@@ -24,12 +24,17 @@ import {
   Shield,
   SlidersHorizontal,
   FilePen,
+  FileSignature,
   FileText,
   GitCompare,
+  Scale,
   Tags,
   UserRound,
   Users,
   UsersRound,
+  MessageSquare,
+  Store,
+  Video,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
@@ -67,6 +72,12 @@ type NavItem = {
     | "comparador"
     | "previdenciario"
     | "trabalhista"
+    | "tributario"
+    | "areas"
+    | "contratos"
+    | "comunicacao"
+    | "advogado-online"
+    | "marketplace"
     | "perfis";
 };
 
@@ -98,6 +109,12 @@ const icons = {
   comparador: GitCompare,
   previdenciario: Shield,
   trabalhista: HardHat,
+  tributario: Landmark,
+  areas: Scale,
+  contratos: FileSignature,
+  comunicacao: MessageSquare,
+  "advogado-online": Video,
+  marketplace: Store,
 };
 
 function NavLinks({ items, pathname }: { items: NavItem[]; pathname: string }) {

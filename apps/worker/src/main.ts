@@ -4,6 +4,10 @@ import { createJobQueueFromEnv, LocalInProcessQueueProvider } from "@verasjuris/
 import { createStorageProvider } from "@verasjuris/storage";
 import { buildWorkerApp, checkDatabase } from "./app.js";
 import { registerLocalAlertHandlers } from "./jobs/alert-handlers.js";
+import { registerLocalTaxContractHandlers } from "./jobs/tax-contract-handlers.js";
+import { registerLocalCommunicationHandlers } from "./jobs/communication-handlers.js";
+import { registerLocalOnlineLawyerHandlers } from "./jobs/online-lawyer-handlers.js";
+import { registerLocalMarketplaceHandlers } from "./jobs/marketplace-handlers.js";
 import {
   createStorageReconciliationHandler,
   STORAGE_RECONCILIATION_JOB,
@@ -18,6 +22,10 @@ async function main(): Promise<void> {
   const queue = createJobQueueFromEnv(process.env);
   if (queue instanceof LocalInProcessQueueProvider) {
     registerLocalAlertHandlers(queue, database.db);
+    registerLocalTaxContractHandlers(queue, database.db);
+    registerLocalCommunicationHandlers(queue, database.db);
+    registerLocalOnlineLawyerHandlers(queue, database.db);
+    registerLocalMarketplaceHandlers(queue, database.db);
     queue.registerHandler(
       STORAGE_RECONCILIATION_JOB,
       createStorageReconciliationHandler({

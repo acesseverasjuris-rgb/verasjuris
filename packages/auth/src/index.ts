@@ -178,6 +178,78 @@ export {
   policyWorkSchedule,
 } from "./labor-policies.js";
 export {
+  policyTaxAssessment,
+  policyTaxCalculation,
+  policyTaxCase,
+  policyTaxCompensation,
+  policyTaxCredit,
+  policyTaxEnforcement,
+  policyTaxObligation,
+  policyTaxRefund,
+  policyTaxThesis,
+} from "./tax-policies.js";
+export {
+  policyContract,
+  policyContractApproval,
+  policyContractClause,
+  policyContractTermination,
+  policyContractVersion,
+  policySignatureRequest,
+} from "./contract-policies.js";
+export { policyLegalAreaModule } from "./legal-area-policies.js";
+export {
+  portalAuthorizeClientCase,
+  portalAuthorizeClientContract,
+  portalAuthorizeClientDocument,
+  portalAuthorizeClientMessage,
+  portalAuthorizeClientPayment,
+  portalAuthorizeScope,
+  policyClientCase,
+  policyClientContract,
+  policyClientDocument,
+  policyClientMessage,
+  policyClientPayment,
+  policyClientPortal,
+  type PortalResourceScope,
+} from "./client-portal-policies.js";
+export {
+  type ClientPortalContext,
+  resolveClientPortalContext,
+} from "./client-portal-context.js";
+export {
+  policyCommunication,
+  policyCommunicationAdmin,
+  policyCommunicationConsent,
+  policyCommunicationOutbox,
+  policyCommunicationPreference,
+  policyCommunicationTemplate,
+} from "./communication-policies.js";
+export {
+  policyLawyerAvailability,
+  policyOnlineConsultation,
+  policyOnlineLegalRequest,
+  policyOnlineMatchCandidate,
+  policyOnlineReviewModeration,
+} from "./online-lawyer-policies.js";
+export {
+  policyMarketplaceDispute,
+  policyMarketplaceEngagement,
+  policyMarketplaceProposal,
+  policyMarketplaceRequest,
+  policyMarketplaceReviewModerate,
+  policyMarketplaceService,
+} from "./marketplace-policies.js";
+export {
+  policyProfessionalVerification,
+  policyProfessionalVerificationProviderVerified,
+  policyProfessionalVerificationReviewDecision,
+} from "./professional-verification-policies.js";
+export { policyDiligence, policyDiligenceAssignment } from "./diligence-policies.js";
+export {
+  policyExtrajudicialOrder,
+  policyExtrajudicialRequest,
+} from "./extrajudicial-policies.js";
+export {
   policyLegalTemplate,
   policyLegalTemplateMutation,
 } from "./legal-template-policies.js";

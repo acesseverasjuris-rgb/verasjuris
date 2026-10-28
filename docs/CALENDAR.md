@@ -29,3 +29,9 @@ Perícias e avaliações sociais previdenciárias (`previdentiary_medical_exams`
 ## Permissões
 
 `calendar.read|create|update|delete|manage_team`.
+
+## Portal e consultas online (Etapas 14–16)
+
+- Portal lista eventos com visibilidade ao cliente (`staffPatchCalendarClientVisible` + leitura portal).
+- Consulta online pode criar/vincular `calendarEventId` ao agendar (`scheduleOnlineConsultation`).
+- Lembrete assíncrono reservado ao job `CONSULTATION_REMINDER` (stub local). Ver `docs/ONLINE_CONSULTATIONS.md`.

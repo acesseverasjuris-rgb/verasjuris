@@ -59,3 +59,9 @@ Prefixo: `/v1/organizations/:organizationId/citations`
 - `docs/LEGAL_SOURCE_PROVIDERS.md`
 - `docs/LEGAL_DRAFTING.md` (source set; inserção ainda stub)
 - ADRs 075, 076, 077, 078, 089
+
+## Contratos e cláusulas (Etapas 11–13)
+
+- Cláusulas congeladas em **`contract_clause_instances`** são texto contratual — citações jurisprudenciais embutidas seguem as mesmas regras anti-alucinação; o motor **não** auto-verifica referências em cláusula.
+- **`contract_templates`** podem conter placeholders de citação via source set futuro; hoje inserção automática permanece **`NOT_CONFIGURED`** (ADR 089).
+- Teses em `tax_legal_theses` ≠ citação verificada — usar `citations` quando houver fonte catalogável.

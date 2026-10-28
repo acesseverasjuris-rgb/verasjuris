@@ -55,3 +55,10 @@ Itens com status `pending` | `done` | `not_applicable` | `blocked`. Itens bloque
 - `docs/LEGAL_DOCUMENT_WORKFLOW.md`
 - `docs/CITATION_ENGINE.md`
 - ADRs 088–092
+
+## Distinção: minuta ≠ contrato CLM (Etapas 11–13)
+
+- **`legal_document_drafts`**: peça/processual com workflow até protocolo manual (ADR 090).
+- **`contracts`**: ciclo comercial/jurídico-operacional com aprovação, assinatura, renovação (ADR 120).
+- Opcionalmente ambos referenciam templates distintos; a IA assistiva **não** promove minuta a contrato assinado nem vice-versa.
+- Revisão assistida de contrato assíncrona: job `CONTRACT_AI_REVIEW` — stub `not_configured` no worker local.

@@ -7,19 +7,63 @@ import {
   createResearchGatewayFromEnv,
   type CNISProvider,
   type ESocialProvider,
+  type FederalTaxProvider,
   type FGTSProvider,
+  type MunicipalTaxProvider,
+  type StateTaxProvider,
+  type TaxDebtProvider,
+  type TaxFilingProvider,
   type LaborCourtProvider,
   NotConfiguredAuctionBidProvider,
   NotConfiguredAuctionProvider,
   NotConfiguredCNISProvider,
   NotConfiguredESocialProvider,
+  NotConfiguredFederalTaxProvider,
   NotConfiguredFGTSProvider,
   NotConfiguredLaborCourtProvider,
+  NotConfiguredMunicipalTaxProvider,
+  NotConfiguredStateTaxProvider,
+  NotConfiguredTaxDebtProvider,
+  NotConfiguredTaxFilingProvider,
+  NotConfiguredElectoralDataProvider,
+  NotConfiguredEnvironmentalDataProvider,
+  NotConfiguredRegistryProvider,
+  NotConfiguredEmailProvider,
+  NotConfiguredPushProvider,
+  NotConfiguredSmsProvider,
+  NotConfiguredWhatsAppProvider,
+  type EmailProvider as CommunicationEmailProvider,
+  type PushProvider,
+  type SmsProvider,
+  type WhatsAppProvider,
+  type ElectoralDataProvider,
+  type EnvironmentalDataProvider,
+  type RegistryProvider,
   NotConfiguredOCRProvider,
   NotConfiguredPublicOpportunityProvider,
   NotConfiguredSocialSecurityProvider,
   NotConfiguredTimeTrackingImportProvider,
+  NotConfiguredConflictCheckProvider,
+  NotConfiguredContractManagementProvider,
+  NotConfiguredOABVerificationProvider,
+  NotConfiguredCPFVerificationProvider,
+  NotConfiguredDocumentVerificationProvider,
+  NotConfiguredBiometricVerificationProvider,
+  NotConfiguredFeeTableProvider,
+  NotConfiguredPaymentProvider,
+  NotConfiguredSignatureProvider,
+  NotConfiguredVideoConferenceProvider,
+  type BiometricVerificationProvider,
+  type ConflictCheckProvider,
+  type ContractManagementProvider,
+  type CPFVerificationProvider,
+  type DocumentVerificationProvider,
+  type FeeTableProvider,
+  type OABVerificationProvider,
   type OCRProvider,
+  type PaymentProvider,
+  type SignatureProvider,
+  type VideoConferenceProvider,
   type PublicOpportunityProvider,
   type ResearchGateway,
   type SocialSecurityProvider,
@@ -78,6 +122,16 @@ import { registerLegalResearchRoutes } from "./modules/legal-research/routes.js"
 import { registerCitationRoutes } from "./modules/citations/routes.js";
 import { registerLaborRoutes } from "./modules/labor/routes.js";
 import { registerPrevidentiaryRoutes } from "./modules/previdentiary/routes.js";
+import { registerTaxRoutes } from "./modules/tax/routes.js";
+import { registerContractRoutes } from "./modules/contracts/routes.js";
+import { registerLegalAreaRoutes } from "./modules/legal-areas/routes.js";
+import { registerClientPortalRoutes } from "./modules/client-portal/routes.js";
+import { registerOnlineLawyerRoutes } from "./modules/online-lawyer/routes.js";
+import { registerMarketplaceRoutes } from "./modules/marketplace/routes.js";
+import { registerProfessionalVerificationRoutes } from "./modules/professional-verification/routes.js";
+import { registerDiligenceRoutes } from "./modules/diligence/routes.js";
+import { registerExtrajudicialRoutes } from "./modules/extrajudicial/routes.js";
+import { registerCommunicationRoutes } from "./modules/communication/routes.js";
 import { registerTaskRoutes } from "./modules/tasks/routes.js";
 import { registerHttpGuards } from "./plugins/http.js";
 
@@ -117,6 +171,38 @@ export type BuildAppOptions = {
   socialSecurityProvider?: SocialSecurityProvider;
   /** Padrão: CNISProvider NOT_CONFIGURED (importação manual ativa). */
   cnisProvider?: CNISProvider;
+  /** Padrão: FederalTaxProvider NOT_CONFIGURED. */
+  federalTaxProvider?: FederalTaxProvider;
+  /** Padrão: StateTaxProvider NOT_CONFIGURED. */
+  stateTaxProvider?: StateTaxProvider;
+  /** Padrão: MunicipalTaxProvider NOT_CONFIGURED. */
+  municipalTaxProvider?: MunicipalTaxProvider;
+  /** Padrão: TaxDebtProvider NOT_CONFIGURED. */
+  taxDebtProvider?: TaxDebtProvider;
+  /** Padrão: TaxFilingProvider NOT_CONFIGURED. */
+  taxFilingProvider?: TaxFilingProvider;
+  /** Padrão: SignatureProvider NOT_CONFIGURED (registro manual ativo). */
+  signatureProvider?: SignatureProvider;
+  /** Padrão: ContractManagementProvider NOT_CONFIGURED. */
+  contractManagementProvider?: ContractManagementProvider;
+  /** Dados eleitorais; ausente = NOT_CONFIGURED. */
+  electoralDataProvider?: ElectoralDataProvider;
+  /** Dados ambientais; ausente = NOT_CONFIGURED. */
+  environmentalDataProvider?: EnvironmentalDataProvider;
+  /** Registros públicos; ausente = NOT_CONFIGURED. */
+  registryProvider?: RegistryProvider;
+  paymentProvider?: PaymentProvider;
+  oabVerificationProvider?: OABVerificationProvider;
+  cpfVerificationProvider?: CPFVerificationProvider;
+  documentVerificationProvider?: DocumentVerificationProvider;
+  biometricVerificationProvider?: BiometricVerificationProvider;
+  feeTableProvider?: FeeTableProvider;
+  conflictCheckProvider?: ConflictCheckProvider;
+  videoConferenceProvider?: VideoConferenceProvider;
+  communicationEmailProvider?: CommunicationEmailProvider;
+  communicationSmsProvider?: SmsProvider;
+  communicationWhatsappProvider?: WhatsAppProvider;
+  communicationPushProvider?: PushProvider;
 };
 
 export async function buildApp(options: BuildAppOptions) {
@@ -164,6 +250,39 @@ export async function buildApp(options: BuildAppOptions) {
     socialSecurityProvider:
       options.socialSecurityProvider ?? new NotConfiguredSocialSecurityProvider(),
     cnisProvider: options.cnisProvider ?? new NotConfiguredCNISProvider(),
+    federalTaxProvider: options.federalTaxProvider ?? new NotConfiguredFederalTaxProvider(),
+    stateTaxProvider: options.stateTaxProvider ?? new NotConfiguredStateTaxProvider(),
+    municipalTaxProvider: options.municipalTaxProvider ?? new NotConfiguredMunicipalTaxProvider(),
+    taxDebtProvider: options.taxDebtProvider ?? new NotConfiguredTaxDebtProvider(),
+    taxFilingProvider: options.taxFilingProvider ?? new NotConfiguredTaxFilingProvider(),
+    signatureProvider: options.signatureProvider ?? new NotConfiguredSignatureProvider(),
+    contractManagementProvider:
+      options.contractManagementProvider ?? new NotConfiguredContractManagementProvider(),
+    electoralDataProvider:
+      options.electoralDataProvider ?? new NotConfiguredElectoralDataProvider(),
+    environmentalDataProvider:
+      options.environmentalDataProvider ?? new NotConfiguredEnvironmentalDataProvider(),
+    registryProvider: options.registryProvider ?? new NotConfiguredRegistryProvider(),
+    paymentProvider: options.paymentProvider ?? new NotConfiguredPaymentProvider(),
+    oabVerificationProvider:
+      options.oabVerificationProvider ?? new NotConfiguredOABVerificationProvider(),
+    cpfVerificationProvider:
+      options.cpfVerificationProvider ?? new NotConfiguredCPFVerificationProvider(),
+    documentVerificationProvider:
+      options.documentVerificationProvider ?? new NotConfiguredDocumentVerificationProvider(),
+    biometricVerificationProvider:
+      options.biometricVerificationProvider ?? new NotConfiguredBiometricVerificationProvider(),
+    feeTableProvider: options.feeTableProvider ?? new NotConfiguredFeeTableProvider(),
+    conflictCheckProvider:
+      options.conflictCheckProvider ?? new NotConfiguredConflictCheckProvider(),
+    videoConferenceProvider:
+      options.videoConferenceProvider ?? new NotConfiguredVideoConferenceProvider(),
+    communicationEmailProvider:
+      options.communicationEmailProvider ?? new NotConfiguredEmailProvider(),
+    communicationSmsProvider: options.communicationSmsProvider ?? new NotConfiguredSmsProvider(),
+    communicationWhatsappProvider:
+      options.communicationWhatsappProvider ?? new NotConfiguredWhatsAppProvider(),
+    communicationPushProvider: options.communicationPushProvider ?? new NotConfiguredPushProvider(),
   };
   await app.register(helmet, { global: true, contentSecurityPolicy: false });
   await app.register(cors, {
@@ -218,6 +337,16 @@ export async function buildApp(options: BuildAppOptions) {
       await registerCitationRoutes(v1, deps);
       await registerLaborRoutes(v1, deps);
       await registerPrevidentiaryRoutes(v1, deps);
+      await registerTaxRoutes(v1, deps);
+      await registerContractRoutes(v1, deps);
+      await registerLegalAreaRoutes(v1, deps);
+      await registerClientPortalRoutes(v1, deps);
+      await registerOnlineLawyerRoutes(v1, deps);
+      await registerMarketplaceRoutes(v1, deps);
+      await registerProfessionalVerificationRoutes(v1, deps);
+      await registerDiligenceRoutes(v1, deps);
+      await registerExtrajudicialRoutes(v1, deps);
+      await registerCommunicationRoutes(v1, deps);
     },
     { prefix: "/v1" },
   );

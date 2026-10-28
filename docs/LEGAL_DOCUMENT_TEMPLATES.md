@@ -56,3 +56,9 @@ Substituição apenas via `TemplateVariableResolver` (`@verasjuris/ai` / `templa
 
 - `docs/LEGAL_DRAFTING.md`, `docs/LEGAL_DOCUMENT_WORKFLOW.md`
 - ADRs 085, 086, 087
+
+## Packs por área e contratos (Etapas 11–13)
+
+- **`legal_area_template_packs`** ligam módulos de área (`legal_area_modules`) a templates existentes ou packs lógicos (`packKey`, `isSystem`). Ver `docs/LEGAL_AREAS.md`.
+- **`contract_templates`** (domínio Contratos) reutilizam o **mesmo motor de variáveis** com whitelist (ADR 121) — distinto de `legal_document_templates`, mas mesmas regras de segurança (ADR 087).
+- Template de minuta processual ≠ template de contrato CLM ≠ modelo system de peça — três catálogos, três fluxos (`LEGAL_DRAFTING` vs `CONTRACTS`).

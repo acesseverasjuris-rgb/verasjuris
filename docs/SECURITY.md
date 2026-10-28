@@ -143,6 +143,28 @@ Upload de documentos (Etapa 4.1) usa `@verasjuris/storage`: MIME por magic bytes
 
 **Protocolo previdenciário:** informado/manual ≠ confirmação do órgão (paralelo ADR 047 / 102).
 
+## Tributário, multi-área e contratos (Etapas 11–13)
+
+**Tenant:** casos tributários, extensões de área, contratos e pedidos de assinatura seguem 404 cross-org. Valores fiscais em centavos inteiros.
+
+**Providers:** `FederalTaxProvider`, `StateTaxProvider`, `MunicipalTaxProvider`, `TaxDebtProvider`, `TaxFilingProvider`, `SignatureProvider`, `RegistryProvider`, `EnvironmentalDataProvider`, `ElectoralDataProvider` default `not_configured` — sem scraping Receita/SEFAZ/TSE/cartório.
+
+**Confidencialidade:** bindings e extensões penal/médica/tributária/eleitoral usam `confidential` / `highly_restricted` quando aplicável (ADR 127). IA não reclassifica nem expõe conteúdo restrito.
+
+**Assinatura:** provider não simula `signed`; manual/wet ink exige permissão `contract.record_signature` e evidência documental.
+
+**Cálculo fiscal:** determinístico ≠ lançamento oficial; revisão humana antes de uso operacional (ADR 117–118).
+
+**Worker:** `TAX_PROVIDER_SYNC` / `SIGNATURE_STATUS_SYNC` falham explicitamente sem adapter; fila distribuída default `not_configured` (ADR 098).
+
+## Portal, comunicação e advogado online (Etapas 14–16)
+
+**Portal:** deny-by-default — sem `organization_client_users` → 404; timeline `client_visible=false` até publicação staff; processos `secret` ocultos (ADRs 128–130). Ver `docs/CLIENT_PORTAL_SECURITY.md`.
+
+**Comunicação:** marketing exige consent `opted_in`; providers externos default `not_configured`; outbox não simula entrega (ADRs 132–135). Mensagens `client_visible=false` ocultas do cliente.
+
+**Advogado online:** documentos da solicitação só após match aceito (ADR 143); OAB `informed` ≠ `verified` (ADR 138); pagamento manual ≠ PSP (ADR 141). Jobs `PAYMENT_STATUS_SYNC`, `OAB_VERIFICATION`, `PUSH_DISPATCH` falham sem adapter.
+
 ## LGPD
 
 A conta guarda nome, e-mail e hash de senha para autenticação. IP e identificador de navegador podem aparecer em sessão e auditoria para segurança. Não há, nesta versão, exportação, retificação além do nome da organização, anonimização ou exclusão automatizada. Esses direitos precisam de um fluxo próprio antes de tratar dados de processos ou documentos.

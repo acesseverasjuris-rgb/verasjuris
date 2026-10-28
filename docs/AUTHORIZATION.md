@@ -202,6 +202,29 @@ Policies dedicadas: `policyProfiles`, `policyCrm` em `@verasjuris/auth/crm-polic
 - Cancel, alertas e escalonamento: owner/administrator.
 - Policy: `policyDeadline`. Transições: `assertDeadlineTransition` / `assertDeadlineMutable`.
 
+### Portal do cliente (`client_portal.*`)
+
+- Vínculo User↔cliente CRM: `client_portal.link_user`.
+- Operar solicitações/timeline/agenda visível: `client_portal.manage_requests`.
+- Ledger de pagamentos do cliente: `client_portal.manage_payments`.
+- Rotas `/portal/*` usam `ClientPortalContext` + `portalAuthorizeScope` (404 fora do escopo).
+- Policies: `policyClientPortal`, `policyClientCase`, `policyClientDocument`, `policyClientContract`, `policyClientPayment`, `policyClientMessage`.
+
+### Comunicação (`communication.*`)
+
+- Leitura/envio: `communication.read`, `communication.send`.
+- Templates/preferências/consent/admin: `manage_templates`, `manage_preferences`, `manage_consents`, `admin`.
+- Policies: `policyCommunication`, `policyCommunicationTemplate`, `policyCommunicationPreference`, `policyCommunicationConsent`.
+
+### Advogado online (`online_lawyer.*`)
+
+- Solicitar atendimento: `online_lawyer.request`.
+- Ofertas/match: `match.read`, `match.respond`.
+- Consultas: `consultation.read`, `consultation.manage`.
+- Disponibilidade: `availability.manage`.
+- Moderação de reviews: `review.moderate`.
+- Policies: `policyOnlineLegalRequest`, `policyOnlineMatchCandidate`, `policyOnlineConsultation`, `policyLawyerAvailability`.
+
 ## Policies (`@verasjuris/auth`)
 
 - `policyRequirePermission` — permission no tenant  

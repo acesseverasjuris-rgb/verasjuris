@@ -16,6 +16,9 @@ Não confundir com:
 | AdministrativeProcess | Processo administrativo 0..N no matter (`docs/ADMINISTRATIVE_PROCESSES.md`) |
 | PrevidentiaryCase | Caso previdenciário 0..N no matter (`docs/PREVIDENTIARY.md`) |
 | LaborCase | Caso trabalhista 0..N no matter (`docs/LABOR.md`) |
+| TaxCase | Caso tributário 0..N no matter (`docs/TAX.md`) |
+| Area extensions | Extensões por módulo (cível, penal, …) via bindings (`docs/LEGAL_AREAS.md`) |
+| Contract | Contrato CLM 0..N (cliente/matter opcionais) (`docs/CONTRACTS.md`) — ≠ LegalDraft |
 
 Produto (UI): **Casos**. Domínio/código: **LegalMatter**.
 
@@ -43,6 +46,7 @@ Tabela `legal_matters` — evolução de `legal_cases` (migration `0006`, rename
 ## Partes e equipe
 
 - `legal_matter_parties` — 0..N, posição (cliente, parte contrária, etc.), sem modelar só autor/réu
+- `personType`: `person` | `organization` | `public_body` | `other` — papéis como herdeiro/árbitro via **position + extensão de área** (`estate_heirs`, metadata), sem duplicar `Client` (ADR 114)
 - Parte contrária **não** é um único campo `opposingPartyName`
 - `legal_matter_team_members` — N membros; papel de equipe ≠ permissão RBAC
 - Responsável = `OrganizationMember` ativo da mesma org
@@ -87,7 +91,15 @@ A partir da Etapa 3.2, um LegalMatter pode agregar **0..N** `administrative_proc
 
 ## Previdenciário e trabalhista (Prompt 16)
 
-Um LegalMatter pode agregar **0..N** `previdentiary_cases` e **0..N** `labor_cases` — agregados próprios, não colunas do matter (ADRs 100, 108). Benefícios, CNIS e cálculos previdenciários: `docs/PREVIDENTIARY.md`. Contratos, FGTS estimado e liquidação: `docs/LABOR.md`. Providers oficiais permanecem `NOT_CONFIGURED`.
+Um LegalMatter pode agregar **0..N** `previdentiary_cases` e **0..N** `labor_cases` — agregados próprios, não colunas do matter (ADRs 100, 108). Benefícios, CNIS e cálculos previdenciários: `docs/PREVIDENTIARY.md`. Contratos de emprego, FGTS estimado e liquidação: `docs/LABOR.md`. Providers oficiais permanecem `NOT_CONFIGURED`.
+
+## Tributário e módulos de área (Etapas 11–13)
+
+**0..N** `tax_cases` (ADR 117). Bindings `legal_matter_area_bindings` + extensões (`civil_*`, `criminal_cases`, …) no schema `legal-areas.ts` — ver `docs/LEGAL_AREAS.md`. Confidencialidade reforçada em penal/médico/tributário/eleitoral (ADR 127).
+
+## Contratos comerciais (Etapa 13)
+
+Contratos CLM (`contracts`) podem referenciar matter e cliente; **não** substituem minuta processual (`legal_document_drafts`) nem documento binário (ADRs 119–120). Assinatura: `docs/CONTRACTS.md`.
 
 ## Documentos
 
@@ -105,4 +117,4 @@ Documentação: `docs/LEGAL_AI_ANALYSIS.md`.
 
 ## Fora do escopo ainda
 
-Peticionamento eletrônico real, financeiro operacional, comunicações externas, captura automática de tribunal/órgão/INSS/eSocial, assinatura eletrônica, alteração automática de status/prazo por IA, cálculo que defira benefício ou homologue liquidação.
+Peticionamento eletrônico real, financeiro operacional, comunicações externas, captura automática de tribunal/órgão/INSS/eSocial/Fisco, assinatura eletrônica via provider real (registro manual já suportado), alteração automática de status/prazo por IA, cálculo que defira benefício ou homologue liquidação/lançamento fiscal.

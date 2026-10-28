@@ -108,6 +108,54 @@ export default async function AuthenticatedLayout({ children }: { children: Reac
           ...(permissions.has("labor.read")
             ? [{ href: "/app/trabalhista", label: "Trabalhista", icon: "trabalhista" as const }]
             : []),
+          ...(permissions.has("tax.read")
+            ? [{ href: "/app/tributario", label: "Tributário", icon: "tributario" as const }]
+            : []),
+          ...(permissions.has("matter.read") || permissions.has("legal_area_module.read")
+            ? [{ href: "/app/areas", label: "Áreas jurídicas", icon: "areas" as const }]
+            : []),
+          ...(permissions.has("contract.read")
+            ? [{ href: "/app/contratos", label: "Contratos", icon: "contratos" as const }]
+            : []),
+          ...(permissions.has("communication.read")
+            ? [{ href: "/app/comunicacao", label: "Comunicação", icon: "comunicacao" as const }]
+            : []),
+          ...([
+            "online_lawyer.match.read",
+            "online_lawyer.consultation.read",
+            "online_lawyer.availability.manage",
+          ].some((key) => permissions.has(key))
+            ? [
+                {
+                  href: "/app/advogado-online",
+                  label: "Advogado Online",
+                  icon: "advogado-online" as const,
+                },
+              ]
+            : []),
+          ...(permissions.has("professional_verification.read_own") ||
+          permissions.has("professional_verification.review")
+            ? [{ href: "/app/verificacoes", label: "Verificações", icon: "perfis" as const }]
+            : []),
+          ...(permissions.has("diligence.read")
+            ? [{ href: "/app/diligencias", label: "Diligências", icon: "tarefas" as const }]
+            : []),
+          ...(permissions.has("extrajudicial.read")
+            ? [{ href: "/app/extrajudicial", label: "Extrajudicial", icon: "documentos" as const }]
+            : []),
+          ...([
+            "marketplace.read",
+            "marketplace.proposal.create",
+            "marketplace.service.manage",
+          ].some((key) => permissions.has(key))
+            ? [
+                {
+                  href: "/app/marketplace",
+                  label: "Marketplace",
+                  icon: "marketplace" as const,
+                },
+              ]
+            : []),
           ...(permissions.has("public_opportunity.read")
             ? [
                 {

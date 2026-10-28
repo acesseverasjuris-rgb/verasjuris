@@ -88,7 +88,12 @@ Shell em `/app/ia` (status, uso, jobs, análises). Mensagens explícitas quando 
 - `docs/PREVIDENTIARY.md` / `docs/LABOR.md` / `docs/CNIS.md` / providers Prompt 16
 - `docs/TECHNICAL_DEBT_CLOSURE.md`
 - ADRs 058–112 em `docs/adr/`
+- Etapas 11–13: `docs/TAX.md`, `docs/TAX_PROVIDERS.md`, `docs/LEGAL_AREAS.md`, `docs/CONTRACTS.md`, `docs/SIGNATURE_PROVIDERS.md` — providers fiscais/assinatura/registro/ambiental/eleitoral default `not_configured`; ADRs 113–127
+
+## Worker (Etapas 11–13)
+
+`apps/worker/src/jobs/tax-contract-handlers.ts` registra handlers locais para `TAX_CALCULATION`, `TAX_IMPORT`, `TAX_PROVIDER_SYNC`, `CONTRACT_ALERT`, `CONTRACT_RENEWAL_ALERT`, `SIGNATURE_STATUS_SYNC`, `CONTRACT_AI_REVIEW`, `AREA_DOCUMENT_ANALYSIS` — sync externo falha explícita; demais stubs no-op idempotentes. Tipos espelhados em `AI_JOB_TYPES` (`ai-jobs.ts`) sem handler ⇒ `not_configured` no executor de `ai_jobs`.
 
 ## Fora do escopo destas etapas
 
-Embeddings em produção, visão multimodal real, RAG com índice vetorial externo, e-filing real, export PDF/DOCX, sync oficial de jurisprudência/leilão/INSS/eSocial, lance eletrônico, inserção automática de citação, alteração automática de domínio jurídico, cálculo de benefício/rescisão via LLM.
+Embeddings em produção, visão multimodal real, RAG com índice vetorial externo, e-filing real, export PDF/DOCX, sync oficial de jurisprudência/leilão/INSS/eSocial/Fisco, lance eletrônico, inserção automática de citação, alteração automática de domínio jurídico, cálculo de benefício/rescisão/lançamento fiscal via LLM, assinatura eletrônica simulada.

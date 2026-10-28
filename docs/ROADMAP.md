@@ -100,30 +100,58 @@ Modelos versionados (system/org), minutas com source set e workflow central até
 
 Casos previdenciários e trabalhistas separados do LegalMatter; benefícios ≠ processo administrativo; requerimentos especializados; CNIS importável/revisável; cálculos determinísticos em `@verasjuris/calculations` com rule sets versionados e input snapshots; comparação de cenários (sem “melhor definitivo”); FGTS estimado ≠ saldo oficial; providers SocialSecurity/CNIS/eSocial/FGTS/LaborCourt **`NOT_CONFIGURED`**. Docs: `docs/PREVIDENTIARY.md`, `docs/PREVIDENTIARY_ADMIN_REQUESTS.md`, `docs/PREVIDENTIARY_CALCULATIONS.md`, `docs/CNIS.md`, `docs/LABOR.md`, `docs/LABOR_CALCULATIONS.md`, `docs/LABOR_LIQUIDATION.md`, `docs/SOCIAL_SECURITY_PROVIDERS.md`, `docs/LABOR_PROVIDERS.md`. ADRs 100–112.
 
-## Depois das etapas 6.3 / 7 / 7.1 / 8 / Prompts 15–16
+## Etapas 11–13 — Tributário, núcleo multi-área e contratos
+
+**Etapa 11 — Tributário:** `tax_cases`, obrigações/créditos/lançamentos, `TaxCalculationEngine`, `tax_rule_sets`, providers fiscais **`NOT_CONFIGURED`**. Docs: `docs/TAX.md`, `docs/TAX_CALCULATIONS.md`, `docs/TAX_PROVIDERS.md`. ADRs 117–118.
+
+**Etapa 12 — Núcleo jurídico comum:** `legal_area_modules`, features, checklists, bindings, extensões por ramo (cível, penal, família, …), `versioned_rule_sets`. Docs: `docs/LEGAL_AREAS.md`, `docs/LEGAL_AREA_EXTENSION_MODEL.md` + guias por área. ADRs 113–116, 127.
+
+**Etapa 13 — Contratos e assinatura:** CLM (`contracts`), versões imutáveis assinadas, cláusulas snapshot, aprovação, assinatura manual/provider stub, renovação/rescisão. Docs: `docs/CONTRACTS.md`, `docs/CONTRACT_SIGNATURES.md`, `docs/SIGNATURE_PROVIDERS.md`. ADRs 119–126.
+
+Worker: jobs `TAX_*`, `CONTRACT_*`, `SIGNATURE_STATUS_SYNC`, `AREA_DOCUMENT_ANALYSIS` registrados só com `LocalInProcessQueueProvider` (stubs idempotentes).
+
+## Etapas 14–16 — Portal, comunicação e advogado online
+
+**Etapa 14 — Portal do cliente:** projection layer (`organization_client_users`, solicitações, conversas, ledger de pagamentos); leituras filtradas de casos/documentos/contratos/agenda/notificações; timeline `client_visible`. Docs: `docs/CLIENT_PORTAL.md`, `docs/CLIENT_PORTAL_SECURITY.md`. ADRs 128–131.
+
+**Etapa 15 — Comunicação:** templates versionados, preferências, consent, outbox; worker `COMMUNICATION_DISPATCH` / `COMMUNICATION_RETRY`; canais externos **`NOT_CONFIGURED`**. Docs: `docs/COMMUNICATION.md`, `docs/COMMUNICATION_PROVIDERS.md`, `docs/COMMUNICATION_CONSENT.md`. ADRs 132–135.
+
+**Etapa 16 — Advogado online:** `online_legal_requests`, matching determinístico, consultas, pagamento manual/provider stub, reviews pós-conclusão. Docs: `docs/ONLINE_LAWYER.md`, `docs/ONLINE_LAWYER_MATCHING.md`, `docs/ONLINE_CONSULTATIONS.md`, `docs/OAB_VERIFICATION.md`, `docs/PAYMENT_PROVIDER.md`. ADRs 136–143.
+
+**Etapa 17 — Marketplace jurídico:** contratação estruturada (≠ Advogado Online). Categorias, serviços, requests, propostas versionadas, engagements, deliveries, disputes, reviews. Docs: `docs/MARKETPLACE.md`. ADR 144, 149–150.
+
+**Etapa 17.1 — Verificação profissional:** cases OAB/CPF/identity/document/biometric; informed ≠ verified; CPF checksum ≠ identidade; biometria NOT_CONFIGURED; suspensão/revalidação. Docs: `docs/PROFESSIONAL_VERIFICATION.md`, `docs/IDENTITY_VERIFICATION.md`, `docs/BIOMETRIC_VERIFICATION.md`. ADRs 145–148.
+
+**Etapa 18 — Correspondentes/diligências:** request→proposal→race-safe accept→execution→evidence→completion. Docs: `docs/DILIGENCES.md`, `docs/DILIGENCE_EVIDENCE.md`. ADR 151.
+
+**Etapa 19 — Extrajudicial/cartórios:** orquestração sem integração fictícia; cartório manual ≠ verificado; FeeTable/Registry NOT_CONFIGURED. Docs: `docs/EXTRAJUDICIAL.md`, `docs/REGISTRY_PROVIDERS.md`, `docs/EXTRAJUDICIAL_FEES.md`. ADR 152. Migration `0016`.
+
+Worker (LocalInProcess): `COMMUNICATION_*` (dispatch real), `ONLINE_MATCH_*`, `CONSULTATION_REMINDER` (noop), `PAYMENT_STATUS_SYNC`, `OAB_VERIFICATION`, `PUSH_DISPATCH` (sync externo honesto).
+
+## Depois das etapas 6.3 / 7 / 7.1 / 8 / Prompts 15–16 / 11–13 / 14–16
 
 1. Homologar migrations no PostgreSQL 16 via Docker quando o ambiente local tiver Docker disponível (**PostgreSQL externo: NÃO HOMOLOGADO** neste ciclo — ver `TECHNICAL_DEBT_CLOSURE.md`).
 2. Object storage de produção (adapter real sobre `StorageProvider`) e scanner antimalware certificado (eliminar buffer integral residual do multipart).
-3. Assinatura eletrônica real e contratos completos (além das minutas internas).
+3. Adapter de **assinatura eletrônica real** sobre `SignatureProvider` (CLM interno já existe; provider ainda `not_configured`).
 4. MFA real (TOTP + recovery codes) e passkeys/WebAuthn.
 5. Provedor de e-mail real (adapter sobre `@verasjuris/email`).
-6. Calendário oficial de feriados e canais externos de notificação (adapters `NOT_CONFIGURED` hoje).
+6. Calendário oficial de feriados e canais externos de notificação/comunicação (email/SMS/WhatsApp/push adapters `NOT_CONFIGURED` hoje — ver `docs/COMMUNICATION_PROVIDERS.md`).
 7. Adapter de **provedor de IA real** (sobre `AIProvider` / gateway existente), OCR comercial e sync de oportunidades públicas (sobre `PublicOpportunityProvider`) — hoje `not_configured`.
 8. Adapter de **fontes jurídicas oficiais** (sobre `LegalSourceProvider` / ResearchGateway), verificação remota de citações e **CitationInsertion** real — hoje stub `NOT_CONFIGURED`.
 9. Adapter de **leilões públicos** (sobre `AuctionProvider`) e bid provider certificado — hoje sem lance real; bid records permanecem manuais.
 10. E-filing / provider de protocolo real (hoje só protocolo informado manualmente) e export PDF/DOCX.
-11. Adapters **INSS/CNIS**, **eSocial**, **FGTS oficial** e **tribunal trabalhista** sobre os contratos existentes — hoje `not_configured`.
+11. Adapters **INSS/CNIS**, **eSocial**, **FGTS oficial**, **tribunal trabalhista** e **fisco** (Federal/State/Municipal/Debt/Filing) sobre os contratos existentes — hoje `not_configured`.
 12. Ledger e pagamentos idempotentes de plataforma, só com provedor oficial (≠ `auction_payments` operacional).
 13. Marketplace, correspondentes, estudos e cartórios, cada um com cobertura verificável.
 14. Operação interna VerasJuris: demandas, setores, SLAs e RACI.
-15. Validação OAB, KYC e biometria documental com provedores certificados (hoje `NOT_CONFIGURED`).
+15. Validação OAB assíncrona real (`OABVerificationProvider` + job `OAB_VERIFICATION`), KYC e biometria documental com provedores certificados (hoje `NOT_CONFIGURED` — ver `docs/OAB_VERIFICATION.md`).
 16. Retenção/legal hold automatizados; remediação humana a partir dos findings de reconciliação (sem auto-delete).
 17. Browser smoke / e2e homologado (**hoje: NÃO HOMOLOGADO**).
 18. Regeneração segura de snapshots Drizzle `0001`–`0007` somente a partir de checkout + DB da época — nunca fabricar JSON.
 
 ## Fora do escopo agora
 
-Marketplace, pagamentos de plataforma, peticionamento eletrônico real, integrações oficiais de tribunal/leilão/INSS/eSocial/FGTS, lance eletrônico real, validação OAB/KYC/biometria real, cursos, cartórios e números de dashboard.
+PSP real, ledger SaaS, peticionamento eletrônico real, integrações oficiais de tribunal/leilão/INSS/eSocial/FGTS/ONR, lance eletrônico real, validação OAB/KYC/biometria real, cursos e números de dashboard. **Implementado neste ciclo:** marketplace de contratação, verificação profissional (providers NOT_CONFIGURED), diligências, extrajudicial orquestrado — sem providers externos reais.
 
 ## Restrições
 
