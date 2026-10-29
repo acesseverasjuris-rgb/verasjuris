@@ -80,6 +80,72 @@ export const AI_JOB_TYPES = {
   EXTRAJUDICIAL_STATUS_SYNC: "EXTRAJUDICIAL_STATUS_SYNC",
   EXTRAJUDICIAL_REQUIREMENT_REMINDER: "EXTRAJUDICIAL_REQUIREMENT_REMINDER",
   REGISTRY_PROVIDER_SYNC: "REGISTRY_PROVIDER_SYNC",
+  /** Liberação de módulo/aula — stub local. */
+  COURSE_RELEASE: "COURSE_RELEASE",
+  /** Expira matrículas com expiresAt passado. */
+  COURSE_EXPIRATION: "COURSE_EXPIRATION",
+  /** PDF de certificado — PDF_GENERATION_NOT_CONFIGURED (não inventa PDF). */
+  CERTIFICATE_GENERATION: "CERTIFICATE_GENERATION",
+  /** Lembrete de aprendizado — stub local. */
+  LEARNING_REMINDER: "LEARNING_REMINDER",
+  /** Job assistivo de IA educacional — stub local. */
+  EDUCATION_AI_JOB: "EDUCATION_AI_JOB",
+  /** Renovação de assinatura idempotente por periodKey. */
+  SUBSCRIPTION_RENEWAL: "SUBSCRIPTION_RENEWAL",
+  /** Geração de invoice idempotente. */
+  INVOICE_GENERATION: "INVOICE_GENERATION",
+  /** Lembrete de fatura a vencer — stub local. */
+  INVOICE_DUE_REMINDER: "INVOICE_DUE_REMINDER",
+  /** Marca invoices vencidas como past_due. */
+  PAST_DUE_CHECK: "PAST_DUE_CHECK",
+  /** Expira créditos available com expiresAt passado. */
+  CREDIT_EXPIRATION: "CREDIT_EXPIRATION",
+  /** Sync status de reembolso externo — stub not_configured. */
+  REFUND_STATUS_SYNC: "REFUND_STATUS_SYNC",
+  /** Processa webhooks pending sem inventar liquidação. */
+  PAYMENT_WEBHOOK_PROCESS: "PAYMENT_WEBHOOK_PROCESS",
+  /** Repasse/payout externo — stub not_configured. */
+  PAYOUT_PROCESS: "PAYOUT_PROCESS",
+  /** Conciliação bancária — stub not_configured. */
+  RECONCILIATION_SYNC: "RECONCILIATION_SYNC",
+  /** Alocação assíncrona de pagamento (split interno via API; job noop). */
+  PAYMENT_ALLOCATION: "PAYMENT_ALLOCATION",
+  /** Libera payables pending com availableAt passado. */
+  PAYABLE_RELEASE: "PAYABLE_RELEASE",
+  /** Agenda de repasse — stub local (não inventa payout pago). */
+  PAYOUT_SCHEDULE: "PAYOUT_SCHEDULE",
+  /** Sync status de payout externo — stub not_configured. */
+  PAYOUT_STATUS_SYNC: "PAYOUT_STATUS_SYNC",
+  /** Processa reembolso externo — stub not_configured. */
+  REFUND_PROCESS: "REFUND_PROCESS",
+  /** Sync status de disputa/chargeback — stub not_configured. */
+  DISPUTE_STATUS_SYNC: "DISPUTE_STATUS_SYNC",
+  /** Conciliação gateway × ledger — stub not_configured. */
+  GATEWAY_RECONCILIATION: "GATEWAY_RECONCILIATION",
+  /** Conciliação bancária — stub not_configured. */
+  BANK_RECONCILIATION: "BANK_RECONCILIATION",
+  /** Conciliação ledger interna — stub local. */
+  LEDGER_RECONCILIATION: "LEDGER_RECONCILIATION",
+  /** Importação de extrato/OFX/CNAB — stub not_configured. */
+  RECONCILIATION_IMPORT: "RECONCILIATION_IMPORT",
+  /** Sincroniza delinquency_cases a partir de receivables vencidos. */
+  DELINQUENCY_CHECK: "DELINQUENCY_CHECK",
+  /** Marca accounts_payable vencidos como overdue. */
+  PAYABLE_DUE_CHECK: "PAYABLE_DUE_CHECK",
+  /** Marca receivables vencidos como overdue. */
+  RECEIVABLE_DUE_CHECK: "RECEIVABLE_DUE_CHECK",
+  /** Refresh de forecast — stub local (sem inventar caixa). */
+  FORECAST_REFRESH: "FORECAST_REFRESH",
+  /** Agregação de usage meters — stub local. */
+  USAGE_AGGREGATION: "USAGE_AGGREGATION",
+  /** Expira AI credits com expiresAt declarado no grant. */
+  AI_CREDIT_EXPIRATION: "AI_CREDIT_EXPIRATION",
+  /** Faturamento de uso de API — stub local (exige invoice via API). */
+  API_USAGE_BILLING: "API_USAGE_BILLING",
+  /** Licenças active com endsAt passado → expired. */
+  LICENSE_EXPIRATION: "LICENSE_EXPIRATION",
+  /** Refresh de entitlements derivados — stub local. */
+  PLAN_ENTITLEMENT_REFRESH: "PLAN_ENTITLEMENT_REFRESH",
 } as const;
 
 export type KnownAiJobType = (typeof AI_JOB_TYPES)[keyof typeof AI_JOB_TYPES];

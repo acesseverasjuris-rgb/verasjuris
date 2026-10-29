@@ -9,7 +9,10 @@ export default function Page() {
   if (!org.orgId) return <EmptyState title="Selecione uma organização">Nenhum item.</EmptyState>;
   return (
     <>
-      <PageHeader title="Nova diligência" description="Wizard de demanda: tipo, localidade, prazo e orçamento." />
+      <PageHeader
+        title="Nova diligência"
+        description="Wizard de demanda: tipo, localidade, prazo e orçamento."
+      />
       <EmptyState title="Sem itens">Nenhum registro ainda neste recorte.</EmptyState>
     </>
   );

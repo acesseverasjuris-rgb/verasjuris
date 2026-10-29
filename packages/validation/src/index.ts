@@ -813,3 +813,6 @@ export * from "./marketplace.js";
 export * from "./professional-verification.js";
 export * from "./diligence.js";
 export * from "./extrajudicial.js";
+export * from "./education.js";
+export * from "./finance.js";
+export * from "./monetization.js";

@@ -225,6 +225,25 @@ Policies dedicadas: `policyProfiles`, `policyCrm` em `@verasjuris/auth/crm-polic
 - Moderação de reviews: `review.moderate`.
 - Policies: `policyOnlineLegalRequest`, `policyOnlineMatchCandidate`, `policyOnlineConsultation`, `policyLawyerAvailability`.
 
+### Educação (`education.*`)
+
+- Leitura: `education.read`.
+- Cursos: `education.course.create` | `update` | `publish`.
+- Aulas/trilhas/biblioteca: `lesson.manage` | `track.manage` | `library.manage`.
+- Matrículas: `enrollment.manage`.
+- Certificados: `certificate.issue` | `certificate.revoke`.
+- Policies: `policyEducationAccess`, `policyEducationCourseManage`, `policyLesson`, `policyLibraryItem`, `policyEnrollment`, `policyCertificate` (`education-policies.ts`).
+
+### Financeiro (`finance.*`)
+
+- Leitura geral / pagamentos / ledger: `finance.read` | `finance.payment.read` | `finance.ledger.read`.
+- Planos/assinaturas/créditos/taxas/custos/conciliação: `plan.manage` | `subscription.manage` | `credit.manage` | `fee.manage` | `cost.manage` | `reconcile`.
+- Invoices: `invoice.create` | `invoice.update`.
+- Ledger: `ledger.post` | `ledger.reverse` | `ledger.export`.
+- Pagamentos: `payment.record_manual` | `refund`.
+- Policies: `policyFinanceRead`, `policyFinanceManage`, `policyInvoice`, `policyPaymentIntent`, `policyPayment`, `policyRefund`, … (`finance-policies.ts`).
+- Pagamentos de portal/consulta/leilão usam permissões dos respectivos domínios — ≠ `finance.*` do ledger SaaS (`docs/FINANCE.md`, `docs/PAYMENT_PROVIDER.md`).
+
 ## Policies (`@verasjuris/auth`)
 
 - `policyRequirePermission` — permission no tenant  

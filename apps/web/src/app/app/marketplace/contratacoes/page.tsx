@@ -39,7 +39,9 @@ export default function AppMarketplaceEngagementsPage() {
 
   return (
     <div className="vj-stack">
-      <Breadcrumb items={[{ label: "Marketplace", href: "/app/marketplace" }, { label: "Contratações" }]} />
+      <Breadcrumb
+        items={[{ label: "Marketplace", href: "/app/marketplace" }, { label: "Contratações" }]}
+      />
       <PageHeader title="Contratações" />
       <SectionTabs label="Seções" items={MARKETPLACE_APP_TABS} current="" />
       {loading ? <LoadingState label="Carregando…" /> : null}

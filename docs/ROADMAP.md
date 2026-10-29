@@ -128,7 +128,19 @@ Worker: jobs `TAX_*`, `CONTRACT_*`, `SIGNATURE_STATUS_SYNC`, `AREA_DOCUMENT_ANAL
 
 Worker (LocalInProcess): `COMMUNICATION_*` (dispatch real), `ONLINE_MATCH_*`, `CONSULTATION_REMINDER` (noop), `PAYMENT_STATUS_SYNC`, `OAB_VERIFICATION`, `PUSH_DISPATCH` (sync externo honesto).
 
-## Depois das etapas 6.3 / 7 / 7.1 / 8 / Prompts 15–16 / 11–13 / 14–16
+## Etapa 20 — Educação jurídica
+
+Cursos, módulos/aulas, conteúdo versionado, trilhas, matrículas, progresso, quizzes, certificados (≠ ICP), biblioteca. `EducationMediaProvider` / `LiveClassProvider` / PDF default `not_configured`. Matrícula paga `pending_payment` até Finance/Payments. Docs: `docs/EDUCATION.md` e satélites. ADRs 153–156.
+
+## Etapas 21 / 21.1 / 21.2 — Financeiro, ledger e pagamentos de plataforma
+
+Billing (planos, assinaturas, invoices, créditos), honorários/taxas/custos, ledger double-entry imutável com reversão e saldo derivado, payment intents/payments/webhooks/refunds/payouts. `PaymentProvider` único evoluído; redirect nunca confirma; Payment→Ledger exactly-once. Docs: `docs/FINANCE.md`, `docs/LEDGER.md`, `docs/PAYMENTS.md`, … ADRs 157–170.
+
+## Etapas 21.3 / 21.4 / 21.5 / 22 — Split, disputas, tesouraria e monetização
+
+Split rules versionadas → allocations → retentions → payables → payouts (allocation ≠ PSP split; payable before payout). Refunds parciais + clawback pós-payout. Disputas financeiras (service ≠ payment) + dispute hold + chargebacks. Conciliação Gateway≠Ledger≠Bank sem mutar ledger. Tesouraria (AR/AP/delinquency) + forecast determinístico ≠ actual. Monetização: products/prices, usage metering, AI credits ≠ tokens, API hash-only + usage billing, licensing, white-label branding-only. Providers (`PayoutProvider`, `PaymentDisputeProvider`, `ReconciliationProvider`, `BankingProvider`, `CustomDomainProvider`, …) default `not_configured`. Docs: `docs/SPLIT.md`, `docs/TREASURY.md`, `docs/MONETIZATION.md`, … ADRs 171–191.
+
+## Depois das etapas 6.3 / 7 / 7.1 / 8 / Prompts 15–16 / 11–13 / 14–16 / 17–22
 
 1. Homologar migrations no PostgreSQL 16 via Docker quando o ambiente local tiver Docker disponível (**PostgreSQL externo: NÃO HOMOLOGADO** neste ciclo — ver `TECHNICAL_DEBT_CLOSURE.md`).
 2. Object storage de produção (adapter real sobre `StorageProvider`) e scanner antimalware certificado (eliminar buffer integral residual do multipart).
@@ -141,8 +153,8 @@ Worker (LocalInProcess): `COMMUNICATION_*` (dispatch real), `ONLINE_MATCH_*`, `C
 9. Adapter de **leilões públicos** (sobre `AuctionProvider`) e bid provider certificado — hoje sem lance real; bid records permanecem manuais.
 10. E-filing / provider de protocolo real (hoje só protocolo informado manualmente) e export PDF/DOCX.
 11. Adapters **INSS/CNIS**, **eSocial**, **FGTS oficial**, **tribunal trabalhista** e **fisco** (Federal/State/Municipal/Debt/Filing) sobre os contratos existentes — hoje `not_configured`.
-12. Ledger e pagamentos idempotentes de plataforma, só com provedor oficial (≠ `auction_payments` operacional).
-13. Marketplace, correspondentes, estudos e cartórios, cada um com cobertura verificável.
+12. Adapter PSP real sobre `PaymentProvider` + `PayoutProvider` / `PaymentDisputeProvider` + conciliação bancária real (`ReconciliationProvider` / `BankingProvider`) — modelo ledger/payments/split/treasury já existe (Etapas 21.x–22); ≠ `auction_payments` / portal / consulta.
+13. Streaming educacional real (`EducationMediaProvider` / `LiveClassProvider`), PDF de certificado e adapters cartório/ONR oficiais; `CustomDomainProvider` real para white-label DNS.
 14. Operação interna VerasJuris: demandas, setores, SLAs e RACI.
 15. Validação OAB assíncrona real (`OABVerificationProvider` + job `OAB_VERIFICATION`), KYC e biometria documental com provedores certificados (hoje `NOT_CONFIGURED` — ver `docs/OAB_VERIFICATION.md`).
 16. Retenção/legal hold automatizados; remediação humana a partir dos findings de reconciliação (sem auto-delete).
@@ -151,7 +163,7 @@ Worker (LocalInProcess): `COMMUNICATION_*` (dispatch real), `ONLINE_MATCH_*`, `C
 
 ## Fora do escopo agora
 
-PSP real, ledger SaaS, peticionamento eletrônico real, integrações oficiais de tribunal/leilão/INSS/eSocial/FGTS/ONR, lance eletrônico real, validação OAB/KYC/biometria real, cursos e números de dashboard. **Implementado neste ciclo:** marketplace de contratação, verificação profissional (providers NOT_CONFIGURED), diligências, extrajudicial orquestrado — sem providers externos reais.
+PSP real (adapter), peticionamento eletrônico real, integrações oficiais de tribunal/leilão/INSS/eSocial/FGTS/ONR, lance eletrônico real, validação OAB/KYC/biometria real, streaming educacional, DNS white-label real e números de dashboard inventados. **Implementado neste ciclo:** marketplace, diligências, extrajudicial, educação, financeiro/ledger/pagamentos/split/tesouraria/monetização — providers externos default `not_configured`.
 
 ## Restrições
 

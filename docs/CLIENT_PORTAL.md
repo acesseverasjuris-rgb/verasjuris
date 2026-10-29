@@ -19,7 +19,7 @@ Schema: `packages/database/src/schema/client-portal.ts`. API: `apps/api/src/modu
 | `client_document_requests` | Pedido formal de documento com ciclo de upload/revisão |
 | `client_appointment_requests` | Pedido de agendamento |
 | `conversation_threads` / `messages` / `conversation_participants` | Mensagens internas cliente↔escritório (ADR 131) |
-| `client_payment_records` | Ledger mínimo de cobranças do cliente (manual até PSP) |
+| `client_payment_records` | Registro operacional de cobranças do cliente (manual até PSP) — **≠** ledger double-entry de plataforma (`docs/LEDGER.md`, `docs/FINANCE.md`) |
 
 ## Leituras projetadas
 
@@ -45,4 +45,4 @@ Sem UI pública separada de login: mesma conta VerasJuris com participação por
 
 ## Relacionado
 
-`docs/CLIENT_PORTAL_SECURITY.md`, ADRs 128–131, `docs/DOCUMENTS.md`, `docs/CONTRACTS.md`
+`docs/CLIENT_PORTAL_SECURITY.md`, ADRs 128–131, `docs/DOCUMENTS.md`, `docs/CONTRACTS.md`, `docs/PAYMENT_PROVIDER.md`, `docs/PAYMENTS.md`, `docs/FINANCE.md` (pagamentos/ledger de plataforma vs `client_payment_records`; white-label branding: `docs/WHITE_LABEL.md`)

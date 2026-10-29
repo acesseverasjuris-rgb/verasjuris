@@ -49,6 +49,8 @@ Assinatura eletrônica real (`SignatureProvider`); sync status (`SIGNATURE_STATU
 - Portal lista contratos do cliente vinculado (`policyClientContract` / leitura projetada).
 - Consulta online pode referenciar `contracts.id` opcionalmente após match (`online_consultations.contractId`).
 
+Honorários faturáveis na plataforma (acordo → accrual → invoice) usam `docs/LEGAL_FEES.md` — distinto do CLM e da assinatura.
+
 ## Relacionado
 
-`docs/CONTRACT_SIGNATURES.md`, `docs/SIGNATURE_PROVIDERS.md`, `docs/LEGAL_DOCUMENT_TEMPLATES.md`, `docs/CLIENT_PORTAL.md`, `docs/ONLINE_CONSULTATIONS.md`, ADRs 119–126
+`docs/CONTRACT_SIGNATURES.md`, `docs/SIGNATURE_PROVIDERS.md`, `docs/LEGAL_DOCUMENT_TEMPLATES.md`, `docs/CLIENT_PORTAL.md`, `docs/ONLINE_CONSULTATIONS.md`, `docs/LEGAL_FEES.md`, `docs/FINANCE.md`, ADRs 119–126

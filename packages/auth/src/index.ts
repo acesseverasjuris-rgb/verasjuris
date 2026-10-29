@@ -250,6 +250,34 @@ export {
   policyExtrajudicialRequest,
 } from "./extrajudicial-policies.js";
 export {
+  policyCertificate,
+  policyEducationAccess,
+  policyEducationCourseManage,
+  policyEnrollment,
+  policyLesson,
+  policyLibraryItem,
+} from "./education-policies.js";
+export {
+  policyApiClient,
+  policyFinanceManage,
+  policyFinanceRead,
+  policyFinancialDispute,
+  policyInvoice,
+  policyLedgerAccount,
+  policyLedgerTransaction,
+  policyLicense,
+  policyMonetization,
+  policyPayable,
+  policyPayment,
+  policyPaymentAllocation,
+  policyPaymentIntent,
+  policyPayout,
+  policyReconciliation,
+  policyRefund,
+  policyTreasury,
+  policyWhiteLabel,
+} from "./finance-policies.js";
+export {
   policyLegalTemplate,
   policyLegalTemplateMutation,
 } from "./legal-template-policies.js";

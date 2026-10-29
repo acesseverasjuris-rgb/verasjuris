@@ -165,6 +165,18 @@ Upload de documentos (Etapa 4.1) usa `@verasjuris/storage`: MIME por magic bytes
 
 **Advogado online:** documentos da solicitação só após match aceito (ADR 143); OAB `informed` ≠ `verified` (ADR 138); pagamento manual ≠ PSP (ADR 141). Jobs `PAYMENT_STATUS_SYNC`, `OAB_VERIFICATION`, `PUSH_DISPATCH` falham sem adapter.
 
+## Educação e financeiro (Etapas 20–22)
+
+**Educação:** matrícula `pending_payment` não libera conteúdo; gabarito (`isCorrect`) não exposto antes da submissão; certificado ≠ ICP (ADR 155); media/live/PDF `not_configured`.
+
+**Pagamentos:** webhook com assinatura + anti-replay; redirect do frontend **nunca** confirma (ADR 166); manual exige `evidenceDocumentId` (ADR 168); Payment→Ledger exactly-once (ADR 167). `PaymentProvider` / `PayoutProvider` / `PaymentDisputeProvider` / `BillingProvider` / `ReconciliationProvider` / `BankingProvider` default `not_configured` — sem inventar paid/matched/won.
+
+**Ledger / conciliação:** postagens imutáveis; correção só por reversão (ADRs 161–162); conciliação nunca muta ledger (ADR 182). Valores em centavos inteiros (ADR 170).
+
+**Split / payout:** payable before payout (ADR 174); retention source explícita (ADR 175); dispute hold bloqueia repasse (ADR 180).
+
+**Monetização:** API credentials só `secretHash` (ADR 188); white-label = branding, domínio via provider real (ADR 191); entitlements centralizados (ADRs 169, 185); AI credits ≠ tokens do provider (ADR 186).
+
 ## LGPD
 
 A conta guarda nome, e-mail e hash de senha para autenticação. IP e identificador de navegador podem aparecer em sessão e auditoria para segurança. Não há, nesta versão, exportação, retificação além do nome da organização, anonimização ou exclusão automatizada. Esses direitos precisam de um fluxo próprio antes de tratar dados de processos ou documentos.

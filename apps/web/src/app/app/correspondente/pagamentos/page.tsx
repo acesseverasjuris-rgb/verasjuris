@@ -9,7 +9,10 @@ export default function Page() {
   if (!org.orgId) return <EmptyState title="Selecione uma organização">Nenhum item.</EmptyState>;
   return (
     <>
-      <PageHeader title="Pagamentos" description="Pagamentos: PaymentProvider NOT_CONFIGURED sem provedor." />
+      <PageHeader
+        title="Pagamentos"
+        description="Pagamentos: PaymentProvider NOT_CONFIGURED sem provedor."
+      />
       <EmptyState title="Sem itens">Nenhum registro ainda neste recorte.</EmptyState>
     </>
   );

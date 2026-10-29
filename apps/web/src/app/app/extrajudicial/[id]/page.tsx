@@ -9,7 +9,10 @@ export default function Page() {
   if (!org.orgId) return <EmptyState title="Selecione uma organização">Nenhum item.</EmptyState>;
   return (
     <>
-      <PageHeader title="Solicitação extrajudicial" description="Timeline: orçamento → pagamento → protocolo → entrega." />
+      <PageHeader
+        title="Solicitação extrajudicial"
+        description="Timeline: orçamento → pagamento → protocolo → entrega."
+      />
       <EmptyState title="Sem itens">Nenhum registro ainda neste recorte.</EmptyState>
     </>
   );

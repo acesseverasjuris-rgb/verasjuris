@@ -46,7 +46,9 @@ export default function MarketplaceProposalsPage() {
 
   return (
     <div className="vj-stack">
-      <Breadcrumb items={[{ label: "Marketplace", href: "/marketplace" }, { label: "Propostas" }]} />
+      <Breadcrumb
+        items={[{ label: "Marketplace", href: "/marketplace" }, { label: "Propostas" }]}
+      />
       <PageHeader title="Minhas propostas" />
       <SectionTabs label="Seções" items={MARKETPLACE_PUBLIC_TABS} current="" />
       {loading ? <LoadingState label="Carregando…" /> : null}

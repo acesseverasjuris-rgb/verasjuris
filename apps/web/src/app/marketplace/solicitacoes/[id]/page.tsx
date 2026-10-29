@@ -46,7 +46,10 @@ export default function MarketplaceRequestDetailPage() {
       {error ? <ErrorState title="Erro">{error}</ErrorState> : null}
       {request ? (
         <>
-          <PageHeader title={request.title} description={MARKETPLACE_REQUEST_STATUS_LABELS[request.status]} />
+          <PageHeader
+            title={request.title}
+            description={MARKETPLACE_REQUEST_STATUS_LABELS[request.status]}
+          />
           <p>{request.description}</p>
         </>
       ) : null}

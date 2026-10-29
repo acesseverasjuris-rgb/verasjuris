@@ -258,6 +258,59 @@ export const DEFAULT_AI_FEATURES: Readonly<Record<string, AIFeatureDefinition>> 
     requires: [AICapability.STRUCTURED_OUTPUT],
     outputDisposition: "assistive",
   },
+  /**
+   * Educação jurídica — assistiva apenas.
+   * A IA NÃO conclui lições, NÃO marca progresso como completo e NÃO emite certificados.
+   * Certificados e conclusão de curso são atos de domínio humano/sistema, nunca de LLM.
+   */
+  "education.explain": {
+    requires: [AICapability.TEXT],
+    outputDisposition: "assistive",
+  },
+  "education.explain_concept": {
+    requires: [AICapability.TEXT],
+    outputDisposition: "assistive",
+  },
+  "education.summarize": {
+    requires: [AICapability.TEXT],
+    outputDisposition: "assistive",
+  },
+  "education.summarize_lesson": {
+    requires: [AICapability.TEXT],
+    outputDisposition: "assistive",
+  },
+  "education.quiz_assist": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "assistive",
+  },
+  "education.quiz_practice": {
+    requires: [AICapability.TEXT],
+    outputDisposition: "assistive",
+  },
+  "education.study_plan": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "assistive",
+  },
+  "education.study_tips": {
+    requires: [AICapability.TEXT],
+    outputDisposition: "assistive",
+  },
+  "education.outline": {
+    requires: [AICapability.TEXT],
+    outputDisposition: "assistive",
+  },
+  "education.case_discussion": {
+    requires: [AICapability.TEXT],
+    outputDisposition: "assistive",
+  },
+  "education.flashcards": {
+    requires: [AICapability.STRUCTURED_OUTPUT],
+    outputDisposition: "assistive",
+  },
+  "education.question_answering": {
+    requires: [AICapability.TEXT],
+    outputDisposition: "assistive",
+  },
   document_embedding: { requires: [AICapability.EMBEDDINGS], outputDisposition: "assistive" },
   document_vision: { requires: [AICapability.VISION], outputDisposition: "requires_review" },
 };

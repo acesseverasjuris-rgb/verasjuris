@@ -27,6 +27,7 @@ import {
   FileSignature,
   FileText,
   GitCompare,
+  GraduationCap,
   Scale,
   Tags,
   UserRound,
@@ -35,6 +36,7 @@ import {
   MessageSquare,
   Store,
   Video,
+  Wallet,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
@@ -78,6 +80,8 @@ type NavItem = {
     | "comunicacao"
     | "advogado-online"
     | "marketplace"
+    | "educacao"
+    | "financeiro"
     | "perfis";
 };
 
@@ -115,6 +119,8 @@ const icons = {
   comunicacao: MessageSquare,
   "advogado-online": Video,
   marketplace: Store,
+  educacao: GraduationCap,
+  financeiro: Wallet,
 };
 
 function NavLinks({ items, pathname }: { items: NavItem[]; pathname: string }) {

@@ -9,7 +9,10 @@ export default function Page() {
   if (!org.orgId) return <EmptyState title="Selecione uma organização">Nenhum item.</EmptyState>;
   return (
     <>
-      <PageHeader title="Cartórios" description="Cadastro manual = não verificado. RegistryProvider NOT_CONFIGURED." />
+      <PageHeader
+        title="Cartórios"
+        description="Cadastro manual = não verificado. RegistryProvider NOT_CONFIGURED."
+      />
       <EmptyState title="Sem itens">Nenhum registro ainda neste recorte.</EmptyState>
     </>
   );

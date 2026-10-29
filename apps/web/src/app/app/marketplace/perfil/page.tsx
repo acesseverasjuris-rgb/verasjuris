@@ -36,11 +36,14 @@ export default function AppMarketplaceProfilePage() {
     else setSaved(true);
   }
 
-  if (org.ready && !can) return <NoPermission>Sem permissão para editar perfil marketplace.</NoPermission>;
+  if (org.ready && !can)
+    return <NoPermission>Sem permissão para editar perfil marketplace.</NoPermission>;
 
   return (
     <div className="vj-stack">
-      <Breadcrumb items={[{ label: "Marketplace", href: "/app/marketplace" }, { label: "Perfil" }]} />
+      <Breadcrumb
+        items={[{ label: "Marketplace", href: "/app/marketplace" }, { label: "Perfil" }]}
+      />
       <PageHeader title="Perfil no marketplace" />
       <SectionTabs label="Seções" items={MARKETPLACE_APP_TABS} current="" />
       {error ? <ErrorState title="Erro">{error}</ErrorState> : null}

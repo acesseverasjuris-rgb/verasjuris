@@ -9,7 +9,10 @@ export default function Page() {
   if (!org.orgId) return <EmptyState title="Selecione uma organização">Nenhum item.</EmptyState>;
   return (
     <>
-      <PageHeader title="Evidências" description="Evidências submetidas (autenticidade não afirmada automaticamente)." />
+      <PageHeader
+        title="Evidências"
+        description="Evidências submetidas (autenticidade não afirmada automaticamente)."
+      />
       <EmptyState title="Sem itens">Nenhum registro ainda neste recorte.</EmptyState>
     </>
   );

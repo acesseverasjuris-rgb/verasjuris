@@ -83,7 +83,10 @@ export default function AppMarketplacePage() {
   return (
     <div className="vj-stack">
       <Breadcrumb items={[{ label: "Painel", href: "/app" }, { label: "Marketplace" }]} />
-      <PageHeader title="Marketplace jurídico" description="Gestão profissional de serviços e propostas." />
+      <PageHeader
+        title="Marketplace jurídico"
+        description="Gestão profissional de serviços e propostas."
+      />
       <SectionTabs label="Seções" items={MARKETPLACE_APP_TABS} current="" />
       <MarketplacePaymentBanner status={paymentStatus} />
       {loading ? <LoadingState label="Carregando…" /> : null}
@@ -100,7 +103,10 @@ export default function AppMarketplacePage() {
           </section>
           <section>
             <h2 className="vj-subtitle">Contratações</h2>
-            <MarketplaceEngagementsTable items={engagements} baseHref="/app/marketplace/contratacoes" />
+            <MarketplaceEngagementsTable
+              items={engagements}
+              baseHref="/app/marketplace/contratacoes"
+            />
           </section>
         </>
       ) : null}

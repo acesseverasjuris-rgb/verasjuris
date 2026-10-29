@@ -22,6 +22,14 @@ import type {
   BiometricVerificationProvider,
   FeeTableProvider,
   PaymentProvider,
+  PayoutProvider,
+  BankingProvider,
+  TaxWithholdingProvider,
+  CustomDomainProvider,
+  DebtCollectionProvider,
+  LicenseProvider,
+  PaymentDisputeProvider,
+  ReconciliationProvider,
   RegistryProvider,
   SignatureProvider,
   VideoConferenceProvider,
@@ -133,6 +141,22 @@ export type ApiDeps = {
   environmentalDataProvider?: EnvironmentalDataProvider;
   registryProvider?: RegistryProvider;
   paymentProvider?: PaymentProvider;
+  /** Repasses externos; ausente = NOT_CONFIGURED (nunca marca PAID). */
+  payoutProvider?: PayoutProvider;
+  /** Contas/extratos bancários; ausente = NOT_CONFIGURED. */
+  bankingProvider?: BankingProvider;
+  /** Retenção tributária oficial; ausente = NOT_CONFIGURED. */
+  taxWithholdingProvider?: TaxWithholdingProvider;
+  /** Domínio white-label; ausente = NOT_CONFIGURED. */
+  customDomainProvider?: CustomDomainProvider;
+  /** Cobrança externa; ausente = NOT_CONFIGURED. */
+  debtCollectionProvider?: DebtCollectionProvider;
+  /** License server externo; ausente = NOT_CONFIGURED. */
+  licenseProvider?: LicenseProvider;
+  /** Chargeback/disputa PSP; ausente = NOT_CONFIGURED (nunca finge won/lost). */
+  paymentDisputeProvider?: PaymentDisputeProvider;
+  /** Conciliação / import de extrato; ausente = NOT_CONFIGURED. */
+  reconciliationProvider?: ReconciliationProvider;
   oabVerificationProvider?: OABVerificationProvider;
   cpfVerificationProvider?: CPFVerificationProvider;
   documentVerificationProvider?: DocumentVerificationProvider;

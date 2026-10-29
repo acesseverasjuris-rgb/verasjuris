@@ -59,9 +59,7 @@ export default function MarketplaceProfessionalDetailPage() {
               <li key={s.id} className="vj-card">
                 <strong>{s.title}</strong>
                 <p className="vj-meta">{s.description}</p>
-                {s.basePriceCents != null ? (
-                  <p>{formatMoneyCents(s.basePriceCents)}</p>
-                ) : null}
+                {s.basePriceCents != null ? <p>{formatMoneyCents(s.basePriceCents)}</p> : null}
               </li>
             ))}
           </ul>

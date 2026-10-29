@@ -51,6 +51,14 @@ import {
   NotConfiguredBiometricVerificationProvider,
   NotConfiguredFeeTableProvider,
   NotConfiguredPaymentProvider,
+  NotConfiguredPayoutProvider,
+  NotConfiguredBankingProvider,
+  NotConfiguredTaxWithholdingProvider,
+  NotConfiguredCustomDomainProvider,
+  NotConfiguredDebtCollectionProvider,
+  NotConfiguredLicenseProvider,
+  NotConfiguredPaymentDisputeProvider,
+  NotConfiguredReconciliationProvider,
   NotConfiguredSignatureProvider,
   NotConfiguredVideoConferenceProvider,
   type BiometricVerificationProvider,
@@ -62,6 +70,14 @@ import {
   type OABVerificationProvider,
   type OCRProvider,
   type PaymentProvider,
+  type PayoutProvider,
+  type BankingProvider,
+  type TaxWithholdingProvider,
+  type CustomDomainProvider,
+  type DebtCollectionProvider,
+  type LicenseProvider,
+  type PaymentDisputeProvider,
+  type ReconciliationProvider,
   type SignatureProvider,
   type VideoConferenceProvider,
   type PublicOpportunityProvider,
@@ -132,6 +148,8 @@ import { registerProfessionalVerificationRoutes } from "./modules/professional-v
 import { registerDiligenceRoutes } from "./modules/diligence/routes.js";
 import { registerExtrajudicialRoutes } from "./modules/extrajudicial/routes.js";
 import { registerCommunicationRoutes } from "./modules/communication/routes.js";
+import { registerEducationRoutes } from "./modules/education/routes.js";
+import { registerFinanceRoutes } from "./modules/finance/routes.js";
 import { registerTaskRoutes } from "./modules/tasks/routes.js";
 import { registerHttpGuards } from "./plugins/http.js";
 
@@ -192,6 +210,22 @@ export type BuildAppOptions = {
   /** Registros públicos; ausente = NOT_CONFIGURED. */
   registryProvider?: RegistryProvider;
   paymentProvider?: PaymentProvider;
+  /** Padrão: PayoutProvider NOT_CONFIGURED (nunca marca PAID). */
+  payoutProvider?: PayoutProvider;
+  /** Padrão: BankingProvider NOT_CONFIGURED. */
+  bankingProvider?: BankingProvider;
+  /** Padrão: TaxWithholdingProvider NOT_CONFIGURED (sem retenção oficial inventada). */
+  taxWithholdingProvider?: TaxWithholdingProvider;
+  /** Padrão: CustomDomainProvider NOT_CONFIGURED. */
+  customDomainProvider?: CustomDomainProvider;
+  /** Padrão: DebtCollectionProvider NOT_CONFIGURED. */
+  debtCollectionProvider?: DebtCollectionProvider;
+  /** Padrão: LicenseProvider NOT_CONFIGURED. */
+  licenseProvider?: LicenseProvider;
+  /** Padrão: PaymentDisputeProvider NOT_CONFIGURED (nunca finge won/lost). */
+  paymentDisputeProvider?: PaymentDisputeProvider;
+  /** Padrão: ReconciliationProvider NOT_CONFIGURED. */
+  reconciliationProvider?: ReconciliationProvider;
   oabVerificationProvider?: OABVerificationProvider;
   cpfVerificationProvider?: CPFVerificationProvider;
   documentVerificationProvider?: DocumentVerificationProvider;
@@ -264,6 +298,18 @@ export async function buildApp(options: BuildAppOptions) {
       options.environmentalDataProvider ?? new NotConfiguredEnvironmentalDataProvider(),
     registryProvider: options.registryProvider ?? new NotConfiguredRegistryProvider(),
     paymentProvider: options.paymentProvider ?? new NotConfiguredPaymentProvider(),
+    payoutProvider: options.payoutProvider ?? new NotConfiguredPayoutProvider(),
+    bankingProvider: options.bankingProvider ?? new NotConfiguredBankingProvider(),
+    taxWithholdingProvider:
+      options.taxWithholdingProvider ?? new NotConfiguredTaxWithholdingProvider(),
+    customDomainProvider: options.customDomainProvider ?? new NotConfiguredCustomDomainProvider(),
+    debtCollectionProvider:
+      options.debtCollectionProvider ?? new NotConfiguredDebtCollectionProvider(),
+    licenseProvider: options.licenseProvider ?? new NotConfiguredLicenseProvider(),
+    paymentDisputeProvider:
+      options.paymentDisputeProvider ?? new NotConfiguredPaymentDisputeProvider(),
+    reconciliationProvider:
+      options.reconciliationProvider ?? new NotConfiguredReconciliationProvider(),
     oabVerificationProvider:
       options.oabVerificationProvider ?? new NotConfiguredOABVerificationProvider(),
     cpfVerificationProvider:
@@ -347,6 +393,8 @@ export async function buildApp(options: BuildAppOptions) {
       await registerDiligenceRoutes(v1, deps);
       await registerExtrajudicialRoutes(v1, deps);
       await registerCommunicationRoutes(v1, deps);
+      await registerEducationRoutes(v1, deps);
+      await registerFinanceRoutes(v1, deps);
     },
     { prefix: "/v1" },
   );

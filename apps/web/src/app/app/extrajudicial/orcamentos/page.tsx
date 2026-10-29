@@ -9,7 +9,10 @@ export default function Page() {
   if (!org.orgId) return <EmptyState title="Selecione uma organização">Nenhum item.</EmptyState>;
   return (
     <>
-      <PageHeader title="Orçamentos" description="Orçamentos (estimativa manual ≠ emolumento oficial)." />
+      <PageHeader
+        title="Orçamentos"
+        description="Orçamentos (estimativa manual ≠ emolumento oficial)."
+      />
       <EmptyState title="Sem itens">Nenhum registro ainda neste recorte.</EmptyState>
     </>
   );

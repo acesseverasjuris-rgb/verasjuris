@@ -156,6 +156,58 @@ export default async function AuthenticatedLayout({ children }: { children: Reac
                 },
               ]
             : []),
+          ...(permissions.has("education.read")
+            ? [{ href: "/app/educacao", label: "Educação", icon: "educacao" as const }]
+            : []),
+          ...([
+            "finance.read",
+            "finance.payment.read",
+            "finance.ledger.read",
+            "finance.split.read",
+            "finance.payout.read",
+            "finance.dispute.read",
+            "finance.reconciliation.read",
+            "finance.treasury.read",
+            "finance.refund.read",
+          ].some((key) => permissions.has(key))
+            ? [{ href: "/app/financeiro", label: "Financeiro", icon: "financeiro" as const }]
+            : []),
+          ...(permissions.has("finance.split.read") || permissions.has("finance.payout.read")
+            ? [
+                {
+                  href: "/app/financeiro/splits",
+                  label: "Splits e repasses",
+                  icon: "financeiro" as const,
+                },
+              ]
+            : []),
+          ...(permissions.has("finance.reconciliation.read") || permissions.has("finance.reconcile")
+            ? [
+                {
+                  href: "/app/financeiro/conciliacao",
+                  label: "Conciliação",
+                  icon: "financeiro" as const,
+                },
+              ]
+            : []),
+          ...(permissions.has("finance.treasury.read")
+            ? [
+                {
+                  href: "/app/financeiro/tesouraria",
+                  label: "Tesouraria",
+                  icon: "financeiro" as const,
+                },
+              ]
+            : []),
+          ...(permissions.has("monetization.read")
+            ? [
+                {
+                  href: "/app/financeiro/monetizacao",
+                  label: "Monetização",
+                  icon: "financeiro" as const,
+                },
+              ]
+            : []),
           ...(permissions.has("public_opportunity.read")
             ? [
                 {

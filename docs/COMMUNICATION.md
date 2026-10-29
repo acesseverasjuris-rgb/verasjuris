@@ -36,6 +36,8 @@ Enums `communication_channel` (`in_app`, `email`, `sms`, `whatsapp`, `push`) e `
 
 Substituição `{{var}}` com whitelist (`substituteTemplateVariables`) — sem eval.
 
+Transacional de billing/pagamento (recibo, falha de cobrança) reutiliza este outbox quando houver template — sem misturar com marketing (ADR 134). Financeiro: `docs/FINANCE.md`, `docs/PAYMENTS.md`.
+
 ## Relacionado
 
-`docs/COMMUNICATION_PROVIDERS.md`, `docs/COMMUNICATION_CONSENT.md`, `docs/NOTIFICATIONS.md`, ADRs 131–135
+`docs/COMMUNICATION_PROVIDERS.md`, `docs/COMMUNICATION_CONSENT.md`, `docs/NOTIFICATIONS.md`, `docs/FINANCE.md`, ADRs 131–135

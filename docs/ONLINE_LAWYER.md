@@ -24,7 +24,7 @@ Disponibilidade detalhada: `lawyer_availability`, `lawyer_availability_overrides
 | Provider | Uso |
 | --- | --- |
 | `OABVerificationProvider` | Verificação assíncrona (default not_configured) |
-| `PaymentProvider` | Cobrança consulta |
+| `PaymentProvider` | Cobrança consulta (`online_consultation_payments` — operacional; ≠ ledger/split/payout plataforma `docs/PAYMENTS.md`, `docs/SPLIT.md`) |
 | `ConflictCheckProvider` | Checagem no accept |
 | `VideoConferenceProvider` | Sala vídeo (not_configured) |
 
@@ -44,4 +44,4 @@ Anexos da solicitação só legíveis ao advogado após match aceito (`grantRequ
 
 ## Relacionado
 
-`docs/ONLINE_LAWYER_MATCHING.md`, `docs/ONLINE_CONSULTATIONS.md`, `docs/OAB_VERIFICATION.md`, `docs/PAYMENT_PROVIDER.md`, ADRs 136–143
+`docs/ONLINE_LAWYER_MATCHING.md`, `docs/ONLINE_CONSULTATIONS.md`, `docs/OAB_VERIFICATION.md`, `docs/PAYMENT_PROVIDER.md`, `docs/FINANCE.md`, `docs/FINANCIAL_DISPUTES.md`, ADRs 136–143, 171+

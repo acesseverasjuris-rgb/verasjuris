@@ -43,7 +43,9 @@ export default function MarketplaceRequestsPage() {
   if (org.ready && !canRead) {
     return (
       <div className="vj-stack">
-        <Breadcrumb items={[{ label: "Marketplace", href: "/marketplace" }, { label: "Solicitações" }]} />
+        <Breadcrumb
+          items={[{ label: "Marketplace", href: "/marketplace" }, { label: "Solicitações" }]}
+        />
         <NoPermission>Você não tem permissão para ver solicitações do marketplace.</NoPermission>
       </div>
     );
@@ -51,7 +53,9 @@ export default function MarketplaceRequestsPage() {
 
   return (
     <div className="vj-stack">
-      <Breadcrumb items={[{ label: "Marketplace", href: "/marketplace" }, { label: "Solicitações" }]} />
+      <Breadcrumb
+        items={[{ label: "Marketplace", href: "/marketplace" }, { label: "Solicitações" }]}
+      />
       <PageHeader
         title="Solicitações"
         description="Demandas publicadas pela sua organização."

@@ -120,6 +120,20 @@
       "when": 1793218721530,
       "tag": "0016_charming_jamie_braddock",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1793295183023,
+      "tag": "0017_etapa20_21_education_finance",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1793301569677,
+      "tag": "0018_etapa21_3_22_split_treasury_monetization",
+      "breakpoints": true
     }
   ]
 }

@@ -40,7 +40,9 @@ export default function MarketplaceEngagementPublicPage() {
 
   return (
     <div className="vj-stack">
-      <Breadcrumb items={[{ label: "Marketplace", href: "/marketplace" }, { label: "Contratação" }]} />
+      <Breadcrumb
+        items={[{ label: "Marketplace", href: "/marketplace" }, { label: "Contratação" }]}
+      />
       {loading ? <LoadingState label="Carregando contratação…" /> : null}
       {error ? <ErrorState title="Erro">{error}</ErrorState> : null}
       {engagement ? (

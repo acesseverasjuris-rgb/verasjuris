@@ -636,3 +636,159 @@ Race-safe accept + evidência. Detalhe: `docs/adr/151-diligence-specialized-work
 ## ADR 152 — Cartório manual ≠ verificado; fees via provider (Etapa 19)
 
 Sem integração fictícia. Detalhe: `docs/adr/152-registry-manual-not-verified.md`.
+
+## ADR 153 — Domínio Education (Etapa 20)
+
+Cursos/trilhas/certificados como domínio próprio. Detalhe: `docs/adr/153-education-domain.md`, `docs/EDUCATION.md`.
+
+## ADR 154 — Versionamento de conteúdo de curso (Etapa 20)
+
+`lesson_content_versions` monotônicas. Detalhe: `docs/adr/154-course-content-versioning.md`, `docs/EDUCATION_CONTENT.md`.
+
+## ADR 155 — Certificado educacional ≠ ICP (Etapa 20)
+
+Atestado de conclusão ≠ assinatura qualificada. Detalhe: `docs/adr/155-certificate-not-icp.md`, `docs/EDUCATION_CERTIFICATES.md`.
+
+## ADR 156 — IA educacional via AIGateway (Etapa 20)
+
+Assistivo; default not_configured. Detalhe: `docs/adr/156-education-ai-via-gateway.md`, `docs/EDUCATION_AI.md`.
+
+## ADR 157 — Billing ≠ Payment (Etapas 21+)
+
+Planos/charges ≠ liquidação PSP. Detalhe: `docs/adr/157-billing-not-payment.md`, `docs/BILLING.md`, `docs/PAYMENTS.md`.
+
+## ADR 158 — Invoice ≠ Payment (Etapas 21+)
+
+Obrigação ≠ liquidação. Detalhe: `docs/adr/158-invoice-not-payment.md`, `docs/INVOICES.md`.
+
+## ADR 159 — Crédito comercial ≠ saldo de ledger (Etapas 21+)
+
+`billing_credits` ≠ saldo derivado. Detalhe: `docs/adr/159-commercial-credit-not-ledger-balance.md`, `docs/BILLING.md`.
+
+## ADR 160 — Ledger double-entry (Etapa 21.1)
+
+Débitos = créditos. Detalhe: `docs/adr/160-ledger-double-entry.md`, `docs/LEDGER.md`, `docs/DOUBLE_ENTRY.md`.
+
+## ADR 161 — Ledger imutável após posting (Etapa 21.1)
+
+Sem edit in-place. Detalhe: `docs/adr/161-ledger-immutable-after-posting.md`.
+
+## ADR 162 — Reversão em vez de edição (Etapa 21.1)
+
+Correção por transação `reversal`. Detalhe: `docs/adr/162-reversal-instead-of-edit.md`.
+
+## ADR 163 — Saldo derivado de entries (Etapa 21.1)
+
+Sem coluna de saldo primária. Detalhe: `docs/adr/163-balance-derived-from-entries.md`.
+
+## ADR 164 — PaymentProvider única abstração (Etapa 21.2)
+
+Um contrato PSP compartilhado. Detalhe: `docs/adr/164-payment-provider-single-abstraction.md`, `docs/PAYMENT_PROVIDER.md`.
+
+## ADR 165 — Webhook autoridade assíncrona (Etapa 21.2)
+
+Confirmação via webhook verificado. Detalhe: `docs/adr/165-webhook-authority-async-payment.md`, `docs/PAYMENT_WEBHOOKS.md`.
+
+## ADR 166 — Redirect frontend nunca confirma (Etapa 21.2)
+
+Success URL não marca paid. Detalhe: `docs/adr/166-frontend-redirect-never-confirms.md`.
+
+## ADR 167 — Payment→Ledger exactly-once (Etapa 21.2)
+
+Idempotência + unique ledgerTransactionId. Detalhe: `docs/adr/167-payment-ledger-exactly-once.md`.
+
+## ADR 168 — Pagamento manual exige evidência (Etapa 21.2)
+
+`evidenceDocumentId` obrigatório. Detalhe: `docs/adr/168-manual-payment-requires-evidence.md`.
+
+## ADR 169 — Entitlements centralizados (Etapas 21+)
+
+`EntitlementService` único. Detalhe: `docs/adr/169-subscription-entitlements-centralized.md`, `docs/SUBSCRIPTIONS.md`.
+
+## ADR 170 — Dinheiro em centavos inteiros (Etapas 21+)
+
+`*Cents` bigint; sem float. Detalhe: `docs/adr/170-money-integer-minor-units.md`, `docs/FINANCE.md`.
+
+## ADR 171 — Allocation ≠ Provider Split (Etapas 21.3+)
+
+Alocação interna ≠ split nativo do PSP. Detalhe: `docs/adr/171-allocation-not-provider-split.md`, `docs/SPLIT.md`.
+
+## ADR 172 — Split rules versionadas (Etapas 21.3+)
+
+`(key, version)` + snapshot na allocation. Detalhe: `docs/adr/172-split-rules-versioned.md`.
+
+## ADR 173 — Payout ≠ Ledger Balance (Etapas 21.3+)
+
+Saldo contábil ≠ liquidação. Detalhe: `docs/adr/173-payout-not-ledger-balance.md`, `docs/PAYOUTS.md`.
+
+## ADR 174 — Payable before Payout (Etapas 21.3+)
+
+Obrigação antes do repasse. Detalhe: `docs/adr/174-payable-before-payout.md`, `docs/PAYABLES.md`.
+
+## ADR 175 — Retention source explicit (Etapas 21.3+)
+
+`manual` | `estimated` | `provider_confirmed`. Detalhe: `docs/adr/175-retention-source-explicit.md`, `docs/FINANCIAL_RETENTIONS.md`.
+
+## ADR 176 — Refund via new ledger transaction (Etapas 21.3+)
+
+Nova tx `refund`; sem editar payment_received. Detalhe: `docs/adr/176-refund-via-new-ledger-transaction.md`, `docs/REFUNDS.md`.
+
+## ADR 177 — Partial refund architecture (Etapas 21.3+)
+
+Refundable capped; offsets append-only. Detalhe: `docs/adr/177-partial-refund-architecture.md`.
+
+## ADR 178 — Refund after payout handling (Etapas 21.3+)
+
+Clawback sem apagar payout. Detalhe: `docs/adr/178-refund-after-payout-handling.md`.
+
+## ADR 179 — Service dispute ≠ payment dispute (Etapas 21.4+)
+
+Tipos distintos; marketplace_disputes ≠ chargeback. Detalhe: `docs/adr/179-service-dispute-not-payment-dispute.md`, `docs/FINANCIAL_DISPUTES.md`.
+
+## ADR 180 — Dispute hold (Etapas 21.4+)
+
+Hold em payables/payouts in-flight. Detalhe: `docs/adr/180-dispute-hold.md`.
+
+## ADR 181 — Gateway ≠ Ledger ≠ Bank (Etapas 21.4+)
+
+Três fontes; sem igualdade assumida. Detalhe: `docs/adr/181-gateway-not-ledger-not-bank.md`, `docs/FINANCIAL_RECONCILIATION.md`.
+
+## ADR 182 — Reconciliation never mutates ledger (Etapas 21.4+)
+
+Só review/discrepancy; correção via reverse. Detalhe: `docs/adr/182-reconciliation-never-mutates-ledger.md`.
+
+## ADR 183 — Deterministic treasury forecast (Etapas 21.4+)
+
+Fatores em bps; sem ML. Detalhe: `docs/adr/183-deterministic-treasury-forecast.md`, `docs/FORECAST.md`.
+
+## ADR 184 — Actual ≠ forecast (Etapas 21.4+)
+
+Campos projected/actual separados. Detalhe: `docs/adr/184-actual-not-forecast.md`, `docs/TREASURY.md`.
+
+## ADR 185 — Monetization via EntitlementService (Etapas 21.5 / 22)
+
+Gates só via entitlements. Detalhe: `docs/adr/185-monetization-via-entitlement-service.md`, `docs/MONETIZATION.md`.
+
+## ADR 186 — AI credits ≠ AI tokens (Etapas 21.5 / 22)
+
+Crédito de produto ≠ tokens do provider. Detalhe: `docs/adr/186-ai-credits-not-ai-tokens.md`, `docs/AI_CREDITS.md`.
+
+## ADR 187 — Usage metering (Etapas 21.5 / 22)
+
+Meters + records idempotentes ≠ paid. Detalhe: `docs/adr/187-usage-metering.md`.
+
+## ADR 188 — API credential hash-only (Etapas 21.5 / 22)
+
+Só `secretHash` + prefix. Detalhe: `docs/adr/188-api-credential-hash-only.md`, `docs/API_MONETIZATION.md`.
+
+## ADR 189 — API usage billing (Etapas 21.5 / 22)
+
+Usage → charge/invoice honesto. Detalhe: `docs/adr/189-api-usage-billing.md`.
+
+## ADR 190 — Licensing domain (Etapas 21.5 / 22)
+
+`software_licenses` ≠ entitlement. Detalhe: `docs/adr/190-licensing-domain.md`, `docs/LICENSING.md`.
+
+## ADR 191 — White-label limited to branding (Etapas 21.5 / 22)
+
+Branding/domínio; sem fake isolation. Detalhe: `docs/adr/191-white-label-branding-only.md`, `docs/WHITE_LABEL.md`.

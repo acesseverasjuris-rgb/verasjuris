@@ -1,4 +1,4 @@
-import type { PermissionKey } from "@verasjuris/types";
+import { PERMISSION_ALIASES, type PermissionKey } from "@verasjuris/types";
 
 export type AccessMembership = {
   status: "active" | "suspended" | "removed";
@@ -10,6 +10,14 @@ export type AccessMembership = {
 export type AccessDecision =
   | { ok: true }
   | { ok: false; code: "NOT_FOUND" | "AUTHORIZATION_ERROR"; message: string };
+
+function membershipHasPermission(permissions: readonly string[], required: PermissionKey): boolean {
+  if (permissions.includes(required)) return true;
+  for (const [alias, grants] of Object.entries(PERMISSION_ALIASES)) {
+    if (grants?.includes(required) && permissions.includes(alias)) return true;
+  }
+  return false;
+}
 
 export function authorizeAccess(input: {
   membership: AccessMembership;
@@ -29,7 +37,7 @@ export function authorizeAccess(input: {
       message: "Seu acesso a esta organização não está ativo. Nenhum dado foi alterado.",
     };
   }
-  if (!input.membership.permissions.includes(input.required)) {
+  if (!membershipHasPermission(input.membership.permissions, input.required)) {
     return {
       ok: false,
       code: "AUTHORIZATION_ERROR",

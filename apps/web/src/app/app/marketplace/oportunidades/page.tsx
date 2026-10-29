@@ -39,13 +39,20 @@ export default function AppMarketplaceOpportunitiesPage() {
 
   return (
     <div className="vj-stack">
-      <Breadcrumb items={[{ label: "Marketplace", href: "/app/marketplace" }, { label: "Oportunidades" }]} />
-      <PageHeader title="Oportunidades" description="Solicitações abertas para envio de proposta." />
+      <Breadcrumb
+        items={[{ label: "Marketplace", href: "/app/marketplace" }, { label: "Oportunidades" }]}
+      />
+      <PageHeader
+        title="Oportunidades"
+        description="Solicitações abertas para envio de proposta."
+      />
       <SectionTabs label="Seções" items={MARKETPLACE_APP_TABS} current="" />
       {loading ? <LoadingState label="Carregando…" /> : null}
       {error ? <ErrorState title="Erro">{error}</ErrorState> : null}
       {!loading && !error && items.length === 0 ? (
-        <EmptyState title="Nenhuma oportunidade">Não há solicitações abertas no momento.</EmptyState>
+        <EmptyState title="Nenhuma oportunidade">
+          Não há solicitações abertas no momento.
+        </EmptyState>
       ) : null}
       {!loading && !error ? (
         <MarketplaceRequestsTable items={items} baseHref="/marketplace/solicitacoes" />

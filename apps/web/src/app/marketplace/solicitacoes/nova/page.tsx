@@ -69,7 +69,10 @@ export default function MarketplaceNewRequestPage() {
           { label: "Nova" },
         ]}
       />
-      <PageHeader title="Nova solicitação" description="Descreva a demanda jurídica em poucos passos." />
+      <PageHeader
+        title="Nova solicitação"
+        description="Descreva a demanda jurídica em poucos passos."
+      />
       {error ? <ErrorState title="Não foi possível salvar">{error}</ErrorState> : null}
       <form className="vj-stack vj-form" onSubmit={(e) => void onSubmit(e)}>
         <label>

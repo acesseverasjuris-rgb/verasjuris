@@ -32,6 +32,10 @@ export function registerHttpGuards(app: FastifyInstance, options: { webOrigin: s
     reply.header("x-request-id", request.id);
     if (!["POST", "PUT", "PATCH", "DELETE"].includes(request.method)) return;
 
+    // Webhooks de provedores externos não enviam CSRF browser header.
+    const path = request.url.split("?")[0] ?? "";
+    if (path.includes("/webhooks/")) return;
+
     const header = request.headers[CSRF_HEADER];
     const value = Array.isArray(header) ? header[0] : header;
     if (value !== "1") {

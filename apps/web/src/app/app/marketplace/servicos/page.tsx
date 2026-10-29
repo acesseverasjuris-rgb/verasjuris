@@ -12,10 +12,17 @@ export default function AppMarketplaceServicesPage() {
   if (org.ready && !can) return <NoPermission>Sem permissão para gerenciar serviços.</NoPermission>;
   return (
     <div className="vj-stack">
-      <Breadcrumb items={[{ label: "Marketplace", href: "/app/marketplace" }, { label: "Serviços" }]} />
-      <PageHeader title="Meus serviços" description="Cadastre serviços ativos quando o perfil marketplace estiver active." />
+      <Breadcrumb
+        items={[{ label: "Marketplace", href: "/app/marketplace" }, { label: "Serviços" }]}
+      />
+      <PageHeader
+        title="Meus serviços"
+        description="Cadastre serviços ativos quando o perfil marketplace estiver active."
+      />
       <SectionTabs label="Seções" items={MARKETPLACE_APP_TABS} current="" />
-      <p className="vj-meta">Use a API ou expanda este formulário para CRUD completo de serviços.</p>
+      <p className="vj-meta">
+        Use a API ou expanda este formulário para CRUD completo de serviços.
+      </p>
     </div>
   );
 }

@@ -176,8 +176,7 @@ export function MarketplaceProfessionalsGrid({ items }: { items: MarketplaceProf
           </h3>
           <p className="vj-meta">{p.marketplaceHeadline ?? "—"}</p>
           <p className="vj-meta">
-            {p.oabUf ? `OAB/${p.oabUf}` : ""}{" "}
-            {p.ranking ? `· score ${p.ranking.totalScore}` : ""}
+            {p.oabUf ? `OAB/${p.oabUf}` : ""} {p.ranking ? `· score ${p.ranking.totalScore}` : ""}
           </p>
         </li>
       ))}

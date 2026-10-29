@@ -14,9 +14,8 @@ export default function MarketplaceServicesBrowsePage() {
       />
       <SectionTabs label="Seções" items={MARKETPLACE_PUBLIC_TABS} current="" />
       <p className="vj-meta">
-        Use a busca de{" "}
-        <a href="/marketplace/profissionais">profissionais</a> para filtrar por categoria, UF, preço e
-        verificação OAB.
+        Use a busca de <a href="/marketplace/profissionais">profissionais</a> para filtrar por
+        categoria, UF, preço e verificação OAB.
       </p>
     </div>
   );

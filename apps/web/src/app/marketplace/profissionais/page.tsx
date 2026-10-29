@@ -34,8 +34,13 @@ export default function MarketplaceProfessionalsPage() {
 
   return (
     <div className="vj-stack">
-      <Breadcrumb items={[{ label: "Marketplace", href: "/marketplace" }, { label: "Profissionais" }]} />
-      <PageHeader title="Profissionais" description="Busca ranqueada de advogados no marketplace." />
+      <Breadcrumb
+        items={[{ label: "Marketplace", href: "/marketplace" }, { label: "Profissionais" }]}
+      />
+      <PageHeader
+        title="Profissionais"
+        description="Busca ranqueada de advogados no marketplace."
+      />
       <SectionTabs label="Seções" items={MARKETPLACE_PUBLIC_TABS} current="" />
       {loading ? <LoadingState label="Carregando profissionais…" /> : null}
       {error ? <ErrorState title="Erro">{error}</ErrorState> : null}

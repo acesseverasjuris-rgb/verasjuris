@@ -90,7 +90,14 @@ const DEFAULT_CATEGORIES: Array<{ key: string; name: string; description: string
 ];
 
 function sanitizeText(value: string): string {
-  return value.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "").trim();
+  return Array.from(value)
+    .filter((ch) => {
+      const code = ch.codePointAt(0) ?? 0;
+      if (code === 0x09 || code === 0x0a || code === 0x0d) return true;
+      return code >= 0x20 && code !== 0x7f;
+    })
+    .join("")
+    .trim();
 }
 
 function assertNonNegativePrices(input: {
