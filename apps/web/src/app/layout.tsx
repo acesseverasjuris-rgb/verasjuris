@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Source_Sans_3 } from "next/font/google";
 import type { ReactNode } from "react";
+import { PlatformChrome } from "../components/platform-chrome";
 import "@verasjuris/ui/styles.css";
 
 const sans = Source_Sans_3({
@@ -22,12 +23,14 @@ export const metadata: Metadata = {
   description:
     "Plataforma para organizar trabalho jurídico com controle humano. Esta versão inicial cria conta, organização e controle de acesso.",
   applicationName: "VerasJuris",
+  manifest: "/manifest.webmanifest",
 };
 
 export const viewport: Viewport = {
   themeColor: "#06295B",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -35,10 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="pt-BR">
       <body className={`${sans.variable} ${mono.variable}`}>
         <div className="vj-stripe" />
-        <a className="vj-skip-link" href="#conteudo">
-          Ir para o conteúdo
-        </a>
-        {children}
+        <PlatformChrome>{children}</PlatformChrome>
       </body>
     </html>
   );

@@ -792,3 +792,24 @@ Usage → charge/invoice honesto. Detalhe: `docs/adr/189-api-usage-billing.md`.
 ## ADR 191 — White-label limited to branding (Etapas 21.5 / 22)
 
 Branding/domínio; sem fake isolation. Detalhe: `docs/adr/191-white-label-branding-only.md`, `docs/WHITE_LABEL.md`.
+
+## VerasJuris Control / Analytics / Workflows
+
+Domínios internos (Etapa 23+): operação da organização (`docs/CONTROL.md` e satélites), analytics como read model (`docs/ANALYTICS.md`) e automações (`docs/WORKFLOWS.md`). ADRs 192–211. UI sob `/app/control/*`. Não confundir com produto cliente nem com financeiro de plataforma (`docs/FINANCE.md`).
+
+## ADR 192–199 — VerasJuris Control (Etapa 23+)
+
+Control como domínio interno; ≠ produto cliente; finance/legal reutilizam Ledger/Matter/Contract; HR employee extension; compliance risk model; vendor lifecycle; product/tech interno. Detalhe: `docs/adr/192-*.md` … `199-*.md`, `docs/CONTROL.md`.
+
+## ADR 200–203 — Analytics
+
+Read model; fontes de verdade nos domínios; formula versioning; CAC/LTV insufficient_data. Docs: `ANALYTICS.md`, `METRIC_REGISTRY.md`.
+
+## ADR 204–211 — Workflows
+
+Engine central; versões imutáveis; DSL segura; ações registradas; sem código arbitrário; idempotência; approvals; dry-run. Docs: `WORKFLOWS.md`.
+
+
+## ADR 212–240 — Platform hardening (Etapas 26–33)
+
+Provider-first integrations; sem SDK direto; public API versionada; webhook gateway; MFA/passkeys/sessions; field encryption/secrets/SIEM; privacy/DSR/retention; observability/backup/DR; no premature microservices; cache/PWA offline security; jurisdiction/i18n; enterprise SSO/SCIM; white-label boundary; a11y/Libras/braille; assistant boundaries; institutional policy versioning.

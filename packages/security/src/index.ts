@@ -4,7 +4,13 @@ export {
   SESSION_COOKIE,
   SESSION_TTL_MS,
 } from "./constants.js";
-export { MemoryRateLimiter, type RateLimitResult } from "./rate-limit.js";
+export {
+  MemoryRateLimiter,
+  RATE_LIMIT_BUCKETS,
+  consumeNamedBucket,
+  type RateLimitBucketName,
+  type RateLimitResult,
+} from "./rate-limit.js";
 export { redactSensitive } from "./redact.js";
 export { hashPassword, verifyPassword, verifyPasswordOrDummy } from "./password.js";
 export { generateSessionToken, hashSessionToken } from "./session-token.js";
@@ -16,3 +22,21 @@ export {
   opaqueTokensEqual,
   PASSWORD_RESET_TTL_MS,
 } from "./tokens.js";
+export {
+  base32Decode,
+  base32Encode,
+  buildOtpAuthUri,
+  generateTotp,
+  generateTotpSecret,
+  verifyTotp,
+  type TotpOptions,
+  type VerifyTotpOptions,
+} from "./totp.js";
+export {
+  createAppKeyFieldEncryption,
+  createFieldEncryption,
+  createFieldEncryptionWithFallback,
+  createSecretReferenceCodec,
+  type FieldEncryptionCodec,
+  type SecretReferenceCodec,
+} from "./field-encryption.js";

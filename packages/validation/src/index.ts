@@ -816,3 +816,14 @@ export * from "./extrajudicial.js";
 export * from "./education.js";
 export * from "./finance.js";
 export * from "./monetization.js";
+export * from "./control.js";
+export * from "./analytics.js";
+export * from "./workflows.js";
+
+export * from "./security.js";
+export * from "./privacy.js";
+export * from "./enterprise.js";
+export * from "./accessibility.js";
+export * from "./assistant.js";
+export * from "./integrations.js";
+export * from "./i18n.js";

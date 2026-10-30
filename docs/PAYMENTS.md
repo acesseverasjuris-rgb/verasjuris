@@ -35,3 +35,8 @@ Após confirmação: alocações internas (`docs/SPLIT.md`) ≠ split do PSP (AD
 ## Relacionado
 
 `docs/PAYMENT_PROVIDER.md`, `docs/PAYMENT_WEBHOOKS.md`, `docs/REFUNDS.md`, `docs/PAYOUTS.md`, `docs/SPLIT.md`, `docs/LEDGER.md`, ADRs 141, 164–168, 171–180.
+
+
+## Payments × platform
+
+PaymentProvider permanece no registry; antifraud signals podem correlacionar anomalias de pagamento. Sem PSP fake.

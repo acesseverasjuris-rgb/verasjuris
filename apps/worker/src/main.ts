@@ -10,6 +10,8 @@ import { registerLocalOnlineLawyerHandlers } from "./jobs/online-lawyer-handlers
 import { registerLocalMarketplaceHandlers } from "./jobs/marketplace-handlers.js";
 import { registerLocalEducationFinanceHandlers } from "./jobs/education-finance-handlers.js";
 import { registerLocalMonetizationTreasuryHandlers } from "./jobs/monetization-treasury-handlers.js";
+import { registerLocalControlAnalyticsWorkflowHandlers } from "./jobs/control-analytics-workflow-handlers.js";
+import { registerLocalPlatformHardeningHandlers } from "./jobs/platform-hardening-handlers.js";
 import {
   createStorageReconciliationHandler,
   STORAGE_RECONCILIATION_JOB,
@@ -30,6 +32,8 @@ async function main(): Promise<void> {
     registerLocalMarketplaceHandlers(queue, database.db);
     registerLocalEducationFinanceHandlers(queue, database.db);
     registerLocalMonetizationTreasuryHandlers(queue, database.db);
+    registerLocalControlAnalyticsWorkflowHandlers(queue, database.db);
+    registerLocalPlatformHardeningHandlers(queue, database.db);
     queue.registerHandler(
       STORAGE_RECONCILIATION_JOB,
       createStorageReconciliationHandler({

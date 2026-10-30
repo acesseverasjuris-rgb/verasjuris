@@ -180,3 +180,12 @@ Upload de documentos (Etapa 4.1) usa `@verasjuris/storage`: MIME por magic bytes
 ## LGPD
 
 A conta guarda nome, e-mail e hash de senha para autenticação. IP e identificador de navegador podem aparecer em sessão e auditoria para segurança. Não há, nesta versão, exportação, retificação além do nome da organização, anonimização ou exclusão automatizada. Esses direitos precisam de um fluxo próprio antes de tratar dados de processos ou documentos.
+
+## VerasJuris Control / Analytics / Workflows
+
+Domínios internos (Etapa 23+): operação da organização (`docs/CONTROL.md` e satélites), analytics como read model (`docs/ANALYTICS.md`) e automações (`docs/WORKFLOWS.md`). ADRs 192–211. UI sob `/app/control/*`. Não confundir com produto cliente nem com financeiro de plataforma (`docs/FINANCE.md`).
+
+
+## Segurança avançada (Etapa 27+)
+
+MFA TOTP (recovery hash-only), passkeys, device/session management, field encryption, secrets, WAF/SIEM abstractions, security events/alerts, vulnerability/pentest records. Ver `ADVANCED_SECURITY.md`, `MFA.md`, ADRs 216–221.

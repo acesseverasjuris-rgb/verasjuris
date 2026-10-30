@@ -14,6 +14,10 @@ Tabela: `white_label_configs`. Status: `draft` | `pending_domain` | `active` | `
 
 Habilitação do produto white-label passa por plano/`EntitlementService` — não por flag solta no front.
 
+## Enterprise / Etapas 26–33
+
+SSO/SCIM/domínio/branding continuam em providers (`SSOProvider`, `SCIMProvider`, `CustomDomainProvider`). Sem JS custom arbitrário no white-label (ADR 234). UI: `/app/configuracoes/enterprise/*`.
+
 ## Relacionado
 
-`docs/MONETIZATION.md`, `docs/ENTITLEMENTS.md`, ADR 191.
+`docs/MONETIZATION.md`, `docs/ENTITLEMENTS.md`, `docs/ENTERPRISE.md`, ADR 191, ADR 234.

@@ -28,6 +28,7 @@ import {
   FileText,
   GitCompare,
   GraduationCap,
+  Gauge,
   Scale,
   Tags,
   UserRound,
@@ -43,6 +44,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import type { Membership } from "../lib/types";
 import { roleLabel } from "../lib/types";
+import { LanguageSwitcher } from "./locale-provider";
 
 type NavItem = {
   href: string;
@@ -82,6 +84,7 @@ type NavItem = {
     | "marketplace"
     | "educacao"
     | "financeiro"
+    | "control"
     | "perfis";
 };
 
@@ -121,11 +124,12 @@ const icons = {
   marketplace: Store,
   educacao: GraduationCap,
   financeiro: Wallet,
+  control: Gauge,
 };
 
 function NavLinks({ items, pathname }: { items: NavItem[]; pathname: string }) {
   return (
-    <nav className="vj-nav" aria-label="Áreas">
+    <nav className="vj-nav" id="navegacao" aria-label="Áreas">
       {items.map((item) => {
         const Icon = icons[item.icon];
         const current =
@@ -230,14 +234,20 @@ export function AppShell({
               <p className="vj-meta">Nenhuma organização ativa</p>
             )}
           </div>
-          <Menu label={userName}>
-            <p className="vj-meta" role="presentation">
-              {email}
-            </p>
-            <button type="button" role="menuitem" onClick={() => void logout()}>
-              <LogOut size={16} aria-hidden="true" /> Sair
-            </button>
-          </Menu>
+          <div className="vj-header-actions">
+            <LanguageSwitcher />
+            <Menu label={userName}>
+              <p className="vj-meta" role="presentation">
+                {email}
+              </p>
+              <a href="/app/configuracoes/seguranca" role="menuitem">
+                Segurança
+              </a>
+              <button type="button" role="menuitem" onClick={() => void logout()}>
+                <LogOut size={16} aria-hidden="true" /> Sair
+              </button>
+            </Menu>
+          </div>
         </header>
         <div className="vj-content" id="conteudo">
           {organization ? (

@@ -61,6 +61,34 @@ import {
   NotConfiguredReconciliationProvider,
   NotConfiguredSignatureProvider,
   NotConfiguredVideoConferenceProvider,
+  NotConfiguredBIProvider,
+  NotConfiguredAnalyticsWarehouseProvider,
+  NotConfiguredIssueTrackerProvider,
+  NotConfiguredDeploymentProvider,
+  NotConfiguredWorkflowWebhookProvider,
+  NotConfiguredCourtIntegrationProvider,
+  NotConfiguredKeyManagementProvider,
+  NotConfiguredObservabilityProvider,
+  NotConfiguredStatusPageProvider,
+  NotConfiguredBackupProvider,
+  NotConfiguredTranslationProvider,
+  NotConfiguredSSOProvider,
+  NotConfiguredSCIMProvider,
+  type ProviderRegistry,
+  createProviderRegistry,
+  type BIProvider,
+  type AnalyticsWarehouseProvider,
+  type IssueTrackerProvider,
+  type DeploymentProvider,
+  type WorkflowWebhookProvider,
+  type CourtIntegrationProvider,
+  type KeyManagementProvider,
+  type ObservabilityProvider,
+  type StatusPageProvider,
+  type BackupProvider,
+  type TranslationProvider,
+  type SSOProvider,
+  type SCIMProvider,
   type BiometricVerificationProvider,
   type ConflictCheckProvider,
   type ContractManagementProvider,
@@ -151,7 +179,24 @@ import { registerCommunicationRoutes } from "./modules/communication/routes.js";
 import { registerEducationRoutes } from "./modules/education/routes.js";
 import { registerFinanceRoutes } from "./modules/finance/routes.js";
 import { registerTaskRoutes } from "./modules/tasks/routes.js";
+import { registerControlRoutes } from "./modules/control/routes.js";
+import { registerAnalyticsRoutes } from "./modules/analytics/routes.js";
+import { registerWorkflowRoutes } from "./modules/workflows/routes.js";
+import { registerIntegrationRoutes } from "./modules/integrations/routes.js";
+import { registerSecurityRoutes } from "./modules/security/routes.js";
+import { registerPrivacyRoutes } from "./modules/privacy/routes.js";
+import {
+  registerObservabilityRoutes,
+  registerObservabilityRootHealth,
+} from "./modules/observability/routes.js";
+import { registerEnterpriseRoutes } from "./modules/enterprise/routes.js";
+import { registerAccessibilityRoutes } from "./modules/accessibility/routes.js";
+import { registerI18nRoutes } from "./modules/i18n/routes.js";
+import { registerAssistantRoutes } from "./modules/assistant/routes.js";
+import { registerPublicApiRoutes } from "./modules/public-api/routes.js";
+import { registerInstitutionalRoutes } from "./modules/institutional/routes.js";
 import { registerHttpGuards } from "./plugins/http.js";
+import type { JobQueue } from "@verasjuris/events";
 
 export type BuildAppOptions = {
   db: AppDatabase;
@@ -237,6 +282,27 @@ export type BuildAppOptions = {
   communicationSmsProvider?: SmsProvider;
   communicationWhatsappProvider?: WhatsAppProvider;
   communicationPushProvider?: PushProvider;
+  /** Padrão: BI NOT_CONFIGURED. */
+  biProvider?: BIProvider;
+  /** Padrão: warehouse NOT_CONFIGURED. */
+  warehouseProvider?: AnalyticsWarehouseProvider;
+  /** Padrão: issue tracker NOT_CONFIGURED. */
+  issueTrackerProvider?: IssueTrackerProvider;
+  /** Padrão: deployment NOT_CONFIGURED. */
+  deploymentProvider?: DeploymentProvider;
+  /** Padrão: workflow webhook NOT_CONFIGURED. */
+  workflowWebhookProvider?: WorkflowWebhookProvider;
+  courtIntegrationProvider?: CourtIntegrationProvider;
+  keyManagementProvider?: KeyManagementProvider;
+  observabilityProvider?: ObservabilityProvider;
+  statusPageProvider?: StatusPageProvider;
+  backupProvider?: BackupProvider;
+  translationProvider?: TranslationProvider;
+  ssoProvider?: SSOProvider;
+  scimProvider?: SCIMProvider;
+  jobQueue?: JobQueue;
+  appEncryptionKey?: string | null;
+  providerRegistry?: ProviderRegistry;
 };
 
 export async function buildApp(options: BuildAppOptions) {
@@ -329,7 +395,73 @@ export async function buildApp(options: BuildAppOptions) {
     communicationWhatsappProvider:
       options.communicationWhatsappProvider ?? new NotConfiguredWhatsAppProvider(),
     communicationPushProvider: options.communicationPushProvider ?? new NotConfiguredPushProvider(),
+    biProvider: options.biProvider ?? new NotConfiguredBIProvider(),
+    warehouseProvider: options.warehouseProvider ?? new NotConfiguredAnalyticsWarehouseProvider(),
+    issueTrackerProvider: options.issueTrackerProvider ?? new NotConfiguredIssueTrackerProvider(),
+    deploymentProvider: options.deploymentProvider ?? new NotConfiguredDeploymentProvider(),
+    workflowWebhookProvider:
+      options.workflowWebhookProvider ?? new NotConfiguredWorkflowWebhookProvider(),
+    courtIntegrationProvider:
+      options.courtIntegrationProvider ?? new NotConfiguredCourtIntegrationProvider(),
+    keyManagementProvider:
+      options.keyManagementProvider ?? new NotConfiguredKeyManagementProvider(),
+    observabilityProvider:
+      options.observabilityProvider ?? new NotConfiguredObservabilityProvider(),
+    statusPageProvider: options.statusPageProvider ?? new NotConfiguredStatusPageProvider(),
+    backupProvider: options.backupProvider ?? new NotConfiguredBackupProvider(),
+    translationProvider: options.translationProvider ?? new NotConfiguredTranslationProvider(),
+    ssoProvider: options.ssoProvider ?? new NotConfiguredSSOProvider(),
+    scimProvider: options.scimProvider ?? new NotConfiguredSCIMProvider(),
+    jobQueue: options.jobQueue,
+    appEncryptionKey: options.appEncryptionKey ?? process.env.APP_ENCRYPTION_KEY ?? null,
+    providerRegistry: options.providerRegistry,
   };
+  if (!deps.providerRegistry) {
+    const registry = createProviderRegistry();
+    const registerNotConfigured = (
+      key: string,
+      type: string,
+      healthCheck: () => Promise<{ status: string; detail?: string; checkedAt: string }>,
+    ) => {
+      registry.register({
+        key,
+        type,
+        status: "not_configured",
+        capabilities: [],
+        healthCheck: async () => {
+          const h = await healthCheck();
+          return { status: h.status, detail: h.detail, checkedAt: h.checkedAt };
+        },
+      });
+    };
+    registerNotConfigured("court", "court", () => deps.courtIntegrationProvider!.healthCheck());
+    registerNotConfigured("kms", "security", () => deps.keyManagementProvider!.healthCheck());
+    registerNotConfigured("observability", "observability", () =>
+      deps.observabilityProvider!.healthCheck(),
+    );
+    registerNotConfigured("status_page", "observability", () =>
+      deps.statusPageProvider!.healthCheck(),
+    );
+    registerNotConfigured("backup", "observability", () => deps.backupProvider!.healthCheck());
+    registerNotConfigured("translation", "i18n", () => deps.translationProvider!.healthCheck());
+    registerNotConfigured("sso", "enterprise", () => deps.ssoProvider!.healthCheck());
+    registerNotConfigured("scim", "enterprise", () => deps.scimProvider!.healthCheck());
+    registerNotConfigured("custom_domain", "enterprise", () =>
+      deps.customDomainProvider!.healthCheck(),
+    );
+    registerNotConfigured("payment", "finance", () => deps.paymentProvider!.healthCheck());
+    registerNotConfigured("signature", "contracts", () => deps.signatureProvider!.healthCheck());
+    registerNotConfigured("email", "communication", () =>
+      deps.communicationEmailProvider!.healthCheck(),
+    );
+    registerNotConfigured("whatsapp", "communication", () =>
+      deps.communicationWhatsappProvider!.healthCheck(),
+    );
+    registerNotConfigured("workflow_webhook", "workflows", () =>
+      deps.workflowWebhookProvider!.healthCheck(),
+    );
+    deps.providerRegistry = registry;
+  }
   await app.register(helmet, { global: true, contentSecurityPolicy: false });
   await app.register(cors, {
     origin: options.webOrigin,
@@ -395,8 +527,37 @@ export async function buildApp(options: BuildAppOptions) {
       await registerCommunicationRoutes(v1, deps);
       await registerEducationRoutes(v1, deps);
       await registerFinanceRoutes(v1, deps);
+      await registerControlRoutes(v1, deps);
+      await registerAnalyticsRoutes(v1, deps);
+      await registerWorkflowRoutes(v1, deps);
+      await registerIntegrationRoutes(v1, deps);
+      await registerSecurityRoutes(v1, deps);
+      await registerPrivacyRoutes(v1, deps);
+      await registerObservabilityRoutes(v1, deps);
+      await registerEnterpriseRoutes(v1, deps);
+      await registerAccessibilityRoutes(v1, deps);
+      await registerI18nRoutes(v1, deps);
+      await registerAssistantRoutes(v1, deps);
+      await registerInstitutionalRoutes(v1, deps);
     },
     { prefix: "/v1" },
   );
+  await app.register(
+    async (pub) => {
+      await registerPublicApiRoutes(pub, deps);
+    },
+    { prefix: "/v1/public" },
+  );
+  await app.register(
+    async (pub) => {
+      await registerPublicApiRoutes(pub, deps);
+    },
+    { prefix: "/api/public/v1" },
+  );
+  registerObservabilityRootHealth(app, deps);
+  app.get("/developers/openapi.json", async (_request, reply) => {
+    const { PUBLIC_OPENAPI } = await import("./modules/public-api/openapi.js");
+    return reply.send(PUBLIC_OPENAPI);
+  });
   return app;
 }

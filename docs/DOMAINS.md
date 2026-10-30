@@ -68,11 +68,22 @@ Os demais domínios estão previstos. Nenhum deles tem tabela, rota ou tela que 
 | Monetization | Products/prices, usage, AI credits≠tokens, API hash-only, licenses, WL branding | Implementado (Etapas 21.5 / 22) |
 | Notary (integração ONR real) | Protocolo/cartório oficial | Não implementado (extrajudicial manual: Etapa 19) |
 | Support | Atendimento ao usuário da plataforma | Não implementado |
-| Compliance, HR, Suppliers, InternalOperations | Operação interna da Café Platine | Não implementado |
-| Analytics, Integrations | Indicadores e conectores | Não implementado |
+| VerasJuris Control (Director/HR/Finance/Legal/Compliance/Vendors/Product) | Operação interna da organização | Schema + UI frontend (API em pouso); ADRs 192–199 |
+| Analytics | Read model / dashboards / exports | Schema + UI; ADRs 200–203 |
+| Workflows | Motor central de automações | Schema + UI; ADRs 204–211 |
+| Integrations | Conectores externos genéricos | Não implementado |
 
 ## Dependências permitidas
 
 Identidade não depende de processo ou pagamento. Organização depende de identidade. Auditoria pode ser chamada por qualquer módulo que já exista, sem ler segredo. Integração futura entra por adaptador (`PaymentProvider`, `PayoutProvider`, `PaymentDisputeProvider`, `BillingProvider`, `AIProvider`, `OCRProvider`, `PublicOpportunityProvider`, `LegalSourceProvider`, `AuctionProvider`, `AuctionBidProvider`, `MapProvider`, `StorageProvider`, `MalwareScannerProvider`, `CourtProvider`, `BodyProvider`, `IdentityProvider`, `NotificationProvider`, `HolidayCalendarProvider`, `SignatureProvider`, `DocumentExportProvider`, `SocialSecurityProvider`, `CNISProvider`, `ESocialProvider`, `FGTSProvider`, `LaborCourtProvider`, `FederalTaxProvider`, `StateTaxProvider`, `MunicipalTaxProvider`, `TaxDebtProvider`, `TaxFilingProvider`, `RegistryProvider`, `EnvironmentalDataProvider`, `ElectoralDataProvider`, `EmailProvider`, `SmsProvider`, `WhatsAppProvider`, `PushProvider`, `OABVerificationProvider`, `ConflictCheckProvider`, `VideoConferenceProvider`, `EducationMediaProvider`, `LiveClassProvider`, `FiscalDocumentProvider`, `ReconciliationProvider`, `BankingProvider`, `DebtCollectionProvider`, `TaxWithholdingProvider`, `CustomDomainProvider`, `LicenseProvider`, `JobQueue`) e deve nascer como `NOT_CONFIGURED` / `not_configured` quando a API oficial não existir. `AIGateway`, `OCRProvider`, `PublicOpportunityProvider`, `ResearchGateway`/`LegalSourceProvider`, providers de leilão, previdenciário/trabalhista, PSP/billing/payout/dispute/recon e mídia educacional existem mas default **not_configured** (sem OpenAI/PNCP/tribunais/lance/INSS/eSocial/Stripe). `StorageProvider`, `MalwareScannerProvider`, `NotificationProvider` (in-app) e `HolidayCalendarProvider` (`NOT_CONFIGURED`) já existem como contrato. Cálculos jurídicos usam `@verasjuris/calculations` (determinístico, sem LLM). `JobQueue` default `not_configured`; `LocalInProcessQueueProvider` só opt-in (ADR 098). Registros operacionais de pagamento (portal/consulta/leilão) ≠ ledger de plataforma; alocação interna ≠ split do PSP (`docs/FINANCE.md`, `docs/SPLIT.md`, `docs/LEDGER.md`, `docs/PAYMENT_PROVIDER.md`).
 
 Um módulo novo não consulta a tabela de outro domínio se puder receber um identificador e autorizar pelo contexto da organização.
+
+## VerasJuris Control / Analytics / Workflows
+
+Domínios internos (Etapa 23+): operação da organização (`docs/CONTROL.md` e satélites), analytics como read model (`docs/ANALYTICS.md`) e automações (`docs/WORKFLOWS.md`). ADRs 192–211. UI sob `/app/control/*`. Não confundir com produto cliente nem com financeiro de plataforma (`docs/FINANCE.md`).
+
+
+## Domínios transversais (Etapas 26–33)
+
+Integrações, security-advanced, privacy_governance, observability/operation, i18n/jurisdictions, accessibility, assistant, institutional policies, enterprise. Não substituem domínios de negócio existentes; reforçam a plataforma.

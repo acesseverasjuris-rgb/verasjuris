@@ -618,6 +618,8 @@ export const costRecords = pgTable(
     documentId: uuid("document_id").references(() => documents.id, { onDelete: "set null" }),
     source: text("source").notNull().default("manual"),
     ledgerTransactionId: uuid("ledger_transaction_id"),
+    /** FK SQL → cost_centers (control.ts); sem references Drizzle para evitar ciclo. */
+    costCenterId: uuid("cost_center_id"),
     createdByMembershipId: uuid("created_by_membership_id").references(
       () => organizationMembers.id,
       { onDelete: "set null" },
@@ -628,6 +630,7 @@ export const costRecords = pgTable(
     index("cost_records_org_idx").on(table.organizationId),
     index("cost_records_category_idx").on(table.category),
     index("cost_records_incurred_idx").on(table.incurredAt),
+    index("cost_records_cost_center_idx").on(table.costCenterId),
   ],
 );
 

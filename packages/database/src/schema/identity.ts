@@ -26,6 +26,12 @@ export const verificationStatusEnum = pgEnum("professional_verification_status",
   "rejected",
 ]);
 export const invitationRoleEnum = pgEnum("invitation_role", ["owner", "administrator", "member"]);
+export const userMfaStatusEnum = pgEnum("user_mfa_status", [
+  "disabled",
+  "enabled",
+  "required",
+  "locked",
+]);
 
 const timestamps = {
   createdAt: timestamp("created_at", { withTimezone: true, mode: "date" }).notNull().defaultNow(),
@@ -42,6 +48,7 @@ export const users = pgTable(
     emailVerifiedAt: timestamp("email_verified_at", { withTimezone: true, mode: "date" }),
     lastLoginAt: timestamp("last_login_at", { withTimezone: true, mode: "date" }),
     mfaEnabled: boolean("mfa_enabled").notNull().default(false),
+    mfaStatus: userMfaStatusEnum("mfa_status").notNull().default("disabled"),
     ...timestamps,
   },
   (table) => [uniqueIndex("users_email_unique").on(table.email)],
@@ -74,12 +81,17 @@ export const organizations = pgTable(
     name: text("name").notNull(),
     slug: text("slug").notNull(),
     status: organizationStatusEnum("status").notNull().default("active"),
+    /** Org interna VerasJuris Control — não confundir com cliente. */
+    internalCompany: boolean("internal_company").notNull().default(false),
     createdByUserId: uuid("created_by_user_id").references(() => users.id, {
       onDelete: "set null",
     }),
     ...timestamps,
   },
-  (table) => [uniqueIndex("organizations_slug_unique").on(table.slug)],
+  (table) => [
+    uniqueIndex("organizations_slug_unique").on(table.slug),
+    index("organizations_internal_company_idx").on(table.internalCompany),
+  ],
 );
 
 export const organizationMembers = pgTable(
@@ -172,11 +184,16 @@ export const sessions = pgTable(
     lastUsedAt: timestamp("last_used_at", { withTimezone: true, mode: "date" }),
     ip: text("ip"),
     userAgent: text("user_agent"),
+    /** Correlates with user_devices.device_id (text), not invasive fingerprint. */
+    deviceId: text("device_id"),
+    ipMasked: text("ip_masked"),
+    revokeReason: text("revoke_reason"),
     createdAt: timestamp("created_at", { withTimezone: true, mode: "date" }).notNull().defaultNow(),
   },
   (table) => [
     uniqueIndex("sessions_token_hash_unique").on(table.tokenHash),
     index("sessions_user_idx").on(table.userId),
+    index("sessions_device_id_idx").on(table.deviceId),
   ],
 );
 

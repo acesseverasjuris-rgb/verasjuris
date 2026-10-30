@@ -97,3 +97,8 @@ Shell em `/app/ia` (status, uso, jobs, análises). Mensagens explícitas quando 
 ## Fora do escopo destas etapas
 
 Embeddings em produção, visão multimodal real, RAG com índice vetorial externo, e-filing real, export PDF/DOCX, sync oficial de jurisprudência/leilão/INSS/eSocial/Fisco, lance eletrônico, inserção automática de citação, alteração automática de domínio jurídico, cálculo de benefício/rescisão/lançamento fiscal via LLM, assinatura eletrônica simulada.
+
+
+## AI × Assistant / i18n / a11y
+
+Assistant usa AIGateway quando configurado; fallback FAQ se NOT_CONFIGURED. Modo legal: nunca se apresentar como advogado. TranslationProvider separado do AI core.

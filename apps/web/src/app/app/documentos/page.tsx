@@ -336,6 +336,8 @@ export default function DocumentosPage() {
               id="upload-file"
               name="file"
               type="file"
+              accept="image/*,application/pdf,.pdf,.png,.jpg,.jpeg"
+              capture="environment"
               required
               onChange={(event) => setUploadFile(event.target.files?.[0] ?? null)}
             />

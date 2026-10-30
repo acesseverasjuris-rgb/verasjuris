@@ -74,6 +74,8 @@ Consultas do servidor Next falam direto com `API_INTERNAL_URL`.
 - **Educação** (`modules/education/`): cursos, trilhas, matrículas, progresso, quizzes, certificados (≠ ICP), biblioteca. Schema `education.ts`. Media/live/PDF default `not_configured`. Docs: `docs/EDUCATION.md` e satélites. ADRs 153–156.
 - **Financeiro / Ledger / Pagamentos / Split / Tesouraria / Monetização** (`modules/finance/`): planos, assinaturas, invoices, créditos, honorários/taxas/custos, ledger double-entry, payments/webhooks/refunds, split rules→allocations→retentions→payables→payouts, disputas/chargebacks, conciliação (gateway≠ledger≠bank), tesouraria (AR/AP/delinquency/forecast), monetização (usage, AI credits, API hash-only, licenses, white-label branding). Schemas `finance.ts` + `monetization.ts`. Providers PSP/billing/payout/dispute/recon/bank/domain default `not_configured`. Docs: `docs/FINANCE.md`, `docs/SPLIT.md`, `docs/TREASURY.md`, `docs/MONETIZATION.md`, … ADRs 157–191.
 
+- **VerasJuris Control / Analytics / Workflows** (Etapa 23+): schemas `control.ts`, `analytics.ts`, `workflows.ts`; policies `control-policies.ts`; UI `/app/control/*`; docs `CONTROL.md`, `ANALYTICS.md`, `WORKFLOWS.md`; ADRs 192–211. API org-scoped sob `/control`, `/analytics`, `/workflows` (backend pode ainda estar pousando).
+
 Módulos respeitam o tenant no caminho (`/organizations/:organizationId/…` quando aplicável), autorização por permissão e auditoria nas mutações críticas. IA **não** muta domínio crítico automaticamente (ADR 065); cálculos jurídicos usam `@verasjuris/calculations` (ADR 103). Dívida técnica e limites honestos: `docs/TECHNICAL_DEBT_CLOSURE.md`.
 
 ## Banco
@@ -87,3 +89,12 @@ Uma pessoa tem uma conta. A participação (`organization_members`, conceito Mem
 ## Escalabilidade
 
 Fila, armazenamento e provedores externos entram por contratos (`JobQueue`, `AIGateway`, `OCRProvider`, `PublicOpportunityProvider`, `ResearchGateway`/`LegalSourceProvider`, `AuctionProvider`, `AuctionBidProvider`, `MapProvider`, `StorageProvider`, `MalwareScannerProvider`, `SocialSecurityProvider`, `CNISProvider`, `ESocialProvider`, `FGTSProvider`, `LaborCourtProvider`, `PaymentProvider`, `PayoutProvider`, `PaymentDisputeProvider`, `BillingProvider`, `EducationMediaProvider`, `LiveClassProvider`, `FiscalDocumentProvider`, `ReconciliationProvider`, `BankingProvider`, `DebtCollectionProvider`, `TaxWithholdingProvider`, `CustomDomainProvider`, `LicenseProvider`). IA/OCR/oportunidades/fontes jurídicas/leilões/previdenciário-trabalhista/PSP/billing/payout/dispute/recon/bank/domínio/mídia educacional default `not_configured` (sem OpenAI/PNCP/tribunais/lance real/INSS/eSocial/FGTS oficial/Stripe). Fila default `not_configured`; fila in-process só com flag explícita (ADR 098) — **não** é broker. Object storage local é só desenvolvimento; produção sem provider real permanece `NOT_CONFIGURED`. Reconciliação DB↔storage é detect-only (ADR 099); conciliação financeira de ledger é contrato separado e **não muta** ledger (`docs/FINANCIAL_RECONCILIATION.md`, ADRs 181–182). Separar um serviço no futuro não exige outro modelo de identidade. Até lá, o worker permanece no mesmo repositório.
+
+## VerasJuris Control / Analytics / Workflows
+
+Domínios internos (Etapa 23+): operação da organização (`docs/CONTROL.md` e satélites), analytics como read model (`docs/ANALYTICS.md`) e automações (`docs/WORKFLOWS.md`). ADRs 192–211. UI sob `/app/control/*`. Não confundir com produto cliente nem com financeiro de plataforma (`docs/FINANCE.md`).
+
+
+## Etapas 26–33 — Platform hardening
+
+Camada transversal: integrações (Provider Registry), segurança avançada (MFA/passkeys/sessions), privacy/LGPD, observabilidade/operação, PWA, i18n (pt/en/es), acessibilidade universal, assistente global, enterprise (SSO/SCIM/white-label), rodapé institucional. UI sob `/app/control/{seguranca,privacidade,operacao,integracoes}`, `/app/configuracoes/{seguranca,enterprise}`, `/acessibilidade`, `/status`, `/developers`. ADRs 212–240. Docs seção 290.

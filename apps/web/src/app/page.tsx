@@ -1,5 +1,6 @@
 import { ButtonLink } from "@verasjuris/ui";
 import { BrandMark } from "../components/brand-mark";
+import { LanguageSwitcher } from "../components/locale-provider";
 
 export default function HomePage() {
   return (
@@ -8,12 +9,16 @@ export default function HomePage() {
         <a href="/" aria-label="VerasJuris, início">
           <BrandMark />
         </a>
-        <div className="vj-header-actions">
+        <nav id="navegacao" className="vj-header-actions" aria-label="Principal">
+          <a href="/acessibilidade">Acessibilidade</a>
+          <a href="/status">Status</a>
+          <a href="/developers">Desenvolvedores</a>
+          <LanguageSwitcher />
           <ButtonLink href="/entrar" variant="ghost">
             Entrar
           </ButtonLink>
           <ButtonLink href="/cadastro">Criar conta</ButtonLink>
-        </div>
+        </nav>
       </header>
       <main className="vj-page" id="conteudo">
         <div className="vj-stack">
@@ -53,12 +58,6 @@ export default function HomePage() {
           </div>
         </div>
       </main>
-      <footer className="vj-footer">
-        <p>
-          A Café Platine desenvolve a plataforma VerasJuris. O VerasJuris é independente de
-          escritórios, autoridades e órgãos públicos.
-        </p>
-      </footer>
     </>
   );
 }

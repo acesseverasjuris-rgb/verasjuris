@@ -27,3 +27,28 @@ export class MemoryRateLimiter {
     return { allowed: true, retryAfterSeconds: 0 };
   }
 }
+
+/** Buckets nomeados para superfícies sensíveis (Etapa 27+). */
+export const RATE_LIMIT_BUCKETS = {
+  login: { limit: 10, windowMs: 15 * 60_000 },
+  mfa: { limit: 10, windowMs: 15 * 60_000 },
+  password: { limit: 5, windowMs: 60 * 60_000 },
+  api: { limit: 120, windowMs: 60_000 },
+  upload: { limit: 30, windowMs: 60_000 },
+  ai: { limit: 60, windowMs: 60_000 },
+  payment: { limit: 30, windowMs: 60_000 },
+  marketplace: { limit: 60, windowMs: 60_000 },
+  webhooks: { limit: 300, windowMs: 60_000 },
+} as const;
+
+export type RateLimitBucketName = keyof typeof RATE_LIMIT_BUCKETS;
+
+export function consumeNamedBucket(
+  limiter: MemoryRateLimiter,
+  bucket: RateLimitBucketName,
+  subjectKey: string,
+  now = Date.now(),
+): RateLimitResult {
+  const config = RATE_LIMIT_BUCKETS[bucket];
+  return limiter.consume(`${bucket}:${subjectKey}`, config.limit, config.windowMs, now);
+}

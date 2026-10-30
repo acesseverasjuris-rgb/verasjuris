@@ -168,3 +168,12 @@ PSP real (adapter), peticionamento eletrônico real, integrações oficiais de t
 ## Restrições
 
 Não inventar API externa. Não executar ato jurídico crítico sem aprovação humana. Não criar tabela de módulo futuro só para “reservar lugar”. Não prometer cobertura de tribunais, cartórios ou resultado de causa.
+
+## VerasJuris Control / Analytics / Workflows
+
+Domínios internos (Etapa 23+): operação da organização (`docs/CONTROL.md` e satélites), analytics como read model (`docs/ANALYTICS.md`) e automações (`docs/WORKFLOWS.md`). ADRs 192–211. UI sob `/app/control/*`. Não confundir com produto cliente nem com financeiro de plataforma (`docs/FINANCE.md`).
+
+
+## Etapas 26–33
+
+Integrações externas preparadas, segurança avançada, LGPD, observabilidade, performance/escala, PWA/mobile, i18n, enterprise/white-label, acessibilidade universal, assistente e rodapé institucional. Providers externos default NOT_CONFIGURED até adapter real.

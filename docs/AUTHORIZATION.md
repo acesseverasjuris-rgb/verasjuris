@@ -244,6 +244,14 @@ Policies dedicadas: `policyProfiles`, `policyCrm` em `@verasjuris/auth/crm-polic
 - Policies: `policyFinanceRead`, `policyFinanceManage`, `policyInvoice`, `policyPaymentIntent`, `policyPayment`, `policyRefund`, … (`finance-policies.ts`).
 - Pagamentos de portal/consulta/leilão usam permissões dos respectivos domínios — ≠ `finance.*` do ledger SaaS (`docs/FINANCE.md`, `docs/PAYMENT_PROVIDER.md`).
 
+### Control / Analytics / Workflows (`control.*`, `analytics.*`, `workflow.*`)
+
+- Control: `control.read` e escopos `control.hr|finance|legal|compliance|vendor|product.read|manage` (+ approvals/director).
+- Analytics: `analytics.read` | `analytics.finance|hr|legal.read` | `analytics.export` | `analytics.admin`.
+- Workflows: `workflow.read|create|update|publish|run|cancel|view_logs|admin`.
+- Policies: `policyInternalControl`, `policyEmployee`, `policyBudget`, `policyAnalytics`, `policyWorkflowDefinition`, `policyWorkflowRun` (`control-policies.ts`).
+- Docs: `CONTROL.md`, `ANALYTICS.md`, `WORKFLOWS.md`.
+
 ## Policies (`@verasjuris/auth`)
 
 - `policyRequirePermission` — permission no tenant  
@@ -270,3 +278,12 @@ Não implementar agora. Modelo planejado:
 - `MfaMethod`, `MfaChallenge`, `RecoveryCode`  
 
 `passwordHash` no User não é a única forma futura de autenticação. `mfaEnabled` permanece placeholder.
+
+## VerasJuris Control / Analytics / Workflows
+
+Domínios internos (Etapa 23+): operação da organização (`docs/CONTROL.md` e satélites), analytics como read model (`docs/ANALYTICS.md`) e automações (`docs/WORKFLOWS.md`). ADRs 192–211. UI sob `/app/control/*`. Não confundir com produto cliente nem com financeiro de plataforma (`docs/FINANCE.md`).
+
+
+## Permissões Etapas 26–33
+
+`security.*`, `privacy.*`, `observability.*`, `enterprise.*`, `integration(s).*`, `assistant.*`, `accessibility.*`, `public_api.*` — ver `packages/types` e policies em `@verasjuris/auth`.

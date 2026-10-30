@@ -35,3 +35,7 @@ Perícias e avaliações sociais previdenciárias (`previdentiary_medical_exams`
 - Portal lista eventos com visibilidade ao cliente (`staffPatchCalendarClientVisible` + leitura portal).
 - Consulta online pode criar/vincular `calendarEventId` ao agendar (`scheduleOnlineConsultation`).
 - Lembrete assíncrono reservado ao job `CONSULTATION_REMINDER` (stub local). Ver `docs/ONLINE_CONSULTATIONS.md`.
+
+## VerasJuris Control / Analytics / Workflows
+
+Domínios internos (Etapa 23+): operação da organização (`docs/CONTROL.md` e satélites), analytics como read model (`docs/ANALYTICS.md`) e automações (`docs/WORKFLOWS.md`). ADRs 192–211. UI sob `/app/control/*`. Não confundir com produto cliente nem com financeiro de plataforma (`docs/FINANCE.md`).

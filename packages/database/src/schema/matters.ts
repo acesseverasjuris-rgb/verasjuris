@@ -29,6 +29,9 @@ export const legalMatterStatusEnum = pgEnum("legal_matter_status", [
   "archived",
 ]);
 
+/** customer = trabalho de cliente; internal_company = jurídico interno VerasJuris Control. */
+export const legalMatterScopeEnum = pgEnum("legal_matter_scope", ["customer", "internal_company"]);
+
 export const legalMatterPriorityEnum = pgEnum("legal_matter_priority", [
   "normal",
   "high",
@@ -176,6 +179,7 @@ export const legalMatters = pgTable(
     }),
     summary: text("summary"),
     status: legalMatterStatusEnum("status").notNull().default("open"),
+    matterScope: legalMatterScopeEnum("matter_scope").notNull().default("customer"),
     priority: legalMatterPriorityEnum("priority").notNull().default("normal"),
     responsibleMembershipId: uuid("responsible_membership_id").references(
       () => organizationMembers.id,
@@ -194,6 +198,7 @@ export const legalMatters = pgTable(
     uniqueIndex("legal_matters_org_ref_unique").on(table.organizationId, table.internalReference),
     index("legal_matters_org_idx").on(table.organizationId),
     index("legal_matters_org_status_idx").on(table.organizationId, table.status),
+    index("legal_matters_org_scope_idx").on(table.organizationId, table.matterScope),
     index("legal_matters_client_idx").on(table.clientId),
     index("legal_matters_opportunity_idx").on(table.originatingOpportunityId),
     index("legal_matters_responsible_idx").on(table.organizationId, table.responsibleMembershipId),

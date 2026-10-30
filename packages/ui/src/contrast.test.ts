@@ -7,8 +7,10 @@ import { contrastRatio, CONTROL_BORDER, TEXT_PAIRS } from "./contrast.js";
 function readTokens(): Record<string, string> {
   const file = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "styles.css");
   const css = readFileSync(file, "utf8");
+  // Baseline WCAG pairs audit only the :root design tokens (not a11y mode overrides).
+  const rootBlock = css.match(/:root\s*\{([\s\S]*?)\n\}/)?.[1] ?? css;
   const tokens: Record<string, string> = {};
-  for (const match of css.matchAll(/(--vj-[\w-]+)\s*:\s*(#[0-9A-Fa-f]{6})/g)) {
+  for (const match of rootBlock.matchAll(/(--vj-[\w-]+)\s*:\s*(#[0-9A-Fa-f]{6})/g)) {
     const name = match[1];
     const color = match[2];
     if (name && color) tokens[name] = color;

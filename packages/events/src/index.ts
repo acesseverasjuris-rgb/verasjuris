@@ -50,3 +50,28 @@ export {
   type LocalInProcessQueueOptions,
   NotConfiguredJobQueue,
 } from "./queue.js";
+export {
+  ANALYTICS_EVENTS,
+  CONTROL_ANALYTICS_WORKFLOW_EVENT_NAMES,
+  CONTROL_EVENTS,
+  WORKFLOW_EVENTS,
+  type AnalyticsEventName,
+  type ControlAnalyticsWorkflowEventName,
+  type ControlEventName,
+  type WorkflowEventName,
+} from "./control-events.js";
+
+export {
+  ASSISTANT_EVENTS,
+  ENTERPRISE_EVENTS,
+  INTEGRATION_EVENTS,
+  PLATFORM_EVENT_NAMES,
+  PRIVACY_EVENTS,
+  SECURITY_EVENTS,
+  type AssistantEventName,
+  type EnterpriseEventName,
+  type IntegrationEventName,
+  type PlatformEventName,
+  type PrivacyEventName,
+  type SecurityEventName,
+} from "./platform-events.js";

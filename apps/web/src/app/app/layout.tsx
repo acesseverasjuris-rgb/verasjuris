@@ -208,6 +208,25 @@ export default async function AuthenticatedLayout({ children }: { children: Reac
                 },
               ]
             : []),
+          ...([
+            "control.read",
+            "analytics.read",
+            "workflow.read",
+            "control.hr.read",
+            "control.finance.read",
+            "control.legal.read",
+            "control.compliance.read",
+            "control.vendor.read",
+            "control.product.read",
+          ].some((key) => permissions.has(key))
+            ? [
+                {
+                  href: "/app/control",
+                  label: "VerasJuris Control",
+                  icon: "control" as const,
+                },
+              ]
+            : []),
           ...(permissions.has("public_opportunity.read")
             ? [
                 {
@@ -225,6 +244,22 @@ export default async function AuthenticatedLayout({ children }: { children: Reac
                   href: "/app/configuracoes/ia",
                   label: "Configurações de IA",
                   icon: "configuracoes-ia" as const,
+                },
+              ]
+            : []),
+          {
+            href: "/app/configuracoes/seguranca",
+            label: "Segurança",
+            icon: "configuracoes-ia" as const,
+          },
+          ...(["enterprise.read", "enterprise.manage", "enterprise.sso.manage"].some((key) =>
+            permissions.has(key),
+          )
+            ? [
+                {
+                  href: "/app/configuracoes/enterprise",
+                  label: "Enterprise",
+                  icon: "organizacao" as const,
                 },
               ]
             : []),

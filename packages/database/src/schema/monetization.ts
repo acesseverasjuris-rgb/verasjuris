@@ -319,6 +319,11 @@ export const softwareLicenseStatusEnum = pgEnum("software_license_status", [
   "cancelled",
 ]);
 
+export const whiteLabelDomainVerificationStatusEnum = pgEnum(
+  "white_label_domain_verification_status",
+  ["requested", "verification_pending", "verified", "tls_pending", "active", "failed"],
+);
+
 export const whiteLabelStatusEnum = pgEnum("white_label_status", [
   "draft",
   "pending_domain",
@@ -1123,6 +1128,8 @@ export const whiteLabelConfigs = pgTable(
     secondaryColor: text("secondary_color"),
     customDomain: text("custom_domain"),
     customDomainVerified: boolean("custom_domain_verified").notNull().default(false),
+    domainVerificationStatus: whiteLabelDomainVerificationStatusEnum("domain_verification_status"),
+    domainVerificationTokenRef: text("domain_verification_token_ref"),
     supportBranding: boolean("support_branding").notNull().default(true),
     status: whiteLabelStatusEnum("status").notNull().default("draft"),
     ...timestamps,
@@ -1130,6 +1137,7 @@ export const whiteLabelConfigs = pgTable(
   (table) => [
     uniqueIndex("white_label_configs_org_unique").on(table.organizationId),
     uniqueIndex("white_label_configs_domain_unique").on(table.customDomain),
+    index("white_label_configs_domain_verification_idx").on(table.domainVerificationStatus),
   ],
 );
 

@@ -42,6 +42,20 @@ import type {
   PushProvider,
   SmsProvider,
   WhatsAppProvider,
+  BIProvider,
+  AnalyticsWarehouseProvider,
+  IssueTrackerProvider,
+  DeploymentProvider,
+  WorkflowWebhookProvider,
+  ProviderRegistry,
+  CourtIntegrationProvider,
+  KeyManagementProvider,
+  ObservabilityProvider,
+  StatusPageProvider,
+  BackupProvider,
+  TranslationProvider,
+  SSOProvider,
+  SCIMProvider,
 } from "@verasjuris/ai";
 import {
   authorizeAccess,
@@ -51,7 +65,7 @@ import {
 } from "@verasjuris/auth";
 import type { AppDatabase } from "@verasjuris/database";
 import type { EmailProvider } from "@verasjuris/email";
-import type { InProcessEventBus } from "@verasjuris/events";
+import type { InProcessEventBus, JobQueue } from "@verasjuris/events";
 import { type MemoryRateLimiter, SESSION_COOKIE, SESSION_TTL_MS } from "@verasjuris/security";
 import type { HolidayCalendarProvider, NotificationProvider } from "@verasjuris/notifications";
 import type { MalwareScannerProvider, StorageProvider } from "@verasjuris/storage";
@@ -168,6 +182,28 @@ export type ApiDeps = {
   communicationSmsProvider?: SmsProvider;
   communicationWhatsappProvider?: WhatsAppProvider;
   communicationPushProvider?: PushProvider;
+  /** BI externo; ausente = NOT_CONFIGURED. */
+  biProvider?: BIProvider;
+  /** Warehouse analítico; ausente = NOT_CONFIGURED. */
+  warehouseProvider?: AnalyticsWarehouseProvider;
+  /** Issue tracker (Jira/GitHub/Linear); ausente = NOT_CONFIGURED. */
+  issueTrackerProvider?: IssueTrackerProvider;
+  /** Deployment/CI; ausente = NOT_CONFIGURED. */
+  deploymentProvider?: DeploymentProvider;
+  /** Webhook externo de workflow; ausente = NOT_CONFIGURED. */
+  workflowWebhookProvider?: WorkflowWebhookProvider;
+  providerRegistry?: ProviderRegistry;
+  courtIntegrationProvider?: CourtIntegrationProvider;
+  keyManagementProvider?: KeyManagementProvider;
+  observabilityProvider?: ObservabilityProvider;
+  statusPageProvider?: StatusPageProvider;
+  backupProvider?: BackupProvider;
+  translationProvider?: TranslationProvider;
+  ssoProvider?: SSOProvider;
+  scimProvider?: SCIMProvider;
+  jobQueue?: JobQueue;
+  /** Fallback local para criptografia de campo (MFA) quando KMS NOT_CONFIGURED. */
+  appEncryptionKey?: string | null;
 };
 
 function meta(request: FastifyRequest): RequestMeta {

@@ -22,3 +22,7 @@ Serviço: `treasury-service.ts`. Snapshot: `treasury_cash_positions` (`derivedFr
 ## Relacionado
 
 `docs/LEDGER.md`, `docs/FINANCIAL_RECONCILIATION.md`, `docs/FINANCE.md`, ADRs 163, 183–184.
+
+## VerasJuris Control / Analytics / Workflows
+
+Domínios internos (Etapa 23+): operação da organização (`docs/CONTROL.md` e satélites), analytics como read model (`docs/ANALYTICS.md`) e automações (`docs/WORKFLOWS.md`). ADRs 192–211. UI sob `/app/control/*`. Não confundir com produto cliente nem com financeiro de plataforma (`docs/FINANCE.md`).

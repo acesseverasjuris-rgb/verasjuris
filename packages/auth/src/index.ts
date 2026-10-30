@@ -278,6 +278,25 @@ export {
   policyWhiteLabel,
 } from "./finance-policies.js";
 export {
+  policyAnalytics,
+  policyBudget,
+  policyComplianceIncident,
+  policyComplianceRisk,
+  policyEmployee,
+  policyExpenseReport,
+  policyInternalControl,
+  policyInternalLegalMatter,
+  policyProductProject,
+  policyVendor,
+  policyWorkflowDefinition,
+  policyWorkflowRun,
+} from "./control-policies.js";
+export {
+  assertInternalControlOrganization,
+  type InternalControlMembership,
+  type InternalControlOrganizationConfig,
+} from "./control-internal.js";
+export {
   policyLegalTemplate,
   policyLegalTemplateMutation,
 } from "./legal-template-policies.js";
@@ -322,3 +341,34 @@ export {
   type SessionAccount,
   type UserStatus,
 } from "./session.js";
+
+export {
+  policyMfa,
+  policySecurity,
+  policySecurityAdmin,
+  policySecurityAlert,
+  policySecuritySession,
+} from "./security-policies.js";
+export {
+  policyPrivacy,
+  policyPrivacyAdmin,
+  policyPrivacyConsent,
+  policyPrivacyDsr,
+  policyPrivacyIncident,
+} from "./privacy-policies.js";
+export {
+  policyEnterprise,
+  policyEnterpriseScim,
+  policyEnterpriseSla,
+  policyEnterpriseSso,
+} from "./enterprise-policies.js";
+export {
+  policyIntegration,
+  policyIntegrationCredential,
+  policyIntegrationWebhook,
+} from "./integration-policies.js";
+export {
+  policyAssistant,
+  policyAssistantAdmin,
+  policyAssistantManage,
+} from "./assistant-policies.js";

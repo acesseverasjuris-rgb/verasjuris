@@ -12,7 +12,7 @@ import { roleLabel } from "../lib/types";
 
 function NavLinks({ pathname }: { pathname: string }) {
   return (
-    <nav className="vj-nav" aria-label="Portal do cliente">
+    <nav className="vj-nav" id="navegacao" aria-label="Portal do cliente">
       {PORTAL_NAV.map((item) => {
         const current =
           item.href === "/portal"
